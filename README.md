@@ -44,7 +44,7 @@ Deux versions de codes accompagnent ce projet :
     ```
 2. Accédez au dossier du projet:
     ```sh
-  cd Projet-Analyse-Factorielle-DPE
+   cd Projet-Analyse-Factorielle-DPE
     ```
 ---
 
