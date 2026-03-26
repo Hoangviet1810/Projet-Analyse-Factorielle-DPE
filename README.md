@@ -42,10 +42,9 @@ Deux versions de codes accompagnent ce projet :
     ```sh
    git clone https://github.com/Hoangviet1810/Projet-Analyse-Factorielle-DPE.git
     ```
-
-2.Accédez au dossier du projet ::
+2. Accédez au dossier du projet:
     ```sh
-    cd Projet-Analyse-Factorielle-DPE
+  cd Projet-Analyse-Factorielle-DPE
     ```
 ---
 
