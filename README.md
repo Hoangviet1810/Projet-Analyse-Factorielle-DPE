@@ -17,9 +17,7 @@
   
 ## 1. Introduction
 
-L’étude porte sur la performance énergétique des logements individuels situés dans le département de la Haute-Garonne. Cette population comprend **1000 logements** construits entre **1900 et 2020**, pour lesquels un diagnostic de performance énergétique a été réalisé avant **juillet 2021**.  
-
-Le **DPE** permet d’évaluer la consommation énergétique d’un bâtiment ainsi que ses émissions de gaz à effet de serre. Les logements classés **F ou G** pour la consommation énergétique sont qualifiés de **« passoires énergétiques »** et sont soumis à des restrictions légales visant à limiter leur impact environnemental.
+L’étude porte sur la performance énergétique de **1000 logements individuels** construits entre **1900 et 2020** dans le département de la **Haute-Garonne**, pour lesquels un **DPE** a été réalisé avant **juillet 2021**.
 
 Ce projet consiste à analyser un jeu de données contenant des informations sur les logements :  
 - **type de logement** (appartement, maison)  
