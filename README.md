@@ -29,7 +29,11 @@ L'objectif est de :
 - Comprendre les relations entre variables quantitatives et qualitatives  
 - Identifier les corrélations entre consommation d’énergie et émissions de GES  
 - Visualiser les profils de logements et l’impact du type de chauffage  
-- Réaliser des tests statistiques (Chi-deux, ANOVA, t-tests)  
+- Réaliser des tests statistiques (Chi-deux, ANOVA, t-tests)
+
+Deux versions de codes accompagnent ce projet :  
+- un fichier **Python** dédié à la visualisation des données (*plots*)  
+- un fichier **R** utilisé pour la réalisation des **tests statistiques**
 
 ---
 
