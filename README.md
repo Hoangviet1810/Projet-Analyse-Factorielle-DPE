@@ -36,8 +36,20 @@ Deux versions de codes accompagnent ce projet :
 - un fichier **R** utilisé pour la réalisation des **tests statistiques**
 
 ---
+## 2. Installation
 
-## 2. Structure des données
+1. Clone this repository to your local machine:
+    ```sh
+   git clone https://github.com/Hoangviet1810/Projet-Analyse-Factorielle-DPE.git
+    ```
+
+2.Accédez au dossier du projet ::
+    ```sh
+    cd Projet-Analyse-Factorielle-DPE
+    ```
+---
+
+## 3. Structure des données
 | Variable                  | Type      | Description                                   |
 |----------------------------|-----------|-----------------------------------------------|
 | type_logement              | Catégorie | Appartement ou Maison                        |
@@ -50,24 +62,24 @@ Deux versions de codes accompagnent ce projet :
 
 ---
 
-## 3. Analyses réalisées
+## 4. Analyses réalisées
 
-### 3.1 Statistiques descriptives
+### 4.1 Statistiques descriptives
 - Calcul de la moyenne, médiane, variance et coefficient de variation pour les variables numériques.  
 - Résumé des variables catégorielles et distribution par barplot.  
 
-### 3.2 Visualisations
+### 4.2 Visualisations
 - Histogrammes et boxplots pour **conso_energie** et **emission_ges**  
 - Barplots pour **type_logement**, **type_energie_chauffage**, **classe_conso_energie**  
 - Cercle de corrélation pour les variables quantitatives (*annee_construction, surface_habitable, conso_energie, emission_ges*)  
 - MCA (Analyse des Correspondances Multiples) pour les variables qualitatives  
 
-### 3.3 Corrélations
+### 4.3 Corrélations
 - Corrélation positive : *conso_energie* et *emission_ges*  
 - Corrélation négative : *annee_construction* vs consommation et émissions  
 - Indépendance : *surface_habitable* peu corrélée avec consommation et année de construction  
 
-### 3.4 Tests statistiques
+### 4.4 Tests statistiques
 1. **Chi-deux** : Dépendance entre *classe_conso_energie* et *type_energie_chauffage*  
    - p-value < 0.05 → H0 rejetée → relation significative  
 2. **ANOVA** : Différence de *conso_energie* entre types de logement  
@@ -77,7 +89,7 @@ Deux versions de codes accompagnent ce projet :
 
 ---
 
-## 4. Interprétation des résultats
+## 5. Interprétation des résultats
 - Les appartements sont généralement plus économes que les maisons individuelles.  
 - Les logements chauffés à l’électricité tendent à avoir de meilleures performances énergétiques (classe B, C).  
 - Les logements chauffés au gaz ont tendance à consommer plus et à émettre davantage de GES.  
@@ -85,7 +97,7 @@ Deux versions de codes accompagnent ce projet :
 
 ---
 
-## 5. Logiciels utilisés
+## 6. Logiciels utilisés
 - **Python** (pour des visualisations) : (**Pandas**, **NumPy**,**Matplotlib**, **Seaborn**, **Prince**)
 - **R** (pour des tests) : `FactoMineR`, `factoextra`
 - Visualisations : histogrammes, boxplots, barplots, cercle de corrélation, MCA plots  
