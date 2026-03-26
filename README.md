@@ -2,6 +2,19 @@
 
 # Analyse de la consommation énergétique et des émissions de GES des logements
 
+## Table des Matières
+
+- [1. Introduction](#1-introduction)
+- [2. Structure des données](#2-structure-des-données)
+- [3. Analyses réalisées](#3-analyses-réalisées)
+  - [3.1 Statistiques descriptives](#31-statistiques-descriptives)
+  - [3.2 Visualisations](#32-visualisations)
+  - [3.3 Corrélations](#33-corrélations)
+  - [3.4 Tests statistiques](#34-tests-statistiques)
+- [4. Interprétation des résultats](#4-interprétation-des-résultats)
+- [5. Outils utilisés](#5-outils-utilisés)
+- [6. Instructions pour reproduire](#6-instructions-pour-reproduire)
+  
 ## 1. Introduction
 Ce projet consiste à analyser un jeu de données contenant des informations sur les logements :  
 - **type de logement** (appartement, maison)  
