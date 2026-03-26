@@ -81,9 +81,9 @@ L'objectif est de :
 
 ---
 
-## 5. Outils utilisés
-- **Python** : pandas, numpy, matplotlib, seaborn, prince (MCA)  
-- **R** (pour comparaison et vérification) : factoextra, FactoMineR  
+## 5. Logiciels utilisés
+- **Python** (pour des visualisations) : (**Pandas**, **NumPy**,**Matplotlib**, **Seaborn**, **Prince**)
+- **R** (pour des tests) : `FactoMineR`, `factoextra`
 - Visualisations : histogrammes, boxplots, barplots, cercle de corrélation, MCA plots  
 
 ---
