@@ -5,15 +5,19 @@
 ## Table des Matières
 
 - [1. Introduction](#1-introduction)
-- [2. Structure des données](#2-structure-des-données)
-- [3. Analyses réalisées](#3-analyses-réalisées)
-  - [3.1 Statistiques descriptives](#31-statistiques-descriptives)
-  - [3.2 Visualisations](#32-visualisations)
-  - [3.3 Corrélations](#33-corrélations)
-  - [3.4 Tests statistiques](#34-tests-statistiques)
-- [4. Interprétation des résultats](#4-interprétation-des-résultats)
-- [5. Outils utilisés](#5-outils-utilisés)
-- [6. Instructions pour reproduire](#6-instructions-pour-reproduire)
+- [2. Installation](#2-installation)
+- [3. Logiciels utilisés](#3-logiciels-utilisés)
+- [4. Structure des données](#4-structure-des-données)
+- [5. Analyses réalisées](#5-analyses-réalisées)
+  - [5.1 Statistiques descriptives](#51-statistiques-descriptives)
+  - [5.2 Visualisations](#52-visualisations)
+  - [5.3 Corrélations](#53-corrélations)
+  - [5.4 Tests statistiques](#54-tests-statistiques)
+- [6. Interprétation des résultats](#6-interprétation-des-résultats)
+- [7. Résultats des tests statistiques](#7-résultats-des-tests-statistiques)
+  - [7.1 Test ANOVA](#71-test-anova)
+  - [7.2 Tests t de Student par paires](#72-tests-t-de-student-par-paires)
+- [8. Visualisations finales](#8-visualisations)
   
 ## 1. Introduction
 
@@ -102,3 +106,40 @@ Deux versions de codes accompagnent ce projet :
 
 ---
 
+## 7. Résultats des tests statistiques
+
+### 7.1 Test ANOVA
+
+| Test | Hypothèse nulle (H0) | Hypothèse alternative (H1) | Statistique | p-value | Conclusion | Moyenne(s) |
+|------|---------------------|----------------------------|------------|---------|-----------|------------|
+| Conso énergie vs type_logement | Pas de différence de consommation moyenne entre Maison et Appartement | Différence réelle de consommation moyenne entre Maison et Appartement | F = 11.1 | 0.000894 | H0 rejetée → différence significative | Maison: 197.63 kWh/m²/an<br>Appartement: 176.48 kWh/m²/an |
+| Émissions GES vs type_energie_chauffage (ANOVA Welch) | Moyennes d’émissions égales | Au moins un groupe a une moyenne différente | F = 219.53 | < 2.2e-16 | Différences significatives → émissions dépendent du type d’énergie | Gaz: 33.6<br>Électricité: 11.1<br>Autre: 55.5 |
+
+---
+
+### 7.2 Tests t de Student par paires
+
+| Comparaison | p-value | Conclusion |
+|------------|---------|------------|
+| Gaz vs Électricité | < 2e-16 | Différence extrêmement significative |
+| Gaz vs Autre | 0.0053 | Différence significative |
+| Électricité vs Autre | 1.8e-06 | Différence extrêmement significative |
+
+**Observations clés :**  
+- Les maisons consomment plus que les appartements, ce qui explique leur projection vers des classes énergétiques moins performantes (D, E, F).  
+- Les émissions de GES dépendent fortement du type d’énergie de chauffage : l’électricité est la plus propre, le gaz intermédiaire, et “Autre” très polluant.  
+- Tous les tests t montrent que toutes les paires de sources d’énergie diffèrent significativement au niveau des émissions.
+
+---
+
+##  8 Visualisations
+
+Les visualisations finales sont créées pour l'analyse DPE et couvrent les aspects suivants :
+
+1. **Distribution du type de logement :** Un graphique à barres montrant la fréquence des appartements et des maisons.  
+2. **Classe énergétique par type de chauffage :** Un graphique à barres groupées illustrant la répartition des classes (A-G) selon l'énergie utilisée (gaz, électricité, autre).  
+3. **Analyse des Correspondances Multiples (ACM) :** Une carte factorielle montrant les corrélations entre les variables catégorielles (type de logement, type de chauffage, classe énergétique).  
+4. **Analyse en Composantes Principales (ACP) :** Un cercle de corrélation représentant les relations entre surface habitable, consommation d'énergie et émissions de GES.  
+5. **Tests Statistiques et Émissions :** Tableaux (ANOVA, tests t) et boxplots analysant l'impact du type de chauffage sur les émissions de gaz à effet de serre.  
+
+![assets/DPE-dashboard.png](assets/DPE-dashboard.png)
