@@ -21,7 +21,7 @@
   
 ## 1. Introduction
 
-L’étude porte sur la performance énergétique de **1000 logements individuels** construits entre **1900 et 2020** dans le département de la **Haute-Garonne**, pour lesquels un **DPE** a été réalisé avant **juillet 2021**. Pour plus de détails, vous pouvez consulter le [fichier PDF](Project_DPE.pdf).
+L’étude porte sur la performance énergétique de **1000 logements individuels** construits entre **1900 et 2020** dans le département de la **Haute-Garonne**, pour lesquels un **DPE** a été réalisé avant **juillet 2021**. Pour plus de détails, vous pouvez consulter le [fichier PDF](Projet_DPE.pdf).
 
 Ce projet consiste à analyser un jeu de données contenant des informations sur les logements :  
 - **type de logement** (appartement, maison)  
