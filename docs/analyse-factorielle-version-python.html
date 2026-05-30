@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1. Import les libraries et le dataset – Projet Analyse Factorielle DPE</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-30ee011dadc1df2dfc3b38815031f4e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Projet Analyse Factorielle DPE</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Accueil</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Part1.html"> 
+<span class="menu-text">Introduction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Part2.html"> 
+<span class="menu-text">Analyse descriptive</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Part3.html"> 
+<span class="menu-text">ACP</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Part4.html"> 
+<span class="menu-text">ACM</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Part5.html"> 
+<span class="menu-text">Test</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Part6.html"> 
+<span class="menu-text">Conclusion</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sur cette page</h2>
+   
+  <ul>
+  <li><a href="#analyse-descriptive" id="toc-analyse-descriptive" class="nav-link active" data-scroll-target="#analyse-descriptive">2. Analyse descriptive</a>
+  <ul class="collapse">
+  <li><a href="#variables-quantitatives" id="toc-variables-quantitatives" class="nav-link" data-scroll-target="#variables-quantitatives">2.1 Variables quantitatives</a></li>
+  <li><a href="#variables-qualitatives" id="toc-variables-qualitatives" class="nav-link" data-scroll-target="#variables-qualitatives">2.2 Variables qualitatives</a></li>
+  </ul></li>
+  <li><a href="#analyse-en-composantes-principales-acp" id="toc-analyse-en-composantes-principales-acp" class="nav-link" data-scroll-target="#analyse-en-composantes-principales-acp">3. Analyse en composantes principales (ACP)</a>
+  <ul class="collapse">
+  <li><a href="#la-matrice-de-covariance" id="toc-la-matrice-de-covariance" class="nav-link" data-scroll-target="#la-matrice-de-covariance">3.1 La matrice de covariance</a></li>
+  <li><a href="#les-valeur-propre" id="toc-les-valeur-propre" class="nav-link" data-scroll-target="#les-valeur-propre">3.2 Les valeur propre</a></li>
+  </ul></li>
+  <li><a href="#analyse-des-correspondances-multiples-acm" id="toc-analyse-des-correspondances-multiples-acm" class="nav-link" data-scroll-target="#analyse-des-correspondances-multiples-acm">4. Analyse des correspondances multiples (ACM)</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">1. Import les libraries et le dataset</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="cell-2" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:16.566660Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:16.567718Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:16.571698Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:16.567679Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:16.570919Z&quot;}}" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np <span class="im">import</span> pandas <span class="im">as</span> pd <span class="im">import</span> matplotlib.pyplot <span class="im">as</span> pltimport seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="cell-3" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:16.573244Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:16.573610Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:16.601542Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:16.573569Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:16.600536Z&quot;}}" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data_dpe <span class="op">=</span> pd.read_csv(<span class="st">'/kaggle/input/datasets/vitnguynchong/data-analyse-dpe/data_dpe.txt'</span>,sep<span class="op">=</span><span class="st">'</span><span class="ch">\\</span><span class="st">s+'</span>)data_dpe.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">type_logement</th>
+<th data-quarto-table-cell-role="th">annee_construction</th>
+<th data-quarto-table-cell-role="th">surface_habitable</th>
+<th data-quarto-table-cell-role="th">type_energie_chauffage</th>
+<th data-quarto-table-cell-role="th">conso_energie</th>
+<th data-quarto-table-cell-role="th">classe_conso_energie</th>
+<th data-quarto-table-cell-role="th">emission_ges</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>1988</td>
+<td>25</td>
+<td>2</td>
+<td>300.44</td>
+<td>C</td>
+<td>13.23</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>1</td>
+<td>1996</td>
+<td>64</td>
+<td>1</td>
+<td>148.17</td>
+<td>D</td>
+<td>34.67</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>1</td>
+<td>1970</td>
+<td>46</td>
+<td>2</td>
+<td>257.00</td>
+<td>C</td>
+<td>12.00</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>2</td>
+<td>1958</td>
+<td>74</td>
+<td>1</td>
+<td>317.03</td>
+<td>F</td>
+<td>74.18</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>1</td>
+<td>2013</td>
+<td>38</td>
+<td>1</td>
+<td>53.42</td>
+<td>C</td>
+<td>12.50</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Les variables sélectionnées pour cette étude sont les suivantes :- <strong>type_logement</strong> : type du logement (1 = appartement, 2 = maison) — variable qualitative.- <strong>annee_construction</strong> : année de construction du logement — variable quantitative.- <strong>surface_habitable</strong> : surface habitable en mètres carrés — variable quantitative.- <strong>type_energie_chauffage</strong> : type d’énergie utilisée pour le chauffage (1 = gaz, 2 = électricité, 3 = autre) — variable qualitative.- <strong>conso_energie</strong> : consommation énergétique annuelle en kWhEP/m² — variable quantitative.- <strong>classe_conso_energie</strong> : classe de consommation énergétique (de A à G) — variable qualitative.- <strong>emission_ges</strong> : émissions de gaz à effet de serre en kg éq.CO₂/m² — variable quantitative.</p>
+<section id="analyse-descriptive" class="level2">
+<h2 class="anchored" data-anchor-id="analyse-descriptive">2. Analyse descriptive</h2>
+<section id="variables-quantitatives" class="level3">
+<h3 class="anchored" data-anchor-id="variables-quantitatives">2.1 Variables quantitatives</h3>
+<section id="ancienneté" class="level4">
+<h4 class="anchored" data-anchor-id="ancienneté">2.1.1 Ancienneté</h4>
+<div id="cell-8" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:16.603119Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:16.603411Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:16.617252Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:16.603382Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:16.616179Z&quot;}}" data-execution_count="11">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data_dpe[<span class="st">'anciennete'</span>] <span class="op">=</span> <span class="dv">2021</span> <span class="op">-</span> data_dpe[<span class="st">'annee_construction'</span>]data_dpe[<span class="st">'anciennete'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>count    1000.000000
+mean       34.578000
+std        25.877743
+min         1.000000
+25%        15.000000
+50%        32.000000
+75%        51.000000
+max       121.000000
+Name: anciennete, dtype: float64</code></pre>
+</div>
+</div>
+<div id="cell-9" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:16.618301Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:16.618546Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:16.634272Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:16.618522Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:16.633298Z&quot;}}" data-execution_count="12">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>anciennete <span class="op">=</span> data_dpe[<span class="st">'anciennete'</span>]<span class="bu">round</span>(anciennete.std(), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>25.88</code></pre>
+</div>
+</div>
+<div id="cell-10" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:16.636468Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:16.636734Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:16.651138Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:16.636710Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:16.650325Z&quot;}}" data-execution_count="13">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cv <span class="op">=</span> <span class="bu">round</span>((anciennete.std() <span class="op">/</span> anciennete.mean()) <span class="op">*</span> <span class="dv">100</span>)cv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>75</code></pre>
+</div>
+</div>
+<div id="cell-11" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:16.652200Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:16.653365Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:16.903417Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:16.653336Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:16.902537Z&quot;}}" data-execution_count="14">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>moyenne <span class="op">=</span> data_dpe[<span class="st">'anciennete'</span>].mean()mediane <span class="op">=</span> data_dpe[<span class="st">'anciennete'</span>].median()plt.hist(data_dpe[<span class="st">'anciennete'</span>], bins<span class="op">=</span><span class="dv">30</span>)plt.title(<span class="st">"Distribution de l'ancienneté des logements"</span>)plt.xlabel(<span class="st">"Ancienneté (années)"</span>)plt.ylabel(<span class="st">"Fréquence"</span>)plt.axvline(moyenne, linewidth<span class="op">=</span><span class="dv">2</span>,color<span class="op">=</span><span class="st">'red'</span>)plt.text(<span class="fl">0.95</span>, <span class="fl">0.95</span>,         <span class="ss">f"Moyenne = </span><span class="sc">{</span><span class="bu">round</span>(moyenne,<span class="dv">1</span>)<span class="sc">}</span><span class="ss">"</span>,         transform<span class="op">=</span>plt.gca().transAxes,ha<span class="op">=</span><span class="st">'right'</span>, va<span class="op">=</span><span class="st">'top'</span>,color<span class="op">=</span><span class="st">'red'</span>)plt.axvline(mediane, linewidth<span class="op">=</span><span class="dv">2</span>,color<span class="op">=</span><span class="st">'green'</span>)plt.text(<span class="fl">0.95</span>, <span class="fl">0.90</span>,         <span class="ss">f"Médiane = </span><span class="sc">{</span><span class="bu">round</span>(mediane,<span class="dv">1</span>)<span class="sc">}</span><span class="ss">"</span>,         transform<span class="op">=</span>plt.gca().transAxes, ha<span class="op">=</span><span class="st">'right'</span>, va<span class="op">=</span><span class="st">'top'</span>,color<span class="op">=</span><span class="st">'green'</span>)plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analyse-factorielle-version-python_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="surface-habitable" class="level4">
+<h4 class="anchored" data-anchor-id="surface-habitable">2.1.2 Surface habitable</h4>
+<div id="cell-13" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:16.904381Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:16.904642Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:16.913994Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:16.904606Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:16.913130Z&quot;}}" data-execution_count="15">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data_dpe[<span class="st">'surface_habitable'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>count    1000.000000
+mean       82.514000
+std        94.874069
+min        16.000000
+25%        45.750000
+50%        66.000000
+75%        95.250000
+max      1452.000000
+Name: surface_habitable, dtype: float64</code></pre>
+</div>
+</div>
+<div id="cell-14" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:16.915217Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:16.915886Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:16.931198Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:16.915856Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:16.930157Z&quot;}}" data-execution_count="16">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># écart-typesd_surface = data_dpe['surface_habitable'].std()print(sd_surface)# Coefficient de variationcv = round((sd_surface / data_dpe['surface_habitable'].mean()) * 100)print(cv)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>94.87406860092435
+115</code></pre>
+</div>
+</div>
+<div id="cell-15" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:16.932317Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:16.932637Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:17.101911Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:16.932610Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:17.100947Z&quot;}}" data-execution_count="17">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>moyenne <span class="op">=</span> data_dpe[<span class="st">'surface_habitable'</span>].mean()mediane <span class="op">=</span> data_dpe[<span class="st">'surface_habitable'</span>].median()plt.hist(data_dpe[<span class="st">'surface_habitable'</span>], bins<span class="op">=</span><span class="dv">30</span>)plt.title(<span class="st">"Distribution de la surface habitable"</span>)plt.xlabel(<span class="st">"Surface habitable"</span>)plt.ylabel(<span class="st">"Fréquence"</span>)<span class="co"># Moyenneplt.axvline(moyenne, linewidth=2,color='red')plt.text(0.95, 0.95,         f"Moyenne = {round(moyenne,1)}",         transform=plt.gca().transAxes,ha='right', va='top',color='red')# Medianeplt.axvline(mediane, linewidth=2,color='green')plt.text(0.95, 0.90,         f"Médiane = {round(mediane,1)}",         transform=plt.gca().transAxes, ha='right', va='top',color='green')plt.show()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analyse-factorielle-version-python_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-16" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:17.103319Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:17.103682Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:17.222172Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:17.103643Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:17.221285Z&quot;}}" data-execution_count="18">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plt.boxplot(data_dpe[<span class="st">'surface_habitable'</span>],            patch_artist<span class="op">=</span><span class="va">True</span>,              boxprops<span class="op">=</span><span class="bu">dict</span>(facecolor<span class="op">=</span><span class="st">'cyan'</span>, color<span class="op">=</span><span class="st">'black'</span>),            medianprops<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">'red'</span>))plt.title(<span class="st">"Distribution de la surface habitable"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)plt.xlabel(<span class="st">"Surface habitable"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)plt.ylabel(<span class="st">"Fréquence"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analyse-factorielle-version-python_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="consommation-dénergie" class="level4">
+<h4 class="anchored" data-anchor-id="consommation-dénergie">2.1.3 Consommation d’énergie</h4>
+<div id="cell-18" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:17.225080Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:17.225395Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:17.235611Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:17.225365Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:17.234598Z&quot;}}" data-execution_count="19">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data_dpe[<span class="st">'conso_energie'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="19">
+<pre><code>count    1000.000000
+mean      184.119070
+std        96.891905
+min        27.920000
+25%       114.735000
+50%       181.165000
+75%       238.245000
+max       591.350000
+Name: conso_energie, dtype: float64</code></pre>
+</div>
+</div>
+<div id="cell-19" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:17.236834Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:17.237158Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:17.248238Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:17.237119Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:17.247341Z&quot;}}" data-execution_count="20">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Écart typesd_conso_energie = data_dpe['conso_energie'].std()print(sd_conso_energie)# Coefficient de variationcv = round((sd_conso_energie/ data_dpe['conso_energie'].mean()) * 100)print(cv)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>96.89190515063082
+53</code></pre>
+</div>
+</div>
+<div id="cell-20" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:17.249342Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:17.249673Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:17.426977Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:17.249642Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:17.426175Z&quot;}}" data-execution_count="21">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>moyenne <span class="op">=</span> data_dpe[<span class="st">"conso_energie"</span>].mean()mediane <span class="op">=</span> data_dpe[<span class="st">"conso_energie"</span>].median()plt.hist(data_dpe[<span class="st">"conso_energie"</span>], bins<span class="op">=</span><span class="dv">30</span>)plt.title(<span class="st">"Distribution de la consommation de l'énergie"</span>)plt.xlabel(<span class="st">"énergie consommée"</span>)plt.ylabel(<span class="st">"Fréquence"</span>)<span class="co"># Moyenne plt.axvline(moyenne, linewidth=2,color='red')plt.text(0.95, 0.95,         f"Moyenne = {round(moyenne,1)}",         transform=plt.gca().transAxes,ha='right', va='top',color='red')# Medianeplt.axvline(mediane, linewidth=2,color='green')plt.text(0.95, 0.90,         f"Médiane = {round(mediane,1)}",         transform=plt.gca().transAxes, ha='right', va='top',color='green')plt.show()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analyse-factorielle-version-python_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-21" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:17.428134Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:17.428454Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:17.536207Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:17.428414Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:17.535336Z&quot;}}" data-execution_count="22">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>plt.boxplot(data_dpe[<span class="st">'conso_energie'</span>],            patch_artist<span class="op">=</span><span class="va">True</span>,             boxprops<span class="op">=</span><span class="bu">dict</span>(facecolor<span class="op">=</span><span class="st">'cyan'</span>, color<span class="op">=</span><span class="st">'black'</span>),            medianprops<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">'red'</span>))plt.title(<span class="st">"Distribution de la consommation de l'énergie"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)plt.xlabel(<span class="st">"énergie consommée"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analyse-factorielle-version-python_files/figure-html/cell-15-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="émission-de-ges" class="level4">
+<h4 class="anchored" data-anchor-id="émission-de-ges">2.1.4 Émission de GES</h4>
+<div id="cell-23" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:17.537365Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:17.537624Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:17.546486Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:17.537598Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:17.545818Z&quot;}}" data-execution_count="23">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>data_dpe[<span class="st">'emission_ges'</span>].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<pre><code>count    1000.000000
+mean       21.932580
+std        20.649155
+min         2.000000
+25%         8.602500
+50%        12.695000
+75%        30.000000
+max       143.360000
+Name: emission_ges, dtype: float64</code></pre>
+</div>
+</div>
+<div id="cell-24" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:17.547566Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:17.547859Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:17.562222Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:17.547823Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:17.561299Z&quot;}}" data-execution_count="24">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Écart-typesd_emission_ges = data_dpe['emission_ges'].std()print(sd_emission_ges)# Coefficient de variationcv = round((sd_emission_ges/ data_dpe['emission_ges'].mean()) * 100)print(cv)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>20.64915509045223
+94</code></pre>
+</div>
+</div>
+<div id="cell-25" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:17.563143Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:17.563389Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:17.740411Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:17.563365Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:17.739625Z&quot;}}" data-execution_count="25">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>moyenne <span class="op">=</span> data_dpe[<span class="st">'emission_ges'</span>].mean()mediane <span class="op">=</span> data_dpe[<span class="st">'emission_ges'</span>].median()plt.hist(data_dpe[<span class="st">'emission_ges'</span>], bins<span class="op">=</span><span class="dv">30</span>)plt.title(<span class="st">"Distribution de la consommation degaz à effet de serre"</span>)plt.xlabel(<span class="st">"consommation de gaz à effet de serre"</span>) plt.ylabel(<span class="st">"Fréquence"</span>)<span class="co"># Moyenneplt.axvline(moyenne, linewidth=2,color='red')plt.text(0.95, 0.95,         f"Moyenne = {round(moyenne,1)}",         transform=plt.gca().transAxes,ha='right', va='top',color='red')# Medianeplt.axvline(mediane, linewidth=2,color='green')plt.text(0.95, 0.90,         f"Médiane = {round(mediane,1)}",         transform=plt.gca().transAxes, ha='right', va='top',color='green')plt.show()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analyse-factorielle-version-python_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-26" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:17.741500Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:17.741829Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:17.866143Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:17.741779Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:17.865033Z&quot;}}" data-execution_count="26">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>plt.boxplot(data_dpe[<span class="st">'emission_ges'</span>],            patch_artist<span class="op">=</span><span class="va">True</span>,              boxprops<span class="op">=</span><span class="bu">dict</span>(facecolor<span class="op">=</span><span class="st">'cyan'</span>, color<span class="op">=</span><span class="st">'black'</span>),            medianprops<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">'red'</span>))plt.title(<span class="st">"Distribution de la consommation degaz à effet de serre"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)plt.xlabel(<span class="st">"consommation de gaz à effet de serre"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analyse-factorielle-version-python_files/figure-html/cell-19-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="variables-qualitatives" class="level3">
+<h3 class="anchored" data-anchor-id="variables-qualitatives">2.2 Variables qualitatives</h3>
+<section id="le-type-de-logement" class="level4">
+<h4 class="anchored" data-anchor-id="le-type-de-logement">2.2.1 Le type de logement</h4>
+<div id="cell-29" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:17.867372Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:17.867665Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:17.883108Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:17.867636Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:17.882223Z&quot;}}" data-execution_count="27">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>data_dpe[<span class="st">"type_logement"</span>] <span class="op">=</span> pd.Categorical(    data_dpe[<span class="st">"type_logement"</span>],    categories<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>],    ordered<span class="op">=</span><span class="va">False</span>)data_dpe[<span class="st">"type_logement"</span>] <span class="op">=</span> data_dpe[<span class="st">"type_logement"</span>].cat.rename_categories(    [<span class="st">"appartement"</span>, <span class="st">"maison"</span>])data_dpe[<span class="st">"type_logement"</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<pre><code>type_logement
+appartement    639
+maison         361
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<div id="cell-30" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:17.884171Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:17.884470Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:18.062635Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:17.884444Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:18.061864Z&quot;}}" data-execution_count="28">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">"type_logement"</span>, y<span class="op">=</span><span class="st">"conso_energie"</span>, hue<span class="op">=</span><span class="st">"type_logement"</span>,            data<span class="op">=</span>data_dpe, palette<span class="op">=</span>{<span class="st">"appartement"</span>:<span class="st">"cyan"</span>,<span class="st">"maison"</span>:<span class="st">"lightgreen"</span>},            dodge<span class="op">=</span><span class="va">False</span>, medianprops<span class="op">=</span>{<span class="st">"color"</span>:<span class="st">"red"</span>})  plt.legend([],[], frameon<span class="op">=</span><span class="va">False</span>)  plt.title(<span class="st">"Distribution de la consommation d'énergie selon type de logement"</span>)plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analyse-factorielle-version-python_files/figure-html/cell-21-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="le-type-de-lenergie-chauffage" class="level4">
+<h4 class="anchored" data-anchor-id="le-type-de-lenergie-chauffage">2.2.2 Le type de l’energie chauffage</h4>
+<div id="cell-32" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:18.063699Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:18.064075Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:18.070247Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:18.064030Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:18.069087Z&quot;}}" data-execution_count="29">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>data_dpe[<span class="st">"type_energie_chauffage"</span>] <span class="op">=</span> data_dpe[<span class="st">"type_energie_chauffage"</span>].<span class="bu">map</span>({    <span class="dv">1</span>: <span class="st">"gaz"</span>,    <span class="dv">2</span>: <span class="st">"électricité"</span>,    <span class="dv">3</span>: <span class="st">"autre"</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="cell-33" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:18.071489Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:18.072314Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:18.089967Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:18.072281Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:18.089016Z&quot;}}" data-execution_count="30">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>data_dpe[<span class="st">"type_energie_chauffage"</span>] <span class="op">=</span> pd.Categorical(    data_dpe[<span class="st">"type_energie_chauffage"</span>],    categories<span class="op">=</span>[<span class="st">"gaz"</span>, <span class="st">"électricité"</span>, <span class="st">"autre"</span>],    ordered<span class="op">=</span><span class="va">False</span>)data_dpe[<span class="st">"type_energie_chauffage"</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="30">
+<pre><code>type_energie_chauffage
+électricité    542
+gaz            433
+autre           25
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<div id="cell-34" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:18.091111Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:18.091429Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:18.268698Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:18.091390Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:18.267886Z&quot;}}" data-execution_count="31">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span><span class="st">"type_energie_chauffage"</span>, data<span class="op">=</span>data_dpe, hue<span class="op">=</span><span class="st">"type_energie_chauffage"</span>,              palette<span class="op">=</span>[<span class="st">"cyan"</span>,<span class="st">"gold"</span>,<span class="st">"coral"</span>])plt.title(<span class="st">"Distribution du type de l'energie chauffage"</span>)plt.xlabel(<span class="st">"Type de l'énergie chauffage"</span>)plt.ylabel(<span class="st">"Frequence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<pre><code>Text(0, 0.5, 'Frequence')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analyse-factorielle-version-python_files/figure-html/cell-24-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="la-classe-de-la-consommation-dénergie" class="level4">
+<h4 class="anchored" data-anchor-id="la-classe-de-la-consommation-dénergie">2.2.3 La classe de la consommation d’énergie</h4>
+<div id="cell-36" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:18.269736Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:18.270035Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:18.278598Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:18.270010Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:18.277734Z&quot;}}" data-execution_count="32">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>data_dpe[<span class="st">"classe_conso_energie"</span>].value_counts().reindex([<span class="st">"A"</span>,<span class="st">"B"</span>,<span class="st">"C"</span>,<span class="st">"D"</span>,<span class="st">"E"</span>,<span class="st">"F"</span>,<span class="st">"G"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="32">
+<pre><code>classe_conso_energie
+A     98
+B    295
+C    274
+D    121
+E    127
+F     70
+G     15
+Name: count, dtype: int64</code></pre>
+</div>
+</div>
+<div id="cell-37" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:18.279739Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:18.280798Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:18.434001Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:18.280712Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:18.433038Z&quot;}}" data-execution_count="33">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> data_dpe[<span class="st">"classe_conso_energie"</span>].value_counts().sort_index()plt.bar(counts.index, counts.values,         color<span class="op">=</span>[<span class="st">"gold"</span>,<span class="st">"plum"</span>,<span class="st">"aquamarine"</span>,<span class="st">"firebrick"</span>,<span class="st">"limegreen"</span>,<span class="st">"khaki"</span>,<span class="st">"navy"</span>])plt.title(<span class="st">"Distribution de classe conso energie"</span>)plt.xlabel(<span class="st">"Classe consommation d'énergie"</span>)plt.ylabel(<span class="st">"Frequence"</span>)<span class="cf">for</span> i, val <span class="kw">in</span> <span class="bu">enumerate</span>(counts.values):    plt.text(i, val <span class="op">+</span> <span class="fl">0.5</span>, <span class="bu">str</span>(val), ha<span class="op">=</span><span class="st">'center'</span>, fontsize<span class="op">=</span><span class="dv">10</span>)plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analyse-factorielle-version-python_files/figure-html/cell-26-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="analyse-en-composantes-principales-acp" class="level2">
+<h2 class="anchored" data-anchor-id="analyse-en-composantes-principales-acp">3. Analyse en composantes principales (ACP)</h2>
+<div id="cell-39" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:18.435115Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:18.435435Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:18.442275Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:18.435405Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:18.441334Z&quot;}}" data-execution_count="34">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>housing <span class="op">=</span> data_dpe.copy()  data <span class="op">=</span> housing[[<span class="st">"annee_construction"</span>, <span class="st">"surface_habitable"</span>, <span class="st">"conso_energie"</span>, <span class="st">"emission_ges"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="cell-40" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:18.443359Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:18.443600Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:18.465072Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:18.443577Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:18.463852Z&quot;}}" data-execution_count="35">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>data.head()  data.info()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 4 columns):
+ #   Column              Non-Null Count  Dtype  
+---  ------              --------------  -----  
+ 0   annee_construction  1000 non-null   int64  
+ 1   surface_habitable   1000 non-null   int64  
+ 2   conso_energie       1000 non-null   float64
+ 3   emission_ges        1000 non-null   float64
+dtypes: float64(2), int64(2)
+memory usage: 31.4 KB</code></pre>
+</div>
+</div>
+<div id="cell-41" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:18.466354Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:18.466723Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:18.602941Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:18.466683Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:18.602136Z&quot;}}" data-execution_count="36">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> data.mean()        s <span class="op">=</span> data.std()         X <span class="op">=</span> (data <span class="op">-</span> m) <span class="op">/</span> s     plt.boxplot(X.values, tick_labels<span class="op">=</span>X.columns, patch_artist<span class="op">=</span><span class="va">True</span>,            boxprops<span class="op">=</span><span class="bu">dict</span>(facecolor<span class="op">=</span><span class="st">"aquamarine"</span>))plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>, fontsize<span class="op">=</span><span class="dv">8</span>)  <span class="co"># las=1, cex.axisplt.show()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analyse-factorielle-version-python_files/figure-html/cell-29-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="la-matrice-de-covariance" class="level3">
+<h3 class="anchored" data-anchor-id="la-matrice-de-covariance">3.1 La matrice de covariance</h3>
+<div id="cell-43" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:18.606584Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:18.606925Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:18.613946Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:18.606895Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:18.613013Z&quot;}}" data-execution_count="37">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Méthode 1: NumpyX_matrix = X.values      V = np.corrcoef(X_matrix, rowvar=False)  V_rounded = np.round(V, 2)print(V_rounded)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[ 1.   -0.01 -0.49 -0.51]
+ [-0.01  1.   -0.13  0.02]
+ [-0.49 -0.13  1.    0.44]
+ [-0.51  0.02  0.44  1.  ]]</code></pre>
+</div>
+</div>
+<p>Méthode 2: PandasV = X.corr() V_rounded = V.round(2) print(V_rounded)</p>
+</section>
+<section id="les-valeur-propre" class="level3">
+<h3 class="anchored" data-anchor-id="les-valeur-propre">3.2 Les valeur propre</h3>
+<div id="cell-46" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:18.615244Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:18.615954Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:18.642796Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:18.615921Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:18.641932Z&quot;}}" data-execution_count="38">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>eigvals, eigvecs <span class="op">=</span> np.linalg.eigh(V_rounded)<span class="co"># on range dans ordreeigvals_sorted = np.sort(eigvals)[::-1]eigvals_rounded = np.round(eigvals_sorted, 2)print(eigvals_rounded)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1.96 1.03 0.54 0.47]</code></pre>
+</div>
+</div>
+<div id="cell-47" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:18.644134Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:18.644459Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:18.789131Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:18.644431Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:18.788104Z&quot;}}" data-execution_count="39">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>plt.plot(<span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(eigvals_sorted)<span class="op">+</span><span class="dv">1</span>), eigvals_sorted, marker<span class="op">=</span><span class="st">'o'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>)plt.ylabel(<span class="st">"Valeurs propres"</span>)plt.xlabel(<span class="st">"Index"</span>)plt.title(<span class="st">"Scree plot"</span>)plt.xticks(<span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(eigvals_sorted)<span class="op">+</span><span class="dv">1</span>))plt.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analyse-factorielle-version-python_files/figure-html/cell-32-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-48" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:18.790365Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:18.790826Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:18.796264Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:18.790704Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:18.795368Z&quot;}}" data-execution_count="40">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>n_features <span class="op">=</span> X.shape[<span class="dv">1</span>]cumulative_variance_ratio <span class="op">=</span> np.cumsum(eigvals_sorted) <span class="op">/</span> n_featuresprint(np.<span class="bu">round</span>(cumulative_variance_ratio, <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[0.49 0.75 0.88 1.  ]</code></pre>
+</div>
+</div>
+<div id="cell-49" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:18.797417Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:18.797786Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:18.819587Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:18.797733Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:18.818778Z&quot;}}" data-execution_count="41">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># eigvals, eigvecs  np.linalg.eigheigvals, eigvecs = np.linalg.eigh(V_rounded)# on range dans l'ordre eigenvalues idx = np.argsort(eigvals)[::-1]    eigvals_sorted = eigvals[idx]eigvecs_sorted = eigvecs[:, idx]eigvecs_rounded = np.round(eigvecs_sorted, 2)eigvecs_df = pd.DataFrame(eigvecs_rounded, columns=X.columns)print(eigvecs_df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   annee_construction  surface_habitable  conso_energie  emission_ges
+0               -0.59              -0.11           0.02         -0.80
+1               -0.06               0.97          -0.22         -0.10
+2                0.57              -0.17          -0.69         -0.41
+3                0.57               0.15           0.69         -0.42</code></pre>
+</div>
+</div>
+<div id="cell-50" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:18.820719Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:18.821035Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:18.831785Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:18.821008Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:18.830908Z&quot;}}" data-execution_count="42">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Méthode 1#  Projections (scores)Y = X.values @ eigvecs_sorted   # X %*% E$vectorsY_df = pd.DataFrame(Y, columns=[f"PC{i+1}" for i in range(Y.shape[1])])#  D = diag(sqrt(eigenvalues))k = 2D = np.diag(np.sqrt(eigvals_sorted))C = eigvecs_sorted @ D[:, :k]   #  E$vectors %*% D[,1:k]#  Méthode 2: correlation X vs Y[,1:k]C2 = np.corrcoef(X.values.T, Y[:, :k].T)[:X.shape[1], X.shape[1]:]  # matrice correlation# Verifierdiff = C2 - C[:, :k]print("C2 (correlation directe):\n", np.round(C2, 2))print("C (E$vectors * sqrt(E$values)):\n", np.round(C[:, :k], 2))print("Diff = C2 - C:\n", np.round(diff, 2))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>C2 (correlation directe):
+ [[-0.83 -0.11]
+ [-0.09  0.98]
+ [ 0.8  -0.17]
+ [ 0.8   0.15]]
+C (E$vectors * sqrt(E$values)):
+ [[-0.83 -0.12]
+ [-0.08  0.98]
+ [ 0.8  -0.17]
+ [ 0.8   0.15]]
+Diff = C2 - C:
+ [[ 0.  0.]
+ [-0. -0.]
+ [ 0. -0.]
+ [-0. -0.]]</code></pre>
+</div>
+</div>
+<div id="cell-51" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:18.833061Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:18.833405Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:19.036642Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:18.833376Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:19.035593Z&quot;}}" data-execution_count="43">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> pltimport numpy <span class="im">as</span> np<span class="co"># Column 0 = PC1, Column 1 = PC2x = C[:, 0]y = C[:, 1]labels = X.columns  plt.figure(figsize=(6,6))plt.scatter(x, y, color='red')for i, label in enumerate(labels):    plt.text(x[i]+0.02, y[i]+0.02, label, fontsize=9)theta = np.linspace(0, 2*np.pi, 100)plt.plot(np.cos(theta), np.sin(theta), linestyle='--', color='blue')# X et Yplt.axhline(0, color='black', linewidth=1)plt.axvline(0, color='black', linewidth=1)plt.xlim(-1, 1)plt.ylim(-1, 1)plt.gca().set_aspect('equal', adjustable='box')  # asp = 1plt.title("Cercle de corrélation")plt.xlabel("PC1")plt.ylabel("PC2")plt.grid(True, linestyle='--', alpha=0.5)plt.show()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analyse-factorielle-version-python_files/figure-html/cell-36-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="relations-entre-les-variables-corrélationsla-distance-et-langle-entre-les-points-variables-indiquent-leur-niveau-de-corrélation---corrélation-positive-emission_ges-émissions-de-gaz-à-effet-de-serre-et-conso_energie-consommation-dénergie-sont-très-proches-lune-de-lautre.-cela-signifie-quelles-sont-positivement-corrélées-les-logements-qui-consomment-beaucoup-dénergie-ont-généralement-des-émissions-élevées.--corrélation-négative-annee_construction-année-de-construction-est-situé-à-lopposé-du-groupe-énergieémissions-par-rapport-au-centre-du-cercle-selon-laxe-horizontal.-cela-suggère-que-les-bâtiments-plus-anciens-année-de-construction-plus-faible-ont-tendance-à-consommer-davantage-dénergie-et-à-émettre-plus-de-gaz-à-effet-de-serre.--indépendance-absence-de-corrélation-surface_habitable-surface-habitable-est-proche-de-laxe-vertical-formant-un-angle-proche-de-90-avec-les-autres-variables.-cela-signifie-que-dans-cet-ensemble-de-données-la-surface-du-logement-est-peu-liée-à-lannée-de-construction-ou-à-la-performance-énergétique-par-unité-de-surface." class="level5">
+<h5 class="anchored" data-anchor-id="relations-entre-les-variables-corrélationsla-distance-et-langle-entre-les-points-variables-indiquent-leur-niveau-de-corrélation---corrélation-positive-emission_ges-émissions-de-gaz-à-effet-de-serre-et-conso_energie-consommation-dénergie-sont-très-proches-lune-de-lautre.-cela-signifie-quelles-sont-positivement-corrélées-les-logements-qui-consomment-beaucoup-dénergie-ont-généralement-des-émissions-élevées.--corrélation-négative-annee_construction-année-de-construction-est-situé-à-lopposé-du-groupe-énergieémissions-par-rapport-au-centre-du-cercle-selon-laxe-horizontal.-cela-suggère-que-les-bâtiments-plus-anciens-année-de-construction-plus-faible-ont-tendance-à-consommer-davantage-dénergie-et-à-émettre-plus-de-gaz-à-effet-de-serre.--indépendance-absence-de-corrélation-surface_habitable-surface-habitable-est-proche-de-laxe-vertical-formant-un-angle-proche-de-90-avec-les-autres-variables.-cela-signifie-que-dans-cet-ensemble-de-données-la-surface-du-logement-est-peu-liée-à-lannée-de-construction-ou-à-la-performance-énergétique-par-unité-de-surface.">Relations entre les variables (Corrélations)La distance et l’angle entre les points (variables) indiquent leur niveau de corrélation :- <strong>Corrélation positive</strong> : <em>emission_ges</em> (émissions de gaz à effet de serre) et <em>conso_energie</em> (consommation d’énergie) sont très proches l’une de l’autre. Cela signifie qu’elles sont positivement corrélées : les logements qui consomment beaucoup d’énergie ont généralement des émissions élevées.- <strong>Corrélation négative</strong> : <em>annee_construction</em> (année de construction) est situé à l’opposé du groupe énergie/émissions par rapport au centre du cercle (selon l’axe horizontal). Cela suggère que les bâtiments plus anciens (année de construction plus faible) ont tendance à consommer davantage d’énergie et à émettre plus de gaz à effet de serre.- <strong>Indépendance (absence de corrélation)</strong> : <em>surface_habitable</em> (surface habitable) est proche de l’axe vertical, formant un angle proche de 90° avec les autres variables. Cela signifie que, dans cet ensemble de données, la surface du logement est peu liée à l’année de construction ou à la performance énergétique par unité de surface.</h5>
+<div id="cell-53" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:19.037852Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:19.038195Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:19.056532Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:19.038165Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:19.055665Z&quot;}}" data-execution_count="44">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCAfrom sklearn.preprocessing <span class="im">import</span> StandardScalerimport pandas <span class="im">as</span> pdX <span class="op">=</span> data.copy()<span class="co"># scaler = StandardScaler()X_scaled = scaler.fit_transform(X)# 2. PCA avec k componentspca = PCA(n_components=2)  Y = pca.fit_transform(X_scaled)  # scores (PCs)# 3. Eigenvalues &amp; proportion of varianceeigvals = pca.explained_variance_            # eigenvaluesexplained_ratio = pca.explained_variance_ratio_  # % variance explained# 4.loadings = pca.components_.Tloadings_df = pd.DataFrame(loadings, index=X.columns, columns=[f"PC{i+1}" for i in range(loadings.shape[1])])print("Scores (Y):")print(pd.DataFrame(Y, columns=[f"PC{i+1}" for i in range(Y.shape[1])]).head())print("\nLoadings (C):")print(loadings_df.round(2))print("\nExplained variance ratio:")print(np.round(explained_ratio, 2))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Scores (Y):
+        PC1       PC2
+0 -0.447276 -0.850355
+1  0.066396 -0.079792
+2 -0.554346 -0.492462
+3 -2.875295  0.200303
+4  1.604580 -0.425929
+
+Loadings (C):
+                     PC1   PC2
+annee_construction  0.59 -0.12
+surface_habitable   0.06  0.97
+conso_energie      -0.57 -0.16
+emission_ges       -0.57  0.15
+
+Explained variance ratio:
+[0.49 0.26]</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="analyse-des-correspondances-multiples-acm" class="level2">
+<h2 class="anchored" data-anchor-id="analyse-des-correspondances-multiples-acm">4. Analyse des correspondances multiples (ACM)</h2>
+<div id="cell-55" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:19.057714Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:19.058096Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:19.064461Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:19.058055Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:19.063608Z&quot;}}" data-execution_count="45">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>house <span class="op">=</span> data_dpe.copy()  data2 <span class="op">=</span> house[[<span class="st">"type_logement"</span>,<span class="st">"type_energie_chauffage"</span>,<span class="st">"classe_conso_energie"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="cell-56" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:19.065536Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:19.065984Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:19.081367Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:19.065945Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:19.080485Z&quot;}}" data-execution_count="46">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>data1 <span class="op">=</span> data_dpe[[<span class="st">"type_logement"</span>, <span class="st">"type_energie_chauffage"</span>, <span class="st">"classe_conso_energie"</span>]].copy()data1[<span class="st">"type_logement"</span>] <span class="op">=</span> data1[<span class="st">"type_logement"</span>].astype(<span class="st">"category"</span>)data1[<span class="st">"type_energie_chauffage"</span>] <span class="op">=</span> data1[<span class="st">"type_energie_chauffage"</span>].astype(<span class="st">"category"</span>)data1[<span class="st">"classe_conso_energie"</span>] <span class="op">=</span> data1[<span class="st">"classe_conso_energie"</span>].astype(<span class="st">"category"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="cell-57" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:19.082895Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:19.083224Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:19.100922Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:19.083196Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:19.100088Z&quot;}}" data-execution_count="47">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># on resumefor col in data1.columns:    print(f"--- {col} ---")    print(data1[col].value_counts())    print()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>--- type_logement ---
+type_logement
+appartement    639
+maison         361
+Name: count, dtype: int64
+
+--- type_energie_chauffage ---
+type_energie_chauffage
+électricité    542
+gaz            433
+autre           25
+Name: count, dtype: int64
+
+--- classe_conso_energie ---
+classe_conso_energie
+B    295
+C    274
+E    127
+D    121
+A     98
+F     70
+G     15
+Name: count, dtype: int64
+</code></pre>
+</div>
+</div>
+<div id="cell-58" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:19.101914Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:19.102230Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:24.571215Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:19.102203Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:24.570090Z&quot;}}" data-execution_count="48">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install prince</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<div class="ansi-escaped-output">
+<pre>Collecting prince
+  Downloading prince-0.17.0-py3-none-any.whl.metadata (6.6 kB)
+Requirement already satisfied: scikit-learn&gt;=1.5.1 in /usr/local/lib/python3.12/dist-packages (from prince) (1.6.1)
+Requirement already satisfied: pandas&gt;=2.2.0 in /usr/local/lib/python3.12/dist-packages (from prince) (2.3.3)
+Requirement already satisfied: altair&gt;=5.0.0 in /usr/local/lib/python3.12/dist-packages (from prince) (5.5.0)
+Requirement already satisfied: jinja2 in /usr/local/lib/python3.12/dist-packages (from altair&gt;=5.0.0-&gt;prince) (3.1.6)
+Requirement already satisfied: jsonschema&gt;=3.0 in /usr/local/lib/python3.12/dist-packages (from altair&gt;=5.0.0-&gt;prince) (4.26.0)
+Requirement already satisfied: narwhals&gt;=1.14.2 in /usr/local/lib/python3.12/dist-packages (from altair&gt;=5.0.0-&gt;prince) (2.17.0)
+Requirement already satisfied: packaging in /usr/local/lib/python3.12/dist-packages (from altair&gt;=5.0.0-&gt;prince) (26.0)
+Requirement already satisfied: typing-extensions&gt;=4.10.0 in /usr/local/lib/python3.12/dist-packages (from altair&gt;=5.0.0-&gt;prince) (4.15.0)
+Requirement already satisfied: numpy&gt;=1.26.0 in /usr/local/lib/python3.12/dist-packages (from pandas&gt;=2.2.0-&gt;prince) (2.0.2)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /usr/local/lib/python3.12/dist-packages (from pandas&gt;=2.2.0-&gt;prince) (2.9.0.post0)
+Requirement already satisfied: pytz&gt;=2020.1 in /usr/local/lib/python3.12/dist-packages (from pandas&gt;=2.2.0-&gt;prince) (2025.2)
+Requirement already satisfied: tzdata&gt;=2022.7 in /usr/local/lib/python3.12/dist-packages (from pandas&gt;=2.2.0-&gt;prince) (2025.3)
+Requirement already satisfied: scipy&gt;=1.6.0 in /usr/local/lib/python3.12/dist-packages (from scikit-learn&gt;=1.5.1-&gt;prince) (1.16.3)
+Requirement already satisfied: joblib&gt;=1.2.0 in /usr/local/lib/python3.12/dist-packages (from scikit-learn&gt;=1.5.1-&gt;prince) (1.5.3)
+Requirement already satisfied: threadpoolctl&gt;=3.1.0 in /usr/local/lib/python3.12/dist-packages (from scikit-learn&gt;=1.5.1-&gt;prince) (3.6.0)
+Requirement already satisfied: attrs&gt;=22.2.0 in /usr/local/lib/python3.12/dist-packages (from jsonschema&gt;=3.0-&gt;altair&gt;=5.0.0-&gt;prince) (25.4.0)
+Requirement already satisfied: jsonschema-specifications&gt;=2023.03.6 in /usr/local/lib/python3.12/dist-packages (from jsonschema&gt;=3.0-&gt;altair&gt;=5.0.0-&gt;prince) (2025.9.1)
+Requirement already satisfied: referencing&gt;=0.28.4 in /usr/local/lib/python3.12/dist-packages (from jsonschema&gt;=3.0-&gt;altair&gt;=5.0.0-&gt;prince) (0.37.0)
+Requirement already satisfied: rpds-py&gt;=0.25.0 in /usr/local/lib/python3.12/dist-packages (from jsonschema&gt;=3.0-&gt;altair&gt;=5.0.0-&gt;prince) (0.30.0)
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.12/dist-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=2.2.0-&gt;prince) (1.17.0)
+Requirement already satisfied: MarkupSafe&gt;=2.0 in /usr/local/lib/python3.12/dist-packages (from jinja2-&gt;altair&gt;=5.0.0-&gt;prince) (3.0.3)
+Downloading prince-0.17.0-py3-none-any.whl (194 kB)
+   <span class="ansi-bright-black-fg">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-green-fg">194.8/194.8 kB</span> <span class="ansi-red-fg">7.4 MB/s</span> eta <span class="ansi-cyan-fg">0:00:00</span>
+Installing collected packages: prince
+Successfully installed prince-0.17.0
+</pre>
+</div>
+</div>
+</div>
+<div id="cell-59" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:24.572733Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:24.573163Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:29.539544Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:24.573124Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:29.538828Z&quot;}}" data-execution_count="49">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> princeimport pandas <span class="im">as</span> pdimport numpy <span class="im">as</span> np<span class="co"># MCAmca = prince.MCA(n_components=5, n_iter=10, copy=True, engine='scipy', random_state=42)mca = mca.fit(data1)# Eigenvalueseigvals = np.array(mca.eigenvalues_)# % variance &amp; cumulativeperc_var = eigvals / eigvals.sum() * 100cum_var = np.cumsum(perc_var)eig_df = pd.DataFrame({    "eigenvalue": np.round(eigvals, 6),    "percentage of variance": np.round(perc_var, 2),    "cumulative % of variance": np.round(cum_var, 2)}, index=[f"dim {i+1}" for i in range(len(eigvals))])print(eig_df)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       eigenvalue  percentage of variance  cumulative % of variance
+dim 1    0.565405                   27.76                     27.76
+dim 2    0.439783                   21.59                     49.35
+dim 3    0.365188                   17.93                     67.27
+dim 4    0.333333                   16.36                     83.64
+dim 5    0.333333                   16.36                    100.00</code></pre>
+</div>
+</div>
+<div id="cell-60" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:29.540422Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:29.540944Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:29.698489Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:29.540907Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:29.697697Z&quot;}}" data-execution_count="50">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">4</span>))plt.plot(<span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(eigvals)<span class="op">+</span><span class="dv">1</span>), perc_var, marker<span class="op">=</span><span class="st">'o'</span>, linestyle<span class="op">=</span><span class="st">'-'</span>)plt.title(<span class="st">"Scree plot - % variance explained"</span>)plt.xlabel(<span class="st">"Dimension"</span>)plt.ylabel(<span class="st">"% variance"</span>)plt.xticks(<span class="bu">range</span>(<span class="dv">1</span>, <span class="bu">len</span>(eigvals)<span class="op">+</span><span class="dv">1</span>))plt.grid(<span class="va">True</span>)plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analyse-factorielle-version-python_files/figure-html/cell-43-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-61" class="cell" data-trusted="true" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.status.busy&quot;:&quot;2026-03-27T17:37:29.699585Z&quot;,&quot;iopub.execute_input&quot;:&quot;2026-03-27T17:37:29.699911Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-03-27T17:37:29.973857Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2026-03-27T17:37:29.699883Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-03-27T17:37:29.972979Z&quot;}}" data-execution_count="51">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>var_coords <span class="op">=</span> mca.column_coordinates(data2)  <span class="co"># coordinates of variablesplt.figure(figsize=(6,6))for i, var in enumerate(var_coords.index):    plt.arrow(0, 0, var_coords.iloc[i,0], var_coords.iloc[i,1],               color='red', alpha=0.5, head_width=0.03, length_includes_head=True)    plt.text(var_coords.iloc[i,0]*1.15, var_coords.iloc[i,1]*1.15, var, fontsize=9)# Vẽ unit circletheta = np.linspace(0, 2*np.pi, 100)plt.plot(np.cos(theta), np.sin(theta), linestyle='--', color='black')plt.axhline(0, color='black')plt.axvline(0, color='black')plt.xlim(-1,1)plt.ylim(-1,1)plt.gca().set_aspect('equal', adjustable='box')plt.title("Carte des variables de la MCA")plt.show()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analyse-factorielle-version-python_files/figure-html/cell-44-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="interprétation-de-lanalyse-des-correspondances-multiples-acm-1.-analyse-des-axes-factoriels--axe-1-horizontal-cet-axe-semble-opposer-les-classes-de-consommation-énergétique.-on-observe-une-transition-de-la-gauche-vers-la-droite-allant-des-bâtiments-les-plus-économes-classe-b-c-vers-les-bâtiments-les-plus-énergivores-classe-e-f.--axe-2-vertical-cet-axe-semble-structurer-les-types-de-logements-et-les-modes-de-chauffage.-il-oppose-principalement-les-appartements-en-haut-aux-maisons-individuelles-en-bas.-2.-corrélations-et-proximités-associationslanalyse-des-proximités-entre-les-points-permet-de-dégager-les-profils-suivants---profil-appartement-économe-on-observe-une-proximité-entre-type_logement_1-appartement-et-classe_conso_energie_c.-cela-suggère-que-dans-ce-jeu-de-données-les-appartements-ont-tendance-à-être-mieux-classés-énergétiquement-que-la-moyenne.--profil-maison-individuelle-type_logement_2-maison-se-situe-dans-la-partie-inférieure-du-plan.-sa-position-séloigne-des-classes-les-plus-performantes-b-c-ce-qui-pourrait-indiquer-une-consommation-plus-élevée-ou-une-isolation-différente.--impact-du-type-de-chauffage---chauffage-électricité-type_energie_chauffage_2-est-graphiquement-proche-de-la-classe-b-suggérant-une-corrélation-entre-les-logements-tout-électrique-souvent-plus-récents-ou-mieux-isolés-et-une-bonne-performance-énergétique.---chauffage-gaz-type_energie_chauffage_1-se-projette-davantage-vers-la-droite-du-graphique-proche-des-classes-d-et-e-indiquant-une-performance-énergétique-souvent-moindre-pour-ces-installations.-3.-synthèse-des-résultats--note-les-modalités-classe_conso_energie_e-et-f-sont-très-excentrées-sur-la-droite.-cela-signifie-quelles-contribuent-fortement-à-la-formation-du-premier-axe-et-quelles-représentent-des-profils-de-consommation-très-distincts-passoires-thermiques-par-rapport-au-reste-de-léchantillon." class="level5">
+<h5 class="anchored" data-anchor-id="interprétation-de-lanalyse-des-correspondances-multiples-acm-1.-analyse-des-axes-factoriels--axe-1-horizontal-cet-axe-semble-opposer-les-classes-de-consommation-énergétique.-on-observe-une-transition-de-la-gauche-vers-la-droite-allant-des-bâtiments-les-plus-économes-classe-b-c-vers-les-bâtiments-les-plus-énergivores-classe-e-f.--axe-2-vertical-cet-axe-semble-structurer-les-types-de-logements-et-les-modes-de-chauffage.-il-oppose-principalement-les-appartements-en-haut-aux-maisons-individuelles-en-bas.-2.-corrélations-et-proximités-associationslanalyse-des-proximités-entre-les-points-permet-de-dégager-les-profils-suivants---profil-appartement-économe-on-observe-une-proximité-entre-type_logement_1-appartement-et-classe_conso_energie_c.-cela-suggère-que-dans-ce-jeu-de-données-les-appartements-ont-tendance-à-être-mieux-classés-énergétiquement-que-la-moyenne.--profil-maison-individuelle-type_logement_2-maison-se-situe-dans-la-partie-inférieure-du-plan.-sa-position-séloigne-des-classes-les-plus-performantes-b-c-ce-qui-pourrait-indiquer-une-consommation-plus-élevée-ou-une-isolation-différente.--impact-du-type-de-chauffage---chauffage-électricité-type_energie_chauffage_2-est-graphiquement-proche-de-la-classe-b-suggérant-une-corrélation-entre-les-logements-tout-électrique-souvent-plus-récents-ou-mieux-isolés-et-une-bonne-performance-énergétique.---chauffage-gaz-type_energie_chauffage_1-se-projette-davantage-vers-la-droite-du-graphique-proche-des-classes-d-et-e-indiquant-une-performance-énergétique-souvent-moindre-pour-ces-installations.-3.-synthèse-des-résultats--note-les-modalités-classe_conso_energie_e-et-f-sont-très-excentrées-sur-la-droite.-cela-signifie-quelles-contribuent-fortement-à-la-formation-du-premier-axe-et-quelles-représentent-des-profils-de-consommation-très-distincts-passoires-thermiques-par-rapport-au-reste-de-léchantillon.">Interprétation de l’Analyse des Correspondances Multiples (ACM)### 1. Analyse des axes factoriels- <strong>Axe 1 (Horizontal)</strong> : Cet axe semble opposer les classes de consommation énergétique. On observe une transition de la gauche vers la droite, allant des bâtiments les plus économes (<em>Classe B, C</em>) vers les bâtiments les plus énergivores (<em>Classe E, F</em>).- <strong>Axe 2 (Vertical)</strong> : Cet axe semble structurer les types de logements et les modes de chauffage. Il oppose principalement les appartements (en haut) aux maisons individuelles (en bas).### 2. Corrélations et Proximités (Associations)L’analyse des proximités entre les points permet de dégager les profils suivants :- <strong>Profil “Appartement Économe”</strong> : On observe une proximité entre <em>type_logement_1</em> (Appartement) et <em>classe_conso_energie_C</em>. Cela suggère que, dans ce jeu de données, les appartements ont tendance à être mieux classés énergétiquement que la moyenne.- <strong>Profil “Maison Individuelle”</strong> : <em>type_logement_2</em> (Maison) se situe dans la partie inférieure du plan. Sa position s’éloigne des classes les plus performantes (<em>B, C</em>), ce qui pourrait indiquer une consommation plus élevée ou une isolation différente.- <strong>Impact du type de chauffage</strong> : - <em>Chauffage Électricité</em> (<em>type_energie_chauffage_2</em>) est graphiquement proche de la <em>Classe B</em>, suggérant une corrélation entre les logements tout-électrique (souvent plus récents ou mieux isolés) et une bonne performance énergétique. - <em>Chauffage Gaz</em> (<em>type_energie_chauffage_1</em>) se projette davantage vers la droite du graphique, proche des <em>Classes D et E</em>, indiquant une performance énergétique souvent moindre pour ces installations.### 3. Synthèse des résultats- Note : Les modalités <em>classe_conso_energie_E</em> et <em>F</em> sont très excentrées sur la droite. Cela signifie qu’elles contribuent fortement à la formation du premier axe et qu’elles représentent des profils de consommation très distincts (passoires thermiques) par rapport au reste de l’échantillon.</h5>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<div style="text-align:center; font-size:0.85em; color:#888; padding:25px;">
+  <strong>© 2026 NGUYEN Duc Hoang Viet — Tous droits réservés.</strong><br>
+  <strong>Université de Lille — Projet Analyse Factorielle DPE<strong><br>
+  Toute reproduction, diffusion ou utilisation sans autorisation est interdite.
+</strong></strong></div><strong><strong>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</strong></strong></div><strong><strong> <!-- /content -->
+
+
+
+
+</strong></strong></body></html>

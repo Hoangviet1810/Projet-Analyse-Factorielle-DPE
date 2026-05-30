@@ -1,0 +1,78 @@
+---
+title: "Partie 6 Conclusion"
+author: "NGUYEN Duc Hoang Viet"
+number-sections: true
+code-fold: false
+execute:
+  warning: false
+  message: false
+---
+
+# Conclusion
+
+L’étude des 1000 logements en Haute-Garonne permet de dégager des conclusions claires sur les facteurs influençant la performance énergétique et les émissions de GES :
+
+## Les déterminants de la consommation et des émissions (PCA & MCA)
+
+- L'analyse en composantes principales (ACP) montre que l'année de construction est corrélée neagtivement avec la consommation d'énergie et émission de GES. Cela suggère que les bâtiments plus anciens (année de construction plus faible) ont tendance à consommer davantage d’énergie et à émettre plus de gaz à effet de serre.
+
+- Deplus, l'ACP révèle aussi que la surface du logement est peu liée à l’année de construction ou à la performance énergétique par unité de surface.
+
+- L'analyse des correspondances multiples (ACM) souligne que la classe énergétique ($A \rightarrow G$) est dominée par le type d'énergie utilisé. Le type de logement (maison ou appartement) a un impact significativement plus faible sur la performance globale.
+
+## Validation par les tests statistiques
+
+### Test du Khi-deux
+
+- Le test du Khi-deux confirme une dépendance forte entre la consommation et le type de chauffage.
+
+###  Test ANOVA
+
+| Test | Hypothèse nulle (H0) | Hypothèse alternative (H1) | Statistique | p-value | Conclusion | Moyenne(s) |
+|------|---------------------|----------------------------|------------|---------|-----------|------------|
+| Conso énergie vs type_logement | Pas de différence de consommation moyenne entre Maison et Appartement | Différence réelle de consommation moyenne entre Maison et Appartement | F = 11.1 | 0.000894 | H0 rejetée → différence significative | Maison: 197.63 kWh/m²/an<br>Appartement: 176.48 kWh/m²/an |
+| Émissions GES vs type_energie_chauffage (ANOVA Welch) | Moyennes d’émissions égales | Au moins un groupe a une moyenne différente | F = 219.53 | < 2.2e-16 | Différences significatives → émissions dépendent du type d’énergie | Gaz: 33.6<br>Électricité: 11.1<br>Autre: 55.5 |
+
+---
+
+- Bien que l'ACM nuance son importance, le test ANOVA confirme que les maisons consomment en moyenne plus que les appartements ($197.63$ vs $176.48$ $kWh/m^2$).
+
+
+### Tests t de Student par paires
+
+| Comparaison | p-value | Conclusion |
+|------------|---------|------------|
+| Gaz vs Électricité | < 2e-16 | Différence extrêmement significative |
+| Gaz vs Autre | 0.0053 | Différence significative |
+| Électricité vs Autre | 1.8e-06 | Différence extrêmement significative |
+
+**Observations clés :**  
+- Les maisons consomment plus que les appartements, ce qui explique leur projection vers des classes énergétiques moins performantes (D, E, F).  
+- Les émissions de GES dépendent fortement du type d’énergie de chauffage : l’électricité est la plus propre, le gaz intermédiaire, et “Autre” très polluant.  
+- Tous les tests t montrent que toutes les paires de sources d’énergie diffèrent significativement au niveau des émissions.
+
+---
+
+##   Visualisations
+
+Les visualisations finales sont créées pour l'analyse DPE et couvrent les aspects suivants :
+
+1. **Distribution du type de logement :** Un graphique à barres montrant la fréquence des appartements et des maisons.  
+2. **Classe énergétique par type de chauffage :** Un graphique à barres groupées illustrant la répartition des classes (A-G) selon l'énergie utilisée (gaz, électricité, autre).  
+3. **Analyse des Correspondances Multiples (ACM) :** Une carte factorielle montrant les corrélations entre les variables catégorielles (type de logement, type de chauffage, classe énergétique).  
+4. **Analyse en Composantes Principales (ACP) :** Un cercle de corrélation représentant les relations entre surface habitable, consommation d'énergie et émissions de GES.  
+5. **Tests Statistiques et Émissions :** Tableaux (ANOVA, tests t) et boxplots analysant l'impact du type de chauffage sur les émissions de gaz à effet de serre.  
+
+**Remarque **
+
+D’après nos résultats, nous pouvons identifier des profils types :
+
+- L'idéal énergétique : Un Appartement chauffé à l'Électricité tend à atteindre les classes de performance B hoặc C.
+
+- Le risque modéré : Une Maison utilisant le Gas se situe souvent dans les classes D hoặc E.
+
+- La "Passoire Énergétique" critique : Quel que soit le type de bâtiment, l'usage d'énergies fossiles de type "Autre" conduit quasi systématiquement à une classification G (consommation extrêmement élevée).
+
+## Conclusion finale
+
+Pour améliorer l'efficacité énergétique en Haute-Garonne, la priorité ne doit pas seulement porter sur l'isolation du bâti, mais surtout sur la transition des systèmes de chauffage. Remplacer une chaudière à gaz ou au fioul par un système électrique moderne (pompe à chaleur) aura un impact bien plus immédiat et significatif sur le DPE que le simple passage d'une maison individuelle à un habitat collectif.

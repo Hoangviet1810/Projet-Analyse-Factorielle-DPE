@@ -1,0 +1,223 @@
+---
+title: "Partie 2 Analyse descriptive"
+author: "NGUYEN Duc Hoang Viet"
+number-sections: true
+code-fold: false
+execute:
+  warning: false
+  message: false
+---
+
+# Analyse descriptive
+
+## Variables quantitatives
+
+### Ancienneté
+
+```{r}
+data_dpe <- read.table("data_dpe.txt", header = TRUE, sep = "")
+data_dpe$anciennete = 2021 - data_dpe$annee_construction
+summary(data_dpe$anciennete)
+```
+
+```{r}
+anciennete <- data_dpe$anciennete
+round(sd(anciennete))
+cv=round((sd(anciennete)/mean(anciennete))*100) # cv = coeff de variation
+cv
+```
+
+La moyenne de l’ancienneté des logements est de 34,58 ans avec un écart-type d’environ 26 ans, ce qui situe la majorité des logements entre 9 et 61 ans.  
+Le coefficient de variation de 75 % indique une forte hétérogénéité des âges, due à la coexistence de logements très anciens et récents.
+
+```{r}
+par(cex.main=1.5, cex.lab=1.3, cex.axis=1.2)
+
+hist(data_dpe$anciennete,
+     main ="Distribution de l'ancienneté des logements",
+     xlab ="Ancienneté (années)",
+     ylab ="Fréquence",
+     col ="skyblue",border ="white")
+
+# Calculer moyenne et median
+moyenne <- mean(data_dpe$anciennete)
+mediane <- median(data_dpe$anciennete)
+
+# Ajouter une ligne pour la moyenne (rouge)
+abline(v = moyenne, col ="red", lwd =2)
+text(moyenne, par("usr")[4]*0.9,
+     labels = paste0("Moyenne = ", round(moyenne,1)),col="red", pos=4)
+
+# Ajouter une ligne pour la médiane (vert)
+abline(v = mediane, col ="green", lwd =2)
+text(mediane, par("usr")[4]*0.8,
+     labels = paste0("Median = ", mediane),col="green", pos=4)
+```
+
+ Remarque
+
+L’ancienneté moyenne des logements est de 34,58 ans, supérieure à la médiane (32 ans), ce qui indique la présence de logements très anciens tirant la moyenne vers le haut. L’âge des logements varie fortement, de 1 à 121 ans, avec quelques valeurs extrêmes.
+
+Le coefficient de variation élevé (75 %) et la forme asymétrique à droite montrent une forte dispersion des données : la majorité des logements sont récents, mais quelques logements très anciens influencent fortement la distribution.
+
+### Surface habitable
+
+```{r}
+summary(data_dpe$surface_habitable)
+sd(data_dpe$surface_habitable)
+cv=round(sd(data_dpe$surface_habitable)/mean(data_dpe$surface_habitable)*100) 
+cv
+```
+
+```{r}
+hist(data_dpe$surface_habitable, main = "Distribution de la surface
+habitable", xlab = "Surface habitable",ylab = "Fréquence")
+```
+
+```{r}
+boxplot(data_dpe$surface_habitable, main = "Distribution de la surface
+habitable", xlab = "Surface habitable",ylab = "Fréquence",col = "cyan")
+```
+
+Les surfaces habitables varient fortement, de 16 m² à 1452 m². La moyenne (82,51 m²) est supérieure à la médiane (66 m²), indiquant une distribution asymétrique influencée par des valeurs extrêmes.
+
+Le coefficient de variation élevé (115 %) confirme une forte dispersion. La majorité des logements ont une surface inférieure à 200 m², tandis que les grandes surfaces (>500 m²) sont rares et apparaissent comme des valeurs aberrantes, notamment une valeur extrême à 1452 m².
+
+### Consommation d’énergie
+
+```{r}
+summary(data_dpe$conso_energie)
+sd(data_dpe$conso_energie)
+cv=round(sd(data_dpe$conso_energie)/mean(data_dpe$conso_energie))*100
+cv
+```
+
+```{r}
+hist(data_dpe$conso_energie, main = "Distribution de la consommation de
+l'énergie",xlab = "énergie consommé", ylab = "Fréquence")
+```
+
+```{r}
+boxplot(data_dpe$conso_energie, main = "Distribution de la consommation
+de l'énergie", xlab = "énergie consommé", ylab = "Fréquence",col = "lightgreen")
+```
+
+La consommation d’énergie varie de 27,92 à 591,40 avec une moyenne de 184,10 et une médiane de 181,20, indiquant une distribution relativement centrée mais influencée par des valeurs élevées.
+
+Le coefficient de variation de 53 % montre une dispersion importante. La majorité des logements consomme autour de 200, tandis qu’une minorité dépasse 400, créant quelques valeurs extrêmes visibles sur le boxplot.
+
+Ainsi, la consommation est globalement modérée, mais quelques logements très énergivores influencent la moyenne.
+
+### Émission de GES
+
+```{r}
+summary(data_dpe$emission_ges)
+sd(data_dpe$emission_ges)
+cv=round(sd(data_dpe$emission_ges)/mean(data_dpe$emission_ges)*100)
+cv
+```
+
+```{r}
+hist(data_dpe$emission_ges, main = "Distribution de la consommation de
+gaz à effet de serre"
+,xlab = "consommation de gaz à effet de serre",ylab = "Fréquence")
+```
+
+```{r}
+boxplot(data_dpe$emission_ges, main = "Distribution de la consommation
+de gaz à effet de serre"
+,xlab = "consommation de gaz à effet de serre"
+,ylab = "Fréquence",col = "lightblue")
+```
+
+- La consommation de gaz à effet de serre varie entre 2 et 143.4 avec une moyenne
+de 21.93 et une médiane de 12.7. Les trois quarts des observations ont une
+consommation inférieure à 30.
+
+- Le coefficient de variation est de 94%, ce qui est une très forte dispersion des
+consommations.
+
+- L’histogramme montre une distribution très asymétrique , ou la majorité consomme
+peu de gaz à effet de serre, tandis qu’une minorité affiche des valeurs très élevées.
+
+- La boite a moustache met en évidence de nombreuses valeurs extrêmes,
+représentant des consommations exceptionnellement élevées.
+
+- Ces observations montre que la majorité consomme peu mais un petit groupe
+génère des émissions très élevées, influencent fortement la moyenne
+
+## Variables qualitatives
+
+### Le type de logement
+
+```{r}
+data_dpe$type_logement <- factor(
+  data_dpe$type_logement,levels = c(1, 2),labels = c("appartement", "maison"))
+summary(data_dpe$type_logement)
+```
+
+```{r}
+barplot(table(data_dpe$type_logement), main = "Distribution du type de
+logement"
+,xlab = "Type de logement",ylab= "Frequence",col = c("yellow","red"))
+```
+
+- Les appartements sont majoritairement, représentant 63.9% des logements, tandis
+que les maisons sont juste 36.1%.
+
+- Le diagramme illustre clairement la différence avec une proportion clairement plus
+élevée pour les appartements.
+
+- Dans cette population, on peut constater que les appartements sont plus fréquentés.
+
+### Le type de l’energie chauffage
+
+```{r}
+data_dpe$type_energie_chauffage <- factor(
+  data_dpe$type_energie_chauffage,
+  levels = c(1, 2, 3), labels = c("gaz", "électricité", "autre"))
+summary(data_dpe$type_energie_chauffage)
+```
+
+```{r}
+barplot(table(data_dpe$type_energie_chauffage), main = "Distribution 
+        du type de l'energie chauffage"
+        ,xlab = "Type de de l'énergie chauffage"
+        ,ylab= "Frequence",col= c("lightpink","slategray1","coral4"))
+```
+
+- Les chauffages de type électronique sont majoritaires,avec 54.2%, suivis par le gaz
+avec 43.3%. Les autres types sont marginaux avec seulement 2.5%.
+
+- Le diagramme reflète cette répartition, montrant une légère dominance de l'électricité
+comme source principale.
+
+- Ces données montrent une préférence pour l'électricité, possiblement liée à son
+accessibilité; le gaz aussi reste une source alternative significative.
+
+### La classe de la consommation d’énergie
+
+```{r}
+table(data_dpe$classe_conso_energie)
+```
+
+```{r}
+barplot(table(data_dpe$classe_conso_energie), main = "Distribution de
+classe conso energie"
+, xlab = "Classe consommation d'énergie"
+, ylab= "Frequence"
+,col =
+c("floralwhite","plum3","aquamarine","firebrick","limegreen","khaki","navy"))
+```
+
+- Les classes B et C sont les plus fréquentes, représentant respectivement 29,5 % et
+27,4 % des logements. Les classes A, D, et E sont moins nombreuses, avec des
+proportions respectives de 9,8 %, 12,1 %, et 12,7 %. Enfin, les classes F et G sont
+marginales, avec 7 % et seulement 1,5 %.
+
+- Le diagramme en barres montre clairement cette répartition, mettant en évidence
+une forte concentration dans les classes intermédiaires (B et C).
+
+- Cette répartition suggère que la majorité des logements ont une consommation
+énergétique modérée (B et C), tandis que les logements très performants (A) et les
+logements très énergivores (F et G) sont beaucoup moins courants.

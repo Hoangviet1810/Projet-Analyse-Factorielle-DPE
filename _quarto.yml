@@ -1,0 +1,63 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Projet Analyse Factorielle DPE"
+ 
+  navbar:
+    background: "#1aa260"
+    left:
+      - href: index.qmd
+        text: Accueil
+      - href: Part1.qmd
+        text: "Introduction "
+      - href: Part2.qmd
+        text: "Analyse descriptive"
+      - href: Part3.qmd
+        text: "ACP "
+      - href: Part4.qmd
+        text: "ACM "
+      - href: Part5.qmd
+        text: "Test "
+      - href: Part6.qmd
+        text: "Conclusion "
+        
+    right:
+      - icon: github
+        href: https://github.com/Hoangviet1810/Projet-Analyse-Factorielle-DPE/tree/main
+      - text: "Portfolio de Viet"
+        href: https://ndhviet.wixsite.com/hviet-portfolio
+        aria-label: "Portfolio"
+      - icon: linkedin           # <--- Thêm icon LinkedIn tại đây
+        href: https://www.linkedin.com/in/hoang-viet1810/?isSelfProfile=false
+        aria-label: "LinkedIn"
+        
+    page-footer:
+    center: |
+      <div style="text-align:center; font-size:0.85em; color:#888;">
+        <strong>© 2026 NGUYEN Duc Hoang Viet — Tous droits réservés.</strong><br>
+        <strong>Université de Lille — Projet Analyse Factorielle DPE</strong><br>
+        Toute reproduction, diffusion ou utilisation sans autorisation est interdite.
+      </div>
+
+        
+
+format:
+  html:
+    theme: flatly
+    css: custom.css
+    toc: true
+    toc-location: right
+    toc-title: "Sur cette page" 
+    code-fold: true
+    embed-resources: false
+   
+    
+    
+    
+    
+    
+    
+    
+    

@@ -1,0 +1,39 @@
+---
+title: "Partie 1 Introduction"
+author: "NGUYEN Duc Hoang Viet"
+number-sections: true
+code-fold: false
+execute:
+  warning: false
+  message: false
+---
+
+#  Introduction
+
+##  Contexte et population étudiée
+
+L’étude porte sur la performance énergétique des logements individuels situés dans le département de la Haute-Garonne. Cette population comprend 1000 logements construits entre 1900 et 2020, pour lesquels un diagnostic de performance énergétique (DPE) a été réalisé avant juillet 2021.
+
+Le DPE permet d’évaluer la consommation énergétique d’un bâtiment ainsi que ses émissions de gaz à effet de serre. Les logements classés F ou G pour la consommation énergétique sont qualifiés de *passoires énergétiques* et sont soumis à des restrictions légales visant à limiter leur impact environnemental.
+
+##  Source des données
+
+Les données utilisées dans cette étude proviennent de l’Agence de la transition écologique (ADEME), accessibles sur le portail Open Data de l’ADEME  (<https://data.ademe.fr/datasets/dpe-31>)
+
+##  Variables de l’échantillon
+
+Les variables sélectionnées pour cette étude sont les suivantes :
+
+-   **type_logement** : type du logement (1 = appartement, 2 = maison) — variable qualitative.
+-   **annee_construction** : année de construction du logement — variable quantitative.
+-   **surface_habitable** : surface habitable en mètres carrés — variable quantitative.
+-   **type_energie_chauffage** : type d’énergie utilisée pour le chauffage (1 = gaz, 2 = électricité, 3 = autre) — variable qualitative.
+-   **conso_energie** : consommation énergétique annuelle en kWhEP/m² — variable quantitative.
+-   **classe_conso_energie** : classe de consommation énergétique (de A à G) — variable qualitative.
+-   **emission_ges** : émissions de gaz à effet de serre en kg éq.CO$_2$/m² — variable quantitative.
+
+```{r}
+data_dpe <- read.table("data_dpe.txt", header = TRUE, sep = "")
+head(data_dpe)
+```
+

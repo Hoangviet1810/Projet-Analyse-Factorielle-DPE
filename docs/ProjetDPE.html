@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Duc Hoang Viet NGUYEN">
+<meta name="dcterms.date" content="2026-01-25">
+
+<title>Projet DPE : Analyse factorielle – Projet Analyse Factorielle DPE</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-50457f86fee86a995f2b2260ea795387.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+</head><body class="nav-fixed quarto-light">\usepackage{hyperref}
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="custom.css">
+
+
+
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Projet Analyse Factorielle DPE</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Accueil</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Part1.html"> 
+<span class="menu-text">Introduction</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Part2.qmd"> 
+<span class="menu-text">Analyse descriptive</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Part3.qmd"> 
+<span class="menu-text">ACP</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Part4.qmd"> 
+<span class="menu-text">ACM</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Part5.qmd"> 
+<span class="menu-text">Test</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Part6.qmd"> 
+<span class="menu-text">Conclusion</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#contexte-et-population-étudiée" id="toc-contexte-et-population-étudiée" class="nav-link" data-scroll-target="#contexte-et-population-étudiée">Contexte et population étudiée</a></li>
+  <li><a href="#source-des-données" id="toc-source-des-données" class="nav-link" data-scroll-target="#source-des-données">Source des données</a></li>
+  <li><a href="#variables-de-léchantillon" id="toc-variables-de-léchantillon" class="nav-link" data-scroll-target="#variables-de-léchantillon">Variables de l’échantillon</a></li>
+  </ul></li>
+  <li><a href="#analyse-descriptive" id="toc-analyse-descriptive" class="nav-link" data-scroll-target="#analyse-descriptive">Analyse descriptive</a>
+  <ul class="collapse">
+  <li><a href="#variables-quantitatives" id="toc-variables-quantitatives" class="nav-link" data-scroll-target="#variables-quantitatives">Variables quantitatives</a>
+  <ul class="collapse">
+  <li><a href="#ancienneté" id="toc-ancienneté" class="nav-link" data-scroll-target="#ancienneté">Ancienneté</a></li>
+  <li><a href="#surface-habitable" id="toc-surface-habitable" class="nav-link" data-scroll-target="#surface-habitable">Surface habitable</a></li>
+  <li><a href="#consommation-dénergie" id="toc-consommation-dénergie" class="nav-link" data-scroll-target="#consommation-dénergie">Consommation d’énergie</a></li>
+  <li><a href="#émission-de-ges" id="toc-émission-de-ges" class="nav-link" data-scroll-target="#émission-de-ges">Émission de GES</a></li>
+  </ul></li>
+  <li><a href="#variables-qualitatives" id="toc-variables-qualitatives" class="nav-link" data-scroll-target="#variables-qualitatives">Variables qualitatives</a>
+  <ul class="collapse">
+  <li><a href="#le-type-de-logement" id="toc-le-type-de-logement" class="nav-link" data-scroll-target="#le-type-de-logement">Le type de logement</a></li>
+  <li><a href="#le-type-de-lenergie-chauffage" id="toc-le-type-de-lenergie-chauffage" class="nav-link" data-scroll-target="#le-type-de-lenergie-chauffage">Le type de l’energie chauffage</a></li>
+  <li><a href="#la-classe-de-la-consommation-dénergie" id="toc-la-classe-de-la-consommation-dénergie" class="nav-link" data-scroll-target="#la-classe-de-la-consommation-dénergie">La classe de la consommation d’énergie</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#analyse-en-composantes-principales-acp" id="toc-analyse-en-composantes-principales-acp" class="nav-link" data-scroll-target="#analyse-en-composantes-principales-acp">Analyse en composantes principales (ACP)</a>
+  <ul class="collapse">
+  <li><a href="#objectif-de-lacp" id="toc-objectif-de-lacp" class="nav-link" data-scroll-target="#objectif-de-lacp">Objectif de l’ACP</a></li>
+  <li><a href="#valeur-propre-et-inertie" id="toc-valeur-propre-et-inertie" class="nav-link" data-scroll-target="#valeur-propre-et-inertie">Valeur propre et inertie</a>
+  <ul class="collapse">
+  <li><a href="#la-matrice-des-covariances" id="toc-la-matrice-des-covariances" class="nav-link" data-scroll-target="#la-matrice-des-covariances">La matrice des covariances</a></li>
+  <li><a href="#les-valeurs-propres" id="toc-les-valeurs-propres" class="nav-link" data-scroll-target="#les-valeurs-propres">Les valeurs propres</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#analyse-des-correspondances-multiples-acm" id="toc-analyse-des-correspondances-multiples-acm" class="nav-link" data-scroll-target="#analyse-des-correspondances-multiples-acm">Analyse des correspondances multiples (ACM)</a>
+  <ul class="collapse">
+  <li><a href="#objectif-de-lacm" id="toc-objectif-de-lacm" class="nav-link" data-scroll-target="#objectif-de-lacm">Objectif de l’ACM</a></li>
+  <li><a href="#valeur-propre" id="toc-valeur-propre" class="nav-link" data-scroll-target="#valeur-propre">Valeur propre</a></li>
+  <li><a href="#acm" id="toc-acm" class="nav-link" data-scroll-target="#acm">ACM</a>
+  <ul class="collapse">
+  <li><a href="#carte-des-variables-de-la-mca-1" id="toc-carte-des-variables-de-la-mca-1" class="nav-link" data-scroll-target="#carte-des-variables-de-la-mca-1">Carte des variables de la MCA 1</a></li>
+  <li><a href="#carte-des-variables-de-la-mca-2" id="toc-carte-des-variables-de-la-mca-2" class="nav-link" data-scroll-target="#carte-des-variables-de-la-mca-2">Carte des variables de la MCA 2</a></li>
+  <li><a href="#individuals" id="toc-individuals" class="nav-link" data-scroll-target="#individuals">Individuals</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#test" id="toc-test" class="nav-link" data-scroll-target="#test">Test</a>
+  <ul class="collapse">
+  <li><a href="#test-chi-deux" id="toc-test-chi-deux" class="nav-link" data-scroll-target="#test-chi-deux">Test Chi-deux</a></li>
+  <li><a href="#test-anova" id="toc-test-anova" class="nav-link" data-scroll-target="#test-anova">Test ANOVA</a>
+  <ul class="collapse">
+  <li><a href="#tester-sil-y-a-une-différence-réelle-de-consommation-énergétique-moyenne-entre-maison-et-appartement." id="toc-tester-sil-y-a-une-différence-réelle-de-consommation-énergétique-moyenne-entre-maison-et-appartement." class="nav-link" data-scroll-target="#tester-sil-y-a-une-différence-réelle-de-consommation-énergétique-moyenne-entre-maison-et-appartement.">Tester s’il y a une différence réelle de consommation énergétique moyenne entre Maison et Appartement.</a></li>
+  <li><a href="#tester-si-les-moyennes-des-émissions-de-ges-sont-identiques-selon-le-type-dénergie-de-chauffage." id="toc-tester-si-les-moyennes-des-émissions-de-ges-sont-identiques-selon-le-type-dénergie-de-chauffage." class="nav-link" data-scroll-target="#tester-si-les-moyennes-des-émissions-de-ges-sont-identiques-selon-le-type-dénergie-de-chauffage.">Tester si les moyennes des émissions de GES sont identiques selon le type d’énergie de chauffage.</a></li>
+  </ul></li>
+  <li><a href="#tests-t-de-student-par-paires" id="toc-tests-t-de-student-par-paires" class="nav-link" data-scroll-target="#tests-t-de-student-par-paires">Tests t de Student par paires</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Projet DPE : Analyse factorielle</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Duc Hoang Viet NGUYEN </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 25, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div style="page-break-after: always;"></div>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<section id="contexte-et-population-étudiée" class="level2">
+<h2 class="anchored" data-anchor-id="contexte-et-population-étudiée">Contexte et population étudiée</h2>
+<p>L’étude porte sur la performance énergétique des logements individuels situés dans le département de la Haute-Garonne. Cette population comprend 1000 logements construits entre 1900 et 2020, pour lesquels un diagnostic de performance énergétique a été réalisé avant juillet 2021. Le DPE permet d’évaluer la consommation énergétique d’un bâtiment ainsi que ses émissions de gaz à effet de serre. Les logements classés F ou G pour la consommation énergétique sont qualifiés de « passoires énergétiques » et sont soumis à des restrictions légales visant à limiter leur impact environnemental.</p>
+</section>
+<section id="source-des-données" class="level2">
+<h2 class="anchored" data-anchor-id="source-des-données">Source des données</h2>
+<p>Les données utilisées dans cette étude proviennent de l’Agence de la transition écologique (ADEME), accessibles sur le portail open data de l’ADEME.</p>
+</section>
+<section id="variables-de-léchantillon" class="level2">
+<h2 class="anchored" data-anchor-id="variables-de-léchantillon">Variables de l’échantillon</h2>
+<p>Les variables sélectionnées pour cette étude sont les suivantes :</p>
+<ul>
+<li><strong>type_logement</strong> : type du logement (1 = appartement, 2 = maison) — variable qualitative.</li>
+<li><strong>annee_construction</strong> : année de construction du logement — variable quantitative.</li>
+<li><strong>surface_habitable</strong> : surface habitable en mètres carrés — variable quantitative.</li>
+<li><strong>type_energie_chauffage</strong> : type d’énergie utilisée pour le chauffage (1 = gaz, 2 = électricité, 3 = autre) — variable qualitative.</li>
+<li><strong>conso_energie</strong> : consommation énergétique annuelle en kWhEP/m² — variable quantitative.</li>
+<li><strong>classe_conso_energie</strong> : classe de consommation énergétique (de A à G) — variable qualitative.</li>
+<li><strong>emission_ges</strong> : émissions de gaz à effet de serre en kg éq.CO₂/m² — variable quantitative.</li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_dpe <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"/Users/nguyenduchoangviet/Downloads/data_dpe.txt"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>                       ,<span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data_dpe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  type_logement annee_construction surface_habitable type_energie_chauffage
+1             1               1988                25                      2
+2             1               1996                64                      1
+3             1               1970                46                      2
+4             2               1958                74                      1
+5             1               2013                38                      1
+6             2               2006                65                      2
+  conso_energie classe_conso_energie emission_ges
+1        300.44                    C        13.23
+2        148.17                    D        34.67
+3        257.00                    C        12.00
+4        317.03                    F        74.18
+5         53.42                    C        12.50
+6        176.09                    B         6.09</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="analyse-descriptive" class="level1">
+<h1>Analyse descriptive</h1>
+<section id="variables-quantitatives" class="level2">
+<h2 class="anchored" data-anchor-id="variables-quantitatives">Variables quantitatives</h2>
+<section id="ancienneté" class="level3">
+<h3 class="anchored" data-anchor-id="ancienneté">Ancienneté</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data_dpe<span class="sc">$</span>anciennete <span class="ot">=</span> <span class="dv">2021</span> <span class="sc">-</span> data_dpe<span class="sc">$</span>annee_construction</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_dpe<span class="sc">$</span>anciennete)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   1.00   15.00   32.00   34.58   51.00  121.00 </code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>anciennete <span class="ot">&lt;-</span> data_dpe<span class="sc">$</span>anciennete</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">sd</span>(anciennete))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 26</code></pre>
+</div>
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cv<span class="ot">=</span><span class="fu">round</span>((<span class="fu">sd</span>(anciennete)<span class="sc">/</span><span class="fu">mean</span>(anciennete))<span class="sc">*</span><span class="dv">100</span>) <span class="co"># cv = coeff de variation</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>cv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 75</code></pre>
+</div>
+</div>
+<p>On a donc le moyen(Mean) est 34.58 et l’écart-type est 26 donc le distance entre le moyen et le sd est 26 donc l’âge de logement est entre 9 et 61 ans.</p>
+<p>Le CV est 75% donc l’âge des logements est très hétérogène, avec des écarts importants par rapport à l’âge moyen.</p>
+<p>Alors, l’écart-type de l’ancienneté est de 25,88 ans et le coefficient de variation atteint 75 %, ce qui révèle une très forte dispersion. Cette hétérogénéité s’explique par la présence de logements très anciens aux côtés de logements récents.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">cex.main=</span><span class="fl">1.5</span>, <span class="at">cex.lab=</span><span class="fl">1.3</span>, <span class="at">cex.axis=</span><span class="fl">1.2</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data_dpe<span class="sc">$</span>anciennete,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span><span class="st">"Distribution de l'ancienneté des logements"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span><span class="st">"Ancienneté (années)"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span><span class="st">"Fréquence"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span><span class="st">"skyblue"</span>,<span class="at">border =</span><span class="st">"white"</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculer moyenne et median</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>moyenne <span class="ot">&lt;-</span> <span class="fu">mean</span>(data_dpe<span class="sc">$</span>anciennete)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>mediane <span class="ot">&lt;-</span> <span class="fu">median</span>(data_dpe<span class="sc">$</span>anciennete)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajouter une ligne pour la moyenne (rouge)</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> moyenne, <span class="at">col =</span><span class="st">"red"</span>, <span class="at">lwd =</span><span class="dv">2</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(moyenne, <span class="fu">par</span>(<span class="st">"usr"</span>)[<span class="dv">4</span>]<span class="sc">*</span><span class="fl">0.9</span>,</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> <span class="fu">paste0</span>(<span class="st">"Moyenne = "</span>, <span class="fu">round</span>(moyenne,<span class="dv">1</span>)),<span class="at">col=</span><span class="st">"red"</span>, <span class="at">pos=</span><span class="dv">4</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajouter une ligne pour la médiane (vert)</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> mediane, <span class="at">col =</span><span class="st">"green"</span>, <span class="at">lwd =</span><span class="dv">2</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(mediane, <span class="fu">par</span>(<span class="st">"usr"</span>)[<span class="dv">4</span>]<span class="sc">*</span><span class="fl">0.8</span>,</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> <span class="fu">paste0</span>(<span class="st">"Median = "</span>, mediane),<span class="at">col=</span><span class="st">"green"</span>, <span class="at">pos=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/hist-anciennete-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Remarque:</strong></p>
+<ol type="1">
+<li>L’ancienneté moyenne des logements est de 34,58 ans, tandis que la moitié des logements ont une ancienneté inférieure à 32 ans (médiane).</li>
+</ol>
+<ul>
+<li><strong>Ancienneté moyenne ≈ 34,58 ans</strong> → âge moyen de tous les logements de l’échantillon.<br>
+</li>
+<li><strong>Médiane = 32 ans</strong> → 50% des logements ont un âge &lt; 32 ans, 50% ≥ 32 ans.<br>
+</li>
+<li>En comparant ces deux valeurs → <strong>la moyenne &gt; la médiane</strong> → cela indique la présence de logements très anciens qui tirent la moyenne vers le haut.</li>
+</ul>
+<ol start="2" type="1">
+<li>Ensuite, le logement le plus récent a 1 an, tandis que le logement le plus ancien a 121 ans.</li>
+</ol>
+<ul>
+<li><strong>Logement le plus récent :</strong> 1 an<br>
+</li>
+<li><strong>Logement le plus ancien :</strong> 121 ans<br>
+</li>
+<li>Ces valeurs sont des <strong>outliers</strong>, créant une forte dispersion des données.</li>
+</ul>
+<ol start="3" type="1">
+<li>Le coefficient de variation est de 75 %, ce qui indique une <strong>dispersion importante</strong> des données.</li>
+</ol>
+<ul>
+<li><strong>CV = 75 %</strong> → les âges des logements sont très hétérogènes<br>
+</li>
+<li>En d’autres termes, certains logements sont très récents, d’autres très anciens.</li>
+</ul>
+<ol start="4" type="1">
+<li>La distribution de l’ancienneté est <strong>asymétrique à droite</strong> avec une concentration élevée de logements récents (moins de 20 ans).</li>
+</ol>
+<ul>
+<li>Beaucoup de logements sont récents (&lt;20 ans)<br>
+</li>
+<li>Quelques logements très anciens (&gt;80 ans) sont présents mais en minorité</li>
+</ul>
+<ol start="5" type="1">
+<li>Le boxplot montre une dispersion notable avec quelques valeurs extrêmes représentant des logements très anciens.</li>
+</ol>
+<ul>
+<li>La majorité des données se concentrent autour de la médiane<br>
+</li>
+<li>Quelques points <strong>hors norme (outliers)</strong> correspondent aux logements très anciens</li>
+</ul>
+<p><strong>Conclusion générale</strong></p>
+<p>Ces observations indiquent que, bien que la majorité des logements soient relativement récents, le parc immobilier inclut également des logements très anciens, ce qui contribue à la <strong>forte variation de l’ancienneté</strong> dans cet échantillon.</p>
+<ul>
+<li>La plupart des logements sont récents<br>
+</li>
+<li>Mais certains logements très anciens sont présents<br>
+</li>
+<li>Cela explique le <strong>CV élevé (75%)</strong> et la grande dispersion des âges des logements</li>
+</ul>
+</section>
+<section id="surface-habitable" class="level3">
+<h3 class="anchored" data-anchor-id="surface-habitable">Surface habitable</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_dpe<span class="sc">$</span>surface_habitable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  16.00   45.75   66.00   82.51   95.25 1452.00 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(data_dpe<span class="sc">$</span>surface_habitable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 94.87407</code></pre>
+</div>
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>cv<span class="ot">=</span><span class="fu">round</span>(<span class="fu">sd</span>(data_dpe<span class="sc">$</span>surface_habitable)<span class="sc">/</span><span class="fu">mean</span>(data_dpe<span class="sc">$</span>surface_habitable)<span class="sc">*</span><span class="dv">100</span>) </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>cv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 115</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data_dpe<span class="sc">$</span>surface_habitable, <span class="at">main =</span> <span class="st">"Distribution de la surface</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="st">habitable"</span>, <span class="at">xlab =</span> <span class="st">"Surface habitable"</span>,<span class="at">ylab =</span> <span class="st">"Fréquence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/hist-surface-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(data_dpe<span class="sc">$</span>surface_habitable, <span class="at">main =</span> <span class="st">"Distribution de la surface</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="st">habitable"</span>, <span class="at">xlab =</span> <span class="st">"Surface habitable"</span>,<span class="at">ylab =</span> <span class="st">"Fréquence"</span>,<span class="at">col =</span> <span class="st">"cyan"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Les surfaces habitables varient entre 16 m² (minimum) et 1452 m² (maximum). La moyenne est de 82.51 m², tandis que la médiane est de 66 m², indiquant une distribution asymétrique avec des valeurs extrêmes.</p></li>
+<li><p>Le coefficient de variation (CV) est très élevé, à 115 %, ce qui révèle une forte dispersion des surfaces habitables.</p></li>
+<li><p>La majorité des logements ont une surface habitable inférieure à 200 m², avec une surreprésentation des petites surfaces (moins de 100 m²). Les surfaces supérieures à 500 m² sont très rares.</p></li>
+<li><p>Le boxplot met en évidence de nombreuses valeurs aberrantes, avec des surfaces très éloignées de la majorité des données, notamment une valeur extrême à 1452 m².</p></li>
+<li><p>La répartition des surfaces habitables est très hétérogène, avec une concentration sur les petites surfaces, tandis que les grandes surfaces constituent quelques exceptions.</p></li>
+</ul>
+</section>
+<section id="consommation-dénergie" class="level3">
+<h3 class="anchored" data-anchor-id="consommation-dénergie">Consommation d’énergie</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_dpe<span class="sc">$</span>conso_energie)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  27.92  114.73  181.16  184.12  238.25  591.35 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(data_dpe<span class="sc">$</span>conso_energie)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 96.89191</code></pre>
+</div>
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>cv<span class="ot">=</span><span class="fu">round</span>(<span class="fu">sd</span>(data_dpe<span class="sc">$</span>conso_energie)<span class="sc">/</span><span class="fu">mean</span>(data_dpe<span class="sc">$</span>conso_energie))<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>cv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 100</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data_dpe<span class="sc">$</span>conso_energie, <span class="at">main =</span> <span class="st">"Distribution de la consommation de</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="st">l'énergie"</span>,<span class="at">xlab =</span> <span class="st">"énergie consommé"</span>, <span class="at">ylab =</span> <span class="st">"Fréquence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(data_dpe<span class="sc">$</span>conso_energie, <span class="at">main =</span> <span class="st">"Distribution de la consommation</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="st">de l'énergie"</span>, <span class="at">xlab =</span> <span class="st">"énergie consommé"</span>, <span class="at">ylab =</span> <span class="st">"Fréquence"</span>,<span class="at">col =</span> <span class="st">"lightgreen"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>La consommation d’énergie varie entre 27.92 et 591.40 avec une moyenne de 184.10 et la médiane de 181.20.</p></li>
+<li><p>Le coefficient de variation (CV) est élevé, à 53%, ce qui révèle une forte dispersion de la consommation d’énergie.</p></li>
+<li><p>La majorité des logements utilise environ 200 d’énergie avec une minorité qui dépasse 400.</p></li>
+<li><p>La boxplot montre une distribution autour de 200 avec quelques logements qui consomment beaucoup plus que les autres.</p></li>
+<li><p>Ces observations montrent qu’une majorité consomme modérément mais une petite partie consomment de manière exceptionnelle, influence la moyenne.</p></li>
+</ul>
+</section>
+<section id="émission-de-ges" class="level3">
+<h3 class="anchored" data-anchor-id="émission-de-ges">Émission de GES</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_dpe<span class="sc">$</span>emission_ges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  2.000   8.602  12.695  21.933  30.000 143.360 </code></pre>
+</div>
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(data_dpe<span class="sc">$</span>emission_ges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20.64916</code></pre>
+</div>
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>cv<span class="ot">=</span><span class="fu">round</span>(<span class="fu">sd</span>(data_dpe<span class="sc">$</span>emission_ges)<span class="sc">/</span><span class="fu">mean</span>(data_dpe<span class="sc">$</span>emission_ges)<span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>cv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 94</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data_dpe<span class="sc">$</span>emission_ges, <span class="at">main =</span> <span class="st">"Distribution de la consommation de</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="st">gaz à effet de serre"</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>,<span class="at">xlab =</span> <span class="st">"consommation de gaz à effet de serre"</span>,<span class="at">ylab =</span> <span class="st">"Fréquence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(data_dpe<span class="sc">$</span>emission_ges, <span class="at">main =</span> <span class="st">"Distribution de la consommation</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="st">de gaz à effet de serre"</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>,<span class="at">xlab =</span> <span class="st">"consommation de gaz à effet de serre"</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>,<span class="at">ylab =</span> <span class="st">"Fréquence"</span>,<span class="at">col =</span> <span class="st">"lightblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>La consommation de gaz à effet de serre varie entre 2 et 143.4 avec une moyenne de 21.93 et une médiane de 12.7. Les trois quarts des observations ont une consommation inférieure à 30.</p></li>
+<li><p>Le coefficient de variation est de 94%, ce qui est une très forte dispersion des consommations.</p></li>
+<li><p>L’histogramme montre une distribution très asymétrique , ou la majorité consomme peu de gaz à effet de serre, tandis qu’une minorité affiche des valeurs très élevées.</p></li>
+<li><p>La boite a moustache met en évidence de nombreuses valeurs extrêmes, représentant des consommations exceptionnellement élevées.</p></li>
+<li><p>Ces observations montre que la majorité consomme peu mais un petit groupe génère des émissions très élevées, influencent fortement la moyenne</p></li>
+</ul>
+</section>
+</section>
+<section id="variables-qualitatives" class="level2">
+<h2 class="anchored" data-anchor-id="variables-qualitatives">Variables qualitatives</h2>
+<section id="le-type-de-logement" class="level3">
+<h3 class="anchored" data-anchor-id="le-type-de-logement">Le type de logement</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>data_dpe<span class="sc">$</span>type_logement <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  data_dpe<span class="sc">$</span>type_logement,<span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"appartement"</span>, <span class="st">"maison"</span>))</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_dpe<span class="sc">$</span>type_logement)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>appartement      maison 
+        639         361 </code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(data_dpe<span class="sc">$</span>type_logement), <span class="at">main =</span> <span class="st">"Distribution du type de</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="st">logement"</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>,<span class="at">xlab =</span> <span class="st">"Type de logement"</span>,<span class="at">ylab=</span> <span class="st">"Frequence"</span>,<span class="at">col =</span> <span class="fu">c</span>(<span class="st">"yellow"</span>,<span class="st">"red"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(data_dpe<span class="sc">$</span>type_logement),</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Distribution du type de logement"</span>,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Fréquence"</span>,<span class="at">ylab =</span> <span class="st">"Type de logement"</span>,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"cyan"</span>, <span class="st">"#1A75FF"</span>),<span class="at">horiz =</span> <span class="cn">TRUE</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Les appartements sont majoritairement, représentant 63.9% des logements, tandis que les maisons sont juste 36.1%.</p></li>
+<li><p>Le diagramme illustre clairement la différence avec une proportion clairement plus élevée pour les appartements.</p></li>
+<li><p>Dans cette population, on peut constater que les appartements sont plus fréquentés.</p></li>
+</ul>
+</section>
+<section id="le-type-de-lenergie-chauffage" class="level3">
+<h3 class="anchored" data-anchor-id="le-type-de-lenergie-chauffage">Le type de l’energie chauffage</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>data_dpe <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"/Users/nguyenduchoangviet/Downloads/data_dpe.txt"</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                       ,<span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>data_dpe<span class="sc">$</span>type_energie_chauffage <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  data_dpe<span class="sc">$</span>type_energie_chauffage,</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"gaz"</span>, <span class="st">"électricité"</span>, <span class="st">"autre"</span>))</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_dpe<span class="sc">$</span>type_energie_chauffage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>        gaz électricité       autre 
+        433         542          25 </code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(data_dpe<span class="sc">$</span>type_energie_chauffage), <span class="at">main =</span> <span class="st">"Distribution </span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="st">        du type de l'energie chauffage"</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>        ,<span class="at">xlab =</span> <span class="st">"Type de de l'énergie chauffage"</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>        ,<span class="at">ylab=</span> <span class="st">"Frequence"</span>,<span class="at">col=</span> <span class="fu">c</span>(<span class="st">"lightpink"</span>,<span class="st">"slategray1"</span>,<span class="st">"coral4"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Les chauffages de type électronique sont majoritaires,avec 54.2%, suivis par le gaz avec 43.3%. Les autres types sont marginaux avec seulement 2.5%.</p></li>
+<li><p>Le diagramme reflète cette répartition, montrant une légère dominance de l’électricité comme source principale.</p></li>
+<li><p>Ces données montrent une préférence pour l’électricité, possiblement liée à son accessibilité; le gaz aussi reste une source alternative significative.</p></li>
+</ul>
+</section>
+<section id="la-classe-de-la-consommation-dénergie" class="level3">
+<h3 class="anchored" data-anchor-id="la-classe-de-la-consommation-dénergie">La classe de la consommation d’énergie</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(data_dpe<span class="sc">$</span>classe_conso_energie)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  A   B   C   D   E   F   G 
+ 98 295 274 121 127  70  15 </code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(data_dpe<span class="sc">$</span>classe_conso_energie), <span class="at">main =</span> <span class="st">"Distribution de</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="st">classe conso energie"</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>, <span class="at">xlab =</span> <span class="st">"Classe consommation d'énergie"</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>, <span class="at">ylab=</span> <span class="st">"Frequence"</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>,<span class="at">col =</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"floralwhite"</span>,<span class="st">"plum3"</span>,<span class="st">"aquamarine"</span>,<span class="st">"firebrick"</span>,<span class="st">"limegreen"</span>,<span class="st">"khaki"</span>,<span class="st">"navy"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Les classes B et C sont les plus fréquentes, représentant respectivement 29,5 % et 27,4 % des logements. Les classes A, D, et E sont moins nombreuses, avec des proportions respectives de 9,8 %, 12,1 %, et 12,7 %. Enfin, les classes F et G sont marginales, avec 7 % et seulement 1,5 %.</p></li>
+<li><p>Le diagramme en barres montre clairement cette répartition, mettant en évidence une forte concentration dans les classes intermédiaires (B et C).</p></li>
+<li><p>Cette répartition suggère que la majorité des logements ont une consommation énergétique modérée (B et C), tandis que les logements très performants (A) et les logements très énergivores (F et G) sont beaucoup moins courants.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="analyse-en-composantes-principales-acp" class="level1">
+<h1>Analyse en composantes principales (ACP)</h1>
+<section id="objectif-de-lacp" class="level2">
+<h2 class="anchored" data-anchor-id="objectif-de-lacp">Objectif de l’ACP</h2>
+<p>Nous réaliserons une Analyse en Composantes Principales (ACP) afin d’explorer les relations entre les variables quantitatives et de visualiser les corrélations entre elles.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>housing <span class="ot">&lt;-</span> data_dpe</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> housing[, <span class="fu">c</span>(<span class="st">"annee_construction"</span>,<span class="st">"surface_habitable"</span>,<span class="st">"conso_energie"</span>,<span class="st">"emission_ges"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Comme les variables ne sont pas exprimées dans les mêmes unités donc il faut centrer et réduire les données ( on peut utiliser la fonction scale)</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>m<span class="ot">&lt;-</span><span class="fu">colMeans</span>(data)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>s<span class="ot">&lt;-</span><span class="fu">apply</span>(data,<span class="at">MARGIN=</span><span class="dv">2</span>,<span class="at">FUN=</span><span class="st">'sd'</span>)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>I<span class="ot">&lt;-</span><span class="fu">rep</span>(<span class="dv">1</span>,<span class="fu">nrow</span>(data))</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>M<span class="ot">&lt;-</span>I<span class="sc">%*%</span><span class="fu">t</span>(m);</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>S<span class="ot">&lt;-</span>I<span class="sc">%*%</span><span class="fu">t</span>(s);</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>X<span class="ot">&lt;-</span>(data<span class="sc">-</span>M)<span class="sc">/</span>S</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(X,<span class="at">las=</span><span class="dv">1</span>,<span class="at">cex.axis =</span> <span class="fl">0.75</span>, <span class="at">col =</span> <span class="st">"aquamarine"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="valeur-propre-et-inertie" class="level2">
+<h2 class="anchored" data-anchor-id="valeur-propre-et-inertie">Valeur propre et inertie</h2>
+<section id="la-matrice-des-covariances" class="level3">
+<h3 class="anchored" data-anchor-id="la-matrice-des-covariances">La matrice des covariances</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>X<span class="ot">&lt;-</span><span class="fu">as.matrix</span>(X)<span class="co"># pour éviter les problèmes</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>V<span class="ot">&lt;-</span><span class="fu">cor</span>(X)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(V,<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   annee_construction surface_habitable conso_energie
+annee_construction               1.00             -0.01         -0.49
+surface_habitable               -0.01              1.00         -0.13
+conso_energie                   -0.49             -0.13          1.00
+emission_ges                    -0.51              0.02          0.44
+                   emission_ges
+annee_construction        -0.51
+surface_habitable          0.02
+conso_energie              0.44
+emission_ges               1.00</code></pre>
+</div>
+</div>
+<p><strong>Remarque que</strong>: Corrélation ±1 = forte, 0 ≈ sans lien</p>
+<p>En obeservant, on a donc:</p>
+<ul>
+<li><p>annee_construction : corrélation négative avec conso_energie (-0,49), corrélation négative avec emission_ges (-0,51) → Plus la maison est récente, plus la consommation d’énergie et les émissions sont faibles.</p></li>
+<li><p>surface_habitable : presque pas de corrélation avec les autres variables (-0,01, -0,13, 0,02) → La surface habitable n’a pas beaucoup d’impact sur l’énergie ou les émissions dans cet échantillon.</p></li>
+<li><p>conso_energie et emission_ges : corrélation positive de 0,44 → Plus la maison consomme d’énergie, plus elle émet de gaz à effet de serre.</p></li>
+</ul>
+</section>
+<section id="les-valeurs-propres" class="level3">
+<h3 class="anchored" data-anchor-id="les-valeurs-propres">Les valeurs propres</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>E<span class="ot">&lt;-</span><span class="fu">eigen</span>(V,<span class="at">symmetric=</span><span class="cn">TRUE</span>)</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(E<span class="sc">$</span>values,<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.96 1.02 0.54 0.47</code></pre>
+</div>
+</div>
+<p>PC1 (1,96) Explique ~1,96 / 4 ≈ 49 % de la variance totale → C’est l’axe le plus important. En regardant la matrice de corrélation, PC1 combine conso_energie, emission_ges et annee_construction (corrélations ≈ ±0,5).</p>
+<p>PC2 (1,02) Explique ~1,02 / 4 ≈ 26 % de la variance totale → Deuxième axe important, généralement lié à surface_habitable (même si elle est peu corrélée aux autres variables, PC2 « absorbe » la variance restante).</p>
+<p>PC3 (0,54) Explique ~13 % de la variance → Troisième axe moins significatif, apporte peu d’information. Souvent utilisé seulement si l’on souhaite modéliser l’intégralité de la variance.</p>
+<p>PC4 (0,47) Explique ~12 % de la variance → Quatrième axe le moins important, presque du bruit → souvent ignoré dans l’analyse visuelle.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(E<span class="sc">$</span>values,<span class="at">ylab=</span><span class="st">'valeurs propres'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Selon la règle de Kaiser, seules les composantes principales dont la valeur propre est supérieure à 1 sont conservées. Dans notre cas, les deux premières composantes vérifient ce critère.</p>
+<p>Par ailleurs, l’examen du scree plot met en évidence un coude au niveau de la deuxième composante, ce qui confirme le choix de conserver deux axes factoriels.</p>
+<p>Ces deux composantes expliquent environ 75 % de la variance totale.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cumsum</span>(E<span class="sc">$</span>values)<span class="sc">/</span><span class="fu">ncol</span>(X)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4903311 0.7465221 0.8812858 1.0000000</code></pre>
+</div>
+</div>
+<p>PC1 (49%) Représente près de la moitié de la variance totale des données. C’est l’axe le plus important, principalement lié à : conso_energie, emission_ges, annee_construction (corrélation négative)</p>
+<p>PC2 (26%) Explique 26% supplémentaires → PC1 + PC2 = 74% de la variance totale. Principalement lié à surface_habitable et à la variance restante.</p>
+<p>PC3 + PC4 (13% + 12%) Représentent environ 25% de la variance restante. Souvent ignorés dans les visualisations ; garder PC1 et PC2 suffit pour percevoir la structure des données.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrice des vecteurs propres (eigenvectors) arrondie à 2 décimales</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(E<span class="sc">$</span>vectors,<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      [,1]  [,2]  [,3] [,4]
+[1,]  0.59 -0.12  0.06 0.80
+[2,]  0.06  0.97 -0.21 0.11
+[3,] -0.57 -0.16 -0.67 0.45
+[4,] -0.57  0.15  0.71 0.39</code></pre>
+</div>
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Coordonnées dans la nouvelle base</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>Y<span class="ot">&lt;-</span>X<span class="sc">%*%</span>E<span class="sc">$</span>vectors</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co"># calcul des corrélations avec la formule: </span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>k<span class="ot">=</span><span class="dv">2</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>D<span class="ot">&lt;-</span><span class="fu">diag</span>(<span class="fu">sqrt</span>(E<span class="sc">$</span>values))</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>C<span class="ot">=</span>E<span class="sc">$</span>vectors<span class="sc">%*%</span>D[,<span class="dv">1</span><span class="sc">:</span>k]; </span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a><span class="co"># méthode directe: </span></span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>C2<span class="ot">=</span><span class="fu">cor</span>(X,Y[,<span class="dv">1</span><span class="sc">:</span>k])</span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>C2<span class="sc">-</span>C <span class="co"># vérification </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            [,1]          [,2]
+annee_construction -4.440892e-16  2.359224e-16
+surface_habitable   8.326673e-17  7.771561e-16
+conso_energie       1.110223e-16 -1.387779e-16
+emission_ges        1.110223e-16  5.551115e-17</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(C,<span class="at">main=</span><span class="st">'cercle de corrélation'</span>,<span class="at">ylim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>),<span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>),<span class="at">asp =</span> <span class="dv">1</span>  )</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(C,<span class="at">labels=</span><span class="fu">colnames</span>(X),<span class="at">pos=</span><span class="dv">4</span>,<span class="at">cex=</span><span class="fl">0.7</span>) <span class="co"># ajout des labels aux points</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="co"># on ajoute le cercle et les deux axes</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">0.01</span>)</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x,<span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>x<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x,<span class="sc">-</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">-</span>x<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>)</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Signification des axes (C[1] et C[2])</strong></p>
+<ul>
+<li><p>Axe horizontal (C[1] – PC1) : Il s’agit de la première composante principale, qui explique la plus grande part de la variance des données.</p></li>
+<li><p>Axe vertical (C[2] – PC2) : Il s’agit de la deuxième composante principale, orthogonale à PC1, expliquant la deuxième plus grande part de la variance.</p></li>
+</ul>
+<p><strong>Relations entre les variables (Corrélations)</strong></p>
+<p>La distance et l’angle entre les points (variables) indiquent leur niveau de corrélation :</p>
+<ul>
+<li><p>Corrélation positive : emission_ges (émissions de gaz à effet de serre) et conso_energie (consommation d’énergie) sont très proches l’une de l’autre. Cela signifie qu’elles sont positivement corrélées : les logements qui consomment beaucoup d’énergie ont généralement des émissions élevées.</p></li>
+<li><p>Corrélation négative : annee_construction (année de construction) est situé à l’opposé du groupe énergie/émissions par rapport au centre du cercle (selon l’axe horizontal). Cela suggère que les bâtiments plus anciens (année de construction plus faible) ont tendance à consommer davantage d’énergie et à émettre plus de gaz à effet de serre.</p></li>
+<li><p>Indépendance (absence de corrélation) : surface_habitable (surface habitable) est proche de l’axe vertical, formant un angle proche de 90° avec les autres variables. Cela signifie que, dans cet ensemble de données, la surface du logement est peu liée à l’année de construction ou à la performance énergétique par unité de surface.</p></li>
+</ul>
+<p><strong>Qualité de la représentation (Distance à l’origine)</strong></p>
+<ul>
+<li><p>Dans un cercle de corrélation standard (de rayon égal à 1) :</p></li>
+<li><p>Plus un point est proche du bord du cercle, mieux la variable est expliquée par les deux premières composantes principales.</p></li>
+</ul>
+<p>On peut utiliser aussi les fonctions de R, ce sera plus rapide.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FactoMineR)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: ggplot2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>acp <span class="ot">&lt;-</span> <span class="fu">PCA</span>(X, <span class="at">scale.unit =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-26-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(acp,<span class="at">addlabels =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in geom_bar(stat = "identity", fill = barfill, color = barcolor, :
+Ignoring empty aesthetic: `width`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(acp, <span class="at">axes =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">select.var =</span> <span class="fu">list</span>(<span class="at">cos2 =</span> <span class="fl">0.1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.
+ℹ The deprecated feature was likely used in the ggpubr package.
+  Please report the issue at &lt;https://github.com/kassambara/ggpubr/issues&gt;.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `aes_string()` was deprecated in ggplot2 3.0.0.
+ℹ Please use tidy evaluation idioms with `aes()`.
+ℹ See also `vignette("ggplot2-in-packages")` for more information.
+ℹ The deprecated feature was likely used in the factoextra package.
+  Please report the issue at &lt;https://github.com/kassambara/factoextra/issues&gt;.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="analyse-des-correspondances-multiples-acm" class="level1">
+<h1>Analyse des correspondances multiples (ACM)</h1>
+<section id="objectif-de-lacm" class="level2">
+<h2 class="anchored" data-anchor-id="objectif-de-lacm">Objectif de l’ACM</h2>
+<p>Nous réaliserons une Analyse des correspondances multiples (ACM) afin d’explorer les relations entre les variables qualitatives et de visualiser les associations entre elles.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>maison <span class="ot">&lt;-</span> data_dpe</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>data1 <span class="ot">&lt;-</span> maison[, <span class="fu">c</span>(<span class="st">"type_logement"</span>,<span class="st">"type_energie_chauffage"</span>,<span class="st">"classe_conso_energie"</span>)]</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> type_logement   type_energie_chauffage classe_conso_energie
+ Min.   :1.000   gaz        :433        Length:1000         
+ 1st Qu.:1.000   électricité:542        Class :character    
+ Median :1.000   autre      : 25        Mode  :character    
+ Mean   :1.361                                              
+ 3rd Qu.:2.000                                              
+ Max.   :2.000                                              </code></pre>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>data1<span class="sc">$</span>type_logement <span class="ot">&lt;-</span> <span class="fu">factor</span>(data1<span class="sc">$</span>type_logement, </span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), </span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Appartement"</span>, <span class="st">"Maison"</span>))</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>data1<span class="sc">$</span>type_energie_chauffage <span class="ot">&lt;-</span> <span class="fu">factor</span>(data1<span class="sc">$</span>type_energie_chauffage)</span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>data1<span class="sc">$</span>classe_conso_energie <span class="ot">&lt;-</span> <span class="fu">factor</span>(data1<span class="sc">$</span>classe_conso_energie)</span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>     type_logement type_energie_chauffage classe_conso_energie
+ Appartement:639   gaz        :433        A: 98               
+ Maison     :361   électricité:542        B:295               
+                   autre      : 25        C:274               
+                                          D:121               
+                                          E:127               
+                                          F: 70               
+                                          G: 15               </code></pre>
+</div>
+</div>
+</section>
+<section id="valeur-propre" class="level2">
+<h2 class="anchored" data-anchor-id="valeur-propre">Valeur propre</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>data1.mca <span class="ot">&lt;-</span> <span class="fu">MCA</span>(data1, <span class="at">graph =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>data1.mca<span class="sc">$</span>eig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>      eigenvalue percentage of variance cumulative percentage of variance
+dim 1  0.5654050              18.846832                          18.84683
+dim 2  0.4397829              14.659430                          33.50626
+dim 3  0.3651877              12.172924                          45.67919
+dim 4  0.3333333              11.111111                          56.79030
+dim 5  0.3333333              11.111111                          67.90141
+dim 6  0.3333333              11.111111                          79.01252
+dim 7  0.2714109               9.047031                          88.05955
+dim 8  0.2470885               8.236284                          96.29583
+dim 9  0.1111250               3.704166                         100.00000</code></pre>
+</div>
+</div>
+</section>
+<section id="acm" class="level2">
+<h2 class="anchored" data-anchor-id="acm">ACM</h2>
+<section id="carte-des-variables-de-la-mca-1" class="level3">
+<h3 class="anchored" data-anchor-id="carte-des-variables-de-la-mca-1">Carte des variables de la MCA 1</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mca_var</span>(data1.mca,<span class="at">repel=</span><span class="cn">TRUE</span>,<span class="at">geom.var=</span><span class="fu">c</span>(<span class="st">'arrow'</span>,<span class="st">'text'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>D’après l’orientation des flèches, nous distinguons trois groupes de logements :</p>
+<ul>
+<li><p>Groupe “Vert” (Appartement &amp; Électricité) : Les flèches Appartement, Électricité et les classes B, C (voire A) pointent toutes vers la gauche. donc les appartements (Appartement) ont tendance à utiliser davantage l’électricité et présentent de meilleures performances énergétiques (souvent les classes B ou C).</p></li>
+<li><p>Groupe “Moyen - Standard” (Gaz) : La flèche Gaz pointe dans la même direction que les classes D et E (dans le quadrant inférieur droit) donc les logements utilisant le gaz comme principale source de chauffage se situent généralement dans une catégorie de performance énergétique moyenne à faible (classes D ou E).</p></li>
+<li><p>Groupe “Particulier &amp; Ancien” (Maison &amp; Autres énergies) : Les flèches G et Autre sont très longues et pointent vers le quadrant supérieur droit. La flèche Maison pointe également dans cette direction (même si elle est plus courte). Donc il s’agit d’une corrélation très forte. Les logements utilisant d’autres sources d’énergie (comme le charbon ou le fioul) appartiennent presque systématiquement à la classe G (la moins performante). Par ailleurs, les maisons (Maison) ont tendance à se situer dans le groupe des performances énergétiques les plus faibles par rapport aux appartements.</p></li>
+</ul>
+<p>Conclusion, pour économiser de l’énergie, privilégiez les appartements utilisant l’électricité (souvent classés B ou C). Si vous habitez dans une maison utilisant le gaz, vous risquez de vous retrouver dans les classes D ou E. Enfin, quel que soit le type de logement, si l’énergie utilisée est “Autre” (autre), il s’agit presque toujours d’un logement très énergivore (classe G).</p>
+</section>
+<section id="carte-des-variables-de-la-mca-2" class="level3">
+<h3 class="anchored" data-anchor-id="carte-des-variables-de-la-mca-2">Carte des variables de la MCA 2</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mca_var</span>(data1.mca,<span class="at">choice=</span><span class="st">'var'</span>,<span class="at">repel=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>1. Contribution des variables aux dimensions</strong></p>
+<ul>
+<li><p>Axe Dim1 (18,8%) : fortement influencé par classe_conso_energie et type_energie_chauffage, ces deux variables étant très éloignées vers la droite de l’axe horizontal (valeurs &gt; 0,6). Donc la plus grande variation dans vos données provient principalement du type d’énergie utilisé et de la classe énergétique du logement.</p></li>
+<li><p>Axe Dim2 (14,7%) : la variable type_energie_chauffage est la plus élevée sur l’axe vertical. Donc le type d’énergie (électricité, gaz, autre) constitue le deuxième facteur le plus important pour distinguer les groupes de logements.</p></li>
+<li><p>type_logement (type de logement) : situé assez proche de l’origine (0,0) par rapport aux deux variables précédentes c’est à dire être appartement ou maison individuelle n’apporte pas de différence statistique aussi importante que le type d’énergie et la classe énergétique.</p></li>
+</ul>
+<p><strong>2. Corrélation entre les variables</strong></p>
+<ul>
+<li><p>Point de convergence : on observe que type_energie_chauffage et classe_conso_energie se trouvent très proches l’une de l’autre dans le quadrant supérieur droit.</p></li>
+<li><p>Signification : Ces deux variables sont extrêmement liées. Connaissant le type d’énergie d’un logement, on peut presque prédire sa classe énergétique (et inversement). Cela explique pourquoi, sur le graphique précédent, « électricité » est systématiquement associé aux classes A et B, tandis que « autre énergie » est toujours liée à la classe G.</p></li>
+</ul>
+<p><strong>3. Implications pratiques et segmentation des logements</strong></p>
+<ul>
+<li><p>Les logements peuvent être divisés en deux groupes principaux :</p>
+<ul>
+<li><p>Groupe à bonne performance : principalement des appartements utilisant l’électricité, situés à gauche (négatif) de Dim1.</p></li>
+<li><p>Groupe à risque / soumis à des restrictions légales (F, G) : principalement des maisons utilisant le gaz ou d’autres énergies, situées à droite (positif) de Dim1.</p></li>
+</ul></li>
+<li><p>Axes d’action : Pour les mesures légales ou les politiques de rénovation à Haute-Garonne, la priorité devrait être donnée au type d’énergie utilisé plutôt qu’au type de logement.</p></li>
+</ul>
+<p><strong>4. Relation avec l’âge des bâtiments</strong></p>
+<ul>
+<li>Bien que la variable année de construction ne soit pas incluse dans cette MCA (variable quantitative), les analyses précédentes (PCA) montrent que les “passoires énergétiques” (F, G) ne concernent pas uniquement les bâtiments anciens, mais résultent d’une combinaison logement ancien + énergie obsolète (autre/gaz)</li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_contrib</span>(data1.mca,<span class="at">choice=</span><span class="st">'var'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>1. Contribution principale des types d’énergie</strong></p>
+<p>Le diagramme en colonnes montre que les variables qui contribuent le plus à la première dimension (Dim1), représentant la performance énergétique, sont les types d’énergie :</p>
+<ul>
+<li>Électricité et Gaz : ce sont les deux variables ayant les colonnes les plus élevées, représentant respectivement près de 20 % et 19 % de contribution. Interprétation : Cela confirme que la principale différence entre un logement “vert” et un logement “mauvais” dans la Haute-Garonne provient du fait qu’il utilise de l’électricité ou du gaz.</li>
+</ul>
+<p>Lien avec le graphique précédent :</p>
+<ul>
+<li><p>L’électricité se situe du côté négatif de Dim1 (avec les classes A/B).</p></li>
+<li><p>Le gaz se situe du côté positif (avec les classes D/E/F). Conclusion : Passer du chauffage au gaz au chauffage électrique est un levier clé pour améliorer la performance énergétique d’un logement.</p></li>
+</ul>
+<p><strong>2. Différenciation des classes DPE</strong></p>
+<ul>
+<li><p>Les classes B, E, F se trouvent au-dessus de la ligne rouge (moyenne attendue).</p></li>
+<li><p>Classe F (Passoire énergétique) : contribue significativement à Dim1 (~9 %). Interprétation : La classe F constitue un repère important pour distinguer les logements dans vos données.</p></li>
+<li><p>Classe G : bien que ce soit la pire catégorie, sa contribution est plus faible que F, probablement parce que dans cet échantillon de 1000 logements, seuls 15 logements appartiennent à la classe G, ce qui limite son poids statistique sur le graphique de contribution.</p></li>
+</ul>
+<p><strong>3. Rôle limité du type de logement (Maison vs Appartement)</strong></p>
+<ul>
+<li><p>Les colonnes Maison et Appartement apparaissent très faibles (&lt;5 %). Interprétation : À Haute-Garonne, le type de logement n’influence pas la performance énergétique autant que le type d’énergie utilisé.</p></li>
+<li><p>Exemple : Un appartement avec un ancien système de chauffage peut avoir une performance plus faible qu’une maison ayant modernisé son chauffage électrique.</p></li>
+</ul>
+</section>
+<section id="individuals" class="level3">
+<h3 class="anchored" data-anchor-id="individuals">Individuals</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mca_ind</span>(data1.mca,<span class="at">col.ind =</span> <span class="st">"cos2"</span>, <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>1. Polarisation selon la performance énergétique (Axe horizontal Dim1)</strong></p>
+<p>L’axe horizontal (Dim1) joue toujours le rôle de “baromètre de performance” :</p>
+<ul>
+<li><p>Groupe à gauche (valeurs négatives) : forte densité de points, représentant les logements performants (classes A, B, C) utilisant principalement l’électricité. Cette concentration indique que la majorité des 1000 logements de votre échantillon sont de qualité stable.</p></li>
+<li><p>Groupe à droite (valeurs positives) : points plus clairsemés mais étendus vers la droite, correspondant aux logements à faible performance énergétique.</p></li>
+</ul>
+<p><strong>2. Identification des “Passoires Énergétiques” (Quadrant supérieur droit)</strong></p>
+<ul>
+<li><p>Certains logements, par exemple les numéros 363, 63, 793, 294, 830, se trouvent isolés dans le quadrant supérieur droit, suivant la direction des flèches G et Autre observées sur les graphiques précédents.</p></li>
+<li><p>Conclusion : Ce sont les “passoires énergétiques” typiques de votre étude. Elles présentent non seulement la pire performance énergétique, mais utilisent également des sources d’énergie très différentes de la majorité (fioul, chauffage ancien, etc.).</p></li>
+</ul>
+<p><strong>3. Signification des couleurs (cos²)</strong></p>
+<p>Les couleurs allant du bleu foncé au bleu clair représentent le cos² (qualité de représentation) :</p>
+<ul>
+<li><p>Bleu clair (valeurs élevées) : le positionnement de ces logements sur les axes Dim1 et Dim2 est très bien expliqué et reflète fidèlement leurs caractéristiques réelles.</p></li>
+<li><p>Bleu foncé (valeurs faibles) : ces logements ont des caractéristiques atypiques ou “décalées” (par exemple, maisons anciennes partiellement rénovées) que les deux axes ne capturent pas complètement.</p></li>
+</ul>
+<p><strong>4. Rôle limité du type de logement (Maison vs Appartement)</strong></p>
+<ul>
+<li><p>Les données confirment vos observations : le type de logement contribue moins de 5 % à la variation.</p></li>
+<li><p>Sur le graphique des individus : les maisons et appartements ne forment pas deux groupes distincts.</p></li>
+<li><p>Interprétation : La séparation des logements se fait principalement selon le système de chauffage, et non selon le type de logement.</p></li>
+<li><p>Exemple: certains appartements utilisant un chauffage ancien apparaissent à droite (moins performants), tandis que certaines maisons modernisées restent à gauche (performantes).</p></li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mca_ind</span>(data1.mca,<span class="at">habillage=</span><span class="st">"type_logement"</span>, <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-36-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mca_ind</span>(data1.mca,<span class="at">habillage=</span><span class="st">"type_energie_chauffage"</span>,<span class="at">repel=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mca_ind</span>(data1.mca,<span class="at">habillage=</span><span class="st">"classe_conso_energie"</span>,<span class="at">repel=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="test" class="level1">
+<h1>Test</h1>
+<section id="test-chi-deux" class="level2">
+<h2 class="anchored" data-anchor-id="test-chi-deux">Test Chi-deux</h2>
+<p>On va faire le test pour savoir si la classe de consommation dépend-elle du type de chauffage</p>
+<p>Hypothèse:</p>
+<p>-H0: La classe de consommation indépendante du type de chauffage.</p>
+<p>-H1: La classe de consommation dépend du type de chauffage.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>type_energie_chauffage <span class="ot">&lt;-</span>data_dpe<span class="sc">$</span>type_energie_chauffage</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>classe_conso_energie <span class="ot">&lt;-</span> data_dpe<span class="sc">$</span>classe_conso_energie</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(type_energie_chauffage,classe_conso_energie),<span class="at">beside=</span><span class="cn">TRUE</span>,</span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"green"</span>,<span class="st">"red"</span>), <span class="at">main=</span><span class="st">"Classe conso energie par type chauffage"</span></span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>        ,<span class="at">xlab=</span> <span class="st">"classe conso energie"</span></span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>        ,<span class="at">ylab=</span><span class="st">"Fréquence "</span>,<span class="at">legend.text=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>table_conso_energie <span class="ot">&lt;-</span> <span class="fu">table</span> (data_dpe<span class="sc">$</span>type_energie_chauffage,</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>                                   data_dpe<span class="sc">$</span>classe_conso_energie)</span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>table_conso_energie</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>             
+                A   B   C   D   E   F   G
+  gaz           5  48 106  93 110  61  10
+  électricité  92 247 165  24  11   3   0
+  autre         1   0   3   4   6   6   5</code></pre>
+</div>
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(table_conso_energie)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in chisq.test(table_conso_energie): Chi-squared approximation may be
+incorrect</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  table_conso_energie
+X-squared = 477.22, df = 12, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Interprétation: - La p-value( &lt; 2.2e-16 ) est inférieure au seuil de 5%. Donc on rejette H0. Il existe une relation entre la classe de consommation et le type de chauffage.</p>
+<ul>
+<li>Selon le graphique, les classes A,B,C ont tendance à être de type électricité tandis que les autres sont plus de type gaz.</li>
+</ul>
+</section>
+<section id="test-anova" class="level2">
+<h2 class="anchored" data-anchor-id="test-anova">Test ANOVA</h2>
+<section id="tester-sil-y-a-une-différence-réelle-de-consommation-énergétique-moyenne-entre-maison-et-appartement." class="level3">
+<h3 class="anchored" data-anchor-id="tester-sil-y-a-une-différence-réelle-de-consommation-énergétique-moyenne-entre-maison-et-appartement.">Tester s’il y a une différence réelle de consommation énergétique moyenne entre Maison et Appartement.</h3>
+<p>On va faire le test pour savoir justifier la relation entre le type de logement et la consommation d’énergie</p>
+<ul>
+<li><p>H0: Il n’y a pas de différence moyenne de consommation énergétique entre Maison et Appartement (toute variation observée est due au hasard)</p></li>
+<li><p>H1: Il existe une différence réelle de consommation énergétique moyenne entre Maison et Appartement.</p></li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>anova_result <span class="ot">&lt;-</span> <span class="fu">aov</span>(conso_energie <span class="sc">~</span> type_logement, <span class="at">data =</span> maison)</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Df  Sum Sq Mean Sq F value   Pr(&gt;F)    
+type_logement   1  103182  103182    11.1 0.000894 ***
+Residuals     998 9275471    9294                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>Ici, Pr(&gt;F) - 0.000894 &lt; 0.5 donc on rejette H0 et donc il existe une différence réelle de consommation énergétique moyenne entre Maison et Appartement</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(conso_energie <span class="sc">~</span> type_logement, <span class="at">data =</span> maison, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  type_logement conso_energie
+1             1      176.4841
+2             2      197.6335</code></pre>
+</div>
+</div>
+<ul>
+<li><p>La valeur moyenne de 197,63 pour les maisons se situe à la frontière entre les classes D et E de l’échelle DPE.</p></li>
+<li><p>Cela explique pourquoi, dans le graphique des contributions de la MCA, la modalité Maison tend à se projeter vers les classes énergétiques moins performantes (D, E, F) par rapport aux appartements.</p></li>
+</ul>
+</section>
+<section id="tester-si-les-moyennes-des-émissions-de-ges-sont-identiques-selon-le-type-dénergie-de-chauffage." class="level3">
+<h3 class="anchored" data-anchor-id="tester-si-les-moyennes-des-émissions-de-ges-sont-identiques-selon-le-type-dénergie-de-chauffage.">Tester si les moyennes des émissions de GES sont identiques selon le type d’énergie de chauffage.</h3>
+<p>On va faire le test pour savoir justifier les moyennes des émissions de GES sont identiques selon le type d’énergie de chauffage.</p>
+<ul>
+<li><p>H0: Les groupes ont des moyennes d’émissions égales.</p></li>
+<li><p>H1: Au moins un groupe a une moyenne différente.</p></li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>moycond <span class="ot">&lt;-</span> <span class="fu">tapply</span>(data_dpe<span class="sc">$</span>emission_ges, data_dpe<span class="sc">$</span>type_logement, mean, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(emission_ges <span class="sc">~</span> type_energie_chauffage,</span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="at">data =</span> data_dpe,</span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a><span class="at">main =</span> <span class="st">"Émissions de GES selon le type de chauffage"</span>,</span>
+<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a><span class="at">xlab =</span> <span class="st">"Type de chauffage"</span>,</span>
+<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a><span class="at">ylab =</span> <span class="st">"Émissions GES (kg éq. CO2/m2)"</span>)</span>
+<span id="cb90-7"><a href="#cb90-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ajouter le point de moyen</span></span>
+<span id="cb90-8"><a href="#cb90-8" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(moycond), moycond, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">pch=</span><span class="st">"*"</span>, <span class="at">cex=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ProjetDPE_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Moyenne des émissions de gaz à effet de serre (emission_ges) selon le type d’énergie de chauffage :</p>
+<ul>
+<li><p>Gaz : ~33,6</p></li>
+<li><p>Électricité : ~11,1</p></li>
+</ul>
+<p>-Autre : ~55,5</p>
+<p>Observation préliminaire : le type d’énergie de chauffage a un impact significatif sur le niveau des émissions.</p>
+<p>De plus, les variances des groupes selon le type d’énergie de chauffage ne sont pas égales. Par conséquent, nous utilisons le test oneway.test() (ANOVA de Welch) au lieu de l’ANOVA classique (aov())</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oneway.test</span>(emission_ges<span class="sc">~</span> type_energie_chauffage, <span class="at">data=</span>data_dpe, <span class="at">var.equal=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    One-way analysis of means (not assuming equal variances)
+
+data:  emission_ges and type_energie_chauffage
+F = 219.53, num df = 2.000, denom df = 61.494, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Signification de l’ANOVA :</p>
+<ul>
+<li><p>p-value &lt; 0,0001 → très faible → différence certaine</p></li>
+<li><p>F élevé → différences de moyennes très importantes</p></li>
+</ul>
+<p>Conclusion : les émissions dépendent réellement du type d’énergie de chauffage.</p>
+</section>
+</section>
+<section id="tests-t-de-student-par-paires" class="level2">
+<h2 class="anchored" data-anchor-id="tests-t-de-student-par-paires">Tests t de Student par paires</h2>
+<p>On va vérifier si les moyennes des émissions de GES diffèrent selon le type d’énergie de chauffage.</p>
+<ul>
+<li><p>H0: Les groupes ont des moyennes d’émissions égales.</p></li>
+<li><p>H1: Au moins un groupe a une moyenne différente.</p></li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Xem code R/Python</summary>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise.t.test</span>(data_dpe<span class="sc">$</span>emission_ges,data_dpe<span class="sc">$</span>type_energie_chauffage,</span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">p.adjust.method =</span> <span class="st">"none"</span>,<span class="at">pool.sd =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pairwise comparisons using t tests with non-pooled SD 
+
+data:  data_dpe$emission_ges and data_dpe$type_energie_chauffage 
+
+            gaz     électricité
+électricité &lt; 2e-16 -          
+autre       0.0053  1.8e-06    
+
+P value adjustment method: none </code></pre>
+</div>
+</div>
+<p><strong>Comparaison par paires des groupes d’énergie</strong> :</p>
+<ul>
+<li><p>Gaz vs Électricité → p &lt; 2e-16 → différence extrêmement significative</p></li>
+<li><p>Gaz vs Autre → p = 0,0053 → différence significative</p></li>
+<li><p>Électricité vs Autre → p = 1,8e-06 → différence extrêmement significative</p></li>
+</ul>
+<p>Conclusion : toutes les paires de groupes d’énergie présentent des différences significatives au niveau des émissions.</p>
+</section>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>L’étude des 1000 logements en Haute-Garonne permet de dégager des conclusions claires sur les facteurs influençant la performance énergétique et les émissions de GES :</p>
+<p><strong>1. Les déterminants de la consommation et des émissions (PCA &amp; MCA)</strong></p>
+<ul>
+<li><p>L’analyse en composantes principales (ACP) montre que l’année de construction est corrélée neagtivement avec la consommation d’énergie et émission de GES. Cela suggère que les bâtiments plus anciens (année de construction plus faible) ont tendance à consommer davantage d’énergie et à émettre plus de gaz à effet de serre.</p></li>
+<li><p>Deplus, l’ACP révèle aussi que la surface du logement est peu liée à l’année de construction ou à la performance énergétique par unité de surface.</p></li>
+<li><p>L’analyse des correspondances multiples (ACM) souligne que la classe énergétique (<span class="math inline">\(A \rightarrow G\)</span>) est dominée par le type d’énergie utilisé. Le type de logement (maison ou appartement) a un impact significativement plus faible sur la performance globale.</p></li>
+</ul>
+<p><strong>2. Validation par les tests statistiques</strong></p>
+<ul>
+<li><p>Le test du Khi-deux confirme une dépendance forte entre la consommation et le type de chauffage.</p></li>
+<li><p>Le test d’ANOVA: Bien que l’ACM nuance son importance, le test ANOVA confirme que les maisons consomment en moyenne plus que les appartements (<span class="math inline">\(197.63\)</span> vs <span class="math inline">\(176.48\)</span> <span class="math inline">\(kWh/m^2\)</span>).</p></li>
+<li><p>Les tests de Student par paires prouvent que toutes les sources d’énergie ne se valent pas : l’électricité est la plus propre, tandis que les énergies de type “Gaz” et “Autre” présentent des émissions de GES radicalement plus élevées.</p></li>
+</ul>
+<div style="page-break-after: always;"></div>
+<p><strong>Remarque </strong></p>
+<p>D’après nos résultats, nous pouvons identifier des profils types :</p>
+<ul>
+<li><p>L’idéal énergétique : Un Appartement chauffé à l’Électricité tend à atteindre les classes de performance B hoặc C.</p></li>
+<li><p>Le risque modéré : Une Maison utilisant le Gas se situe souvent dans les classes D hoặc E.</p></li>
+<li><p>La “Passoire Énergétique” critique : Quel que soit le type de bâtiment, l’usage d’énergies fossiles de type “Autre” conduit quasi systématiquement à une classification G (consommation extrêmement élevée).</p></li>
+</ul>
+<p><strong>Conclusion finale</strong></p>
+<p>Pour améliorer l’efficacité énergétique en Haute-Garonne, la priorité ne doit pas seulement porter sur l’isolation du bâti, mais surtout sur la transition des systèmes de chauffage. Remplacer une chaudière à gaz ou au fioul par un système électrique moderne (pompe à chaleur) aura un impact bien plus immédiat et significatif sur le DPE que le simple passage d’une maison individuelle à un habitat collectif.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<div style="text-align:center; font-size:0.85em; color:#888; padding:25px;">
+  <strong>© 2026 NGUYEN Duc Hoang Viet — Tous droits réservés.</strong><br>
+  <strong>Université de Lille — Projet Analyse Factorielle DPE<strong><br>
+  Toute reproduction, diffusion ou utilisation sans autorisation est interdite.
+</strong></strong></div><strong><strong>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</strong></strong></div><strong><strong> <!-- /content -->
+
+
+
+
+</strong></strong></body></html>

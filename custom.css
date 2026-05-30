@@ -1,0 +1,38 @@
+/* Đổi màu chữ trên thanh menu thành trắng cho dễ đọc trên nền xanh */
+.navbar-dark .navbar-nav .nav-link, .navbar-brand {
+  color: #ffffff !important;
+  font-weight: 500;
+}
+
+/* Đổi màu toàn bộ các đường link trong bài viết sang màu xanh lá đồng bộ */
+a {
+  color: #1aa260;
+  text-decoration: none;
+}
+a:hover {
+  color: #13804b;
+  text-decoration: underline;
+}
+
+/* Làm mượt các tiêu đề H1, H2 (Présentation du projet...) */
+h1, h2, h3 {
+  color: #2c3e50;
+  font-weight: 700;
+  margin-top: 1.5em;
+}
+
+/* Tạo điểm nhấn cho các danh sách bullet point */
+ul li {
+  margin-bottom: 8px;
+}
+
+/* Đổi màu thanh Mục lục (On this page) bên phải sang màu xanh lá khi scroll */
+.sidebar nav[data-bs-spy="scroll"] .active {
+  color: #1aa260 !important;
+  border-left-color: #1aa260 !important;
+}
+
+/* Hiệu ứng đổi màu xanh lá khi di chuột qua các mục trong mục lục */
+.sidebar nav a:hover {
+  color: #13804b !important;
+}

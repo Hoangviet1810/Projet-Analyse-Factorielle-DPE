@@ -1,0 +1,125 @@
+---
+title: "Partie 4 Analyse des correspondances multiples (ACM)"
+author: "NGUYEN Duc Hoang Viet"
+number-sections: true
+code-fold: false
+execute:
+  warning: false
+  message: false
+---
+
+
+# Objectif de l’ACM
+On va réaliserer une Analyse des correspondances multiples (ACM) afin d’explorer les relations
+entre les variables qualitatives et de visualiser les associations entre elles.
+
+```{r}
+data_dpe <- read.table("data_dpe.txt", header = TRUE, sep = "")
+data1 <- data_dpe[, c("type_logement", "type_energie_chauffage", "classe_conso_energie")]
+```
+
+```{r}
+data1$type_logement <- factor(
+  data1$type_logement,
+  levels = c(1, 2), 
+  labels = c("Appartement", "Maison")
+)
+
+data1$type_energie_chauffage <- factor(
+  data1$type_energie_chauffage,
+  levels = c(1, 2, 3), 
+  labels = c("gaz", "électricité", "autre")
+)
+
+data1$classe_conso_energie <- factor(
+  data1$classe_conso_energie,
+  levels = c("A", "B", "C", "D", "E", "F", "G"),
+  ordered = TRUE
+)
+
+summary(data1)
+```
+# Valeur propre 
+
+```{r}
+library(FactoMineR)
+data1.mca <- MCA(data1, graph = FALSE)
+data1.mca$eig
+```
+# ACM 
+
+## Carte des variables de la MCA 1
+
+```{r}
+library(factoextra)
+fviz_mca_var(data1.mca,repel=TRUE,geom.var=c('arrow','text'))
+```
+Interprétation du graphique
+
+L’analyse des flèches met en évidence trois profils de logements :
+
+- Les **appartements** utilisant l’**électricité** sont associés aux meilleures performances énergétiques (classes **B** et **C**).
+- Les logements chauffés au **gaz** se situent généralement dans les classes **D** et **E**, correspondant à une performance énergétique moyenne.
+- Les **maisons** utilisant d’**autres sources d’énergie** sont fortement associées à la classe **G**, la moins performante sur le plan énergétique.
+
+En conclusion, les appartements chauffés à l’électricité présentent les meilleures performances énergétiques, tandis que les logements utilisant d’autres sources d’énergie sont les plus énergivores.
+
+## Carte des variables de la MCA 2
+
+```{r}
+fviz_mca_var(data1.mca,choice='var',repel=TRUE)
+```
+Interprétation de l’ACM
+
+Les deux premières dimensions sont principalement expliquées par **la classe énergétique** et **le type d’énergie de chauffage**, tandis que le **type de logement** joue un rôle plus secondaire.
+
+La proximité entre **type_energie_chauffage** et **classe_conso_energie** indique une forte relation entre ces variables : le type d’énergie utilisé est étroitement lié à la performance énergétique du logement.
+
+L’ACM met en évidence deux grands profils : les logements performants, souvent chauffés à l’électricité, et les logements moins performants (classes F et G), davantage associés au gaz ou à d’autres sources d’énergie. Ainsi, le type d’énergie apparaît comme le principal levier d’action pour améliorer l’efficacité énergétique.
+
+Enfin, les analyses précédentes suggèrent que les logements les plus énergivores sont généralement associés à une combinaison de bâtiments anciens et de systèmes de chauffage peu performants.
+
+```{r}
+fviz_contrib(data1.mca,choice='var')
+```
+Contribution des variables à la Dim1
+
+Le type d’énergie est le principal facteur expliquant la première dimension. L’**électricité** est associée aux meilleures classes énergétiques (A/B), tandis que le **gaz** est davantage lié aux classes moins performantes (D/E/F). Cela suggère que le choix de l’énergie de chauffage joue un rôle majeur dans la performance énergétique des logements.
+
+Par ailleurs, les classes **F** contribuent fortement à la différenciation des logements, alors que la contribution de la classe **G** reste limitée en raison de son faible effectif dans l’échantillon.
+
+Enfin, le **type de logement** (maison ou appartement) contribue peu à la dimension étudiée, ce qui indique que la performance énergétique dépend davantage du système de chauffage que du type de logement lui-même.
+
+## Individuals
+
+```{r}
+fviz_mca_ind(data1.mca,col.ind = "cos2", repel = TRUE)
+```
+
+Analyse des individus
+
+L’axe **Dim1** oppose les logements performants (classes A, B, C), majoritairement chauffés à l’électricité, aux logements moins performants situés à droite du graphique.
+
+Quelques individus isolés dans le quadrant supérieur droit correspondent aux **passoires énergétiques** (classes F et G), souvent associées à des systèmes de chauffage anciens ou à d’autres sources d’énergie.
+
+Les couleurs représentent la qualité de représentation (*cos²*) : plus la couleur est claire, mieux l’individu est représenté par les deux dimensions.
+
+Enfin, les maisons et les appartements ne forment pas de groupes distincts, ce qui confirme que la performance énergétique dépend davantage du **type d’énergie de chauffage** que du **type de logement**.
+
+```{r}
+fviz_mca_ind(data1.mca,habillage="type_logement", repel = TRUE)
+```
+
+```{r}
+fviz_mca_ind(data1.mca,habillage="type_energie_chauffage",repel=TRUE)
+```
+```{r}
+fviz_mca_ind(data1.mca,habillage="classe_conso_energie",repel=TRUE)
+```
+::: callout-note
+## Consulter le code Python
+
+Vous pouvez consulter le notebook Python dédié à la visualisation des données en cliquant sur le lien ci-dessous :
+
+<a href="analyse-factorielle-version-python.ipynb" target="_blank" style="font-weight: bold; text-decoration: underline;"> Ouvrir le Notebook Python (.ipynb) </a>
+:::

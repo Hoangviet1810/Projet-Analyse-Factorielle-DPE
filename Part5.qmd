@@ -1,0 +1,135 @@
+---
+title: "Partie 5 Test"
+author: "NGUYEN Duc Hoang Viet"
+number-sections: true
+code-fold: false
+execute:
+  warning: false
+  message: false
+---
+
+# Test 
+
+##  Test Chi-deux
+
+On va faire le test pour savoir si la classe de consommation dépend-elle du type de chauffage
+
+Hypothèse:
+
+-H0: La classe de consommation indépendante du type de chauffage.
+
+-H1: La classe de consommation dépend du type de chauffage.
+
+```{r}
+data_dpe <- read.table("data_dpe.txt", header = TRUE, sep = "")
+type_energie_chauffage <-data_dpe$type_energie_chauffage
+classe_conso_energie <- data_dpe$classe_conso_energie
+barplot(table(type_energie_chauffage,classe_conso_energie),beside=TRUE,
+        col=c("blue","green","red"), main="Classe conso energie par type chauffage"
+        ,xlab= "classe conso energie"
+        ,ylab="Fréquence ",legend.text=TRUE)
+```
+
+```{r}
+table_conso_energie <- table (data_dpe$type_energie_chauffage,
+                                   data_dpe$classe_conso_energie)
+table_conso_energie
+
+chisq.test(table_conso_energie)
+```
+
+Interprétation:
+- La p-value( < 2.2e-16 ) est inférieure au seuil de 5%. Donc on rejette H0. Il existe une relation
+entre la classe de consommation et le type de chauffage.
+
+- Selon le graphique, les classes A,B,C ont tendance à être de type électricité tandis que les autres
+sont plus de type gaz.
+
+##  Test ANOVA 
+
+### Tester s'il y a une différence réelle de consommation énergétique moyenne entre Maison et Appartement.
+
+On va faire le test pour savoir justifier la relation entre le type de logement et la consommation d'énergie
+
+ - H0: Il n’y a pas de différence moyenne de consommation énergétique entre Maison et Appartement (toute variation observée est due au hasard)
+
+ - H1: Il existe une différence réelle de consommation énergétique moyenne entre Maison et Appartement.
+
+```{r}
+anova_result <- aov(conso_energie ~ type_logement, data = data_dpe)
+summary(anova_result)
+```
+Ici, Pr(>F) - 0.000894 < 0.5 donc on rejette H0 et donc il existe une différence réelle de consommation énergétique moyenne entre Maison et Appartement
+
+```{r}
+aggregate(conso_energie ~ type_logement, data = data_dpe, mean)
+```
+
+- La valeur moyenne de 197,63 pour les maisons se situe à la frontière entre les classes D et E de l’échelle DPE.
+
+- Cela explique pourquoi, dans le graphique des contributions de la MCA, la modalité Maison tend à se projeter vers les classes énergétiques moins performantes (D, E, F) par rapport aux appartements.
+
+### Tester si les moyennes des émissions de GES sont identiques selon le type d’énergie de chauffage.
+
+On va faire le test pour savoir justifier les moyennes des émissions de GES sont identiques selon le type d’énergie de chauffage.
+
+- H0: Les groupes ont des moyennes d’émissions égales.
+
+- H1: Au moins un groupe a une moyenne différente.
+
+```{r}
+moycond <- tapply(data_dpe$emission_ges, data_dpe$type_logement, mean, na.rm=TRUE)
+boxplot(emission_ges ~ type_energie_chauffage,
+data = data_dpe,
+main = "Émissions de GES selon le type de chauffage",
+xlab = "Type de chauffage",
+ylab = "Émissions GES (kg éq. CO2/m2)")
+# ajouter le point de moyen
+points(1:length(moycond), moycond, col="red", pch="*", cex=2)
+```
+Moyenne des émissions de gaz à effet de serre (emission_ges) selon le type d’énergie de chauffage :
+
+- Gaz : ~33,6
+
+- Électricité : ~11,1
+
+-Autre : ~55,5
+
+Observation préliminaire : le type d’énergie de chauffage a un impact significatif sur le niveau des
+émissions. 
+
+De plus, les variances des groupes selon le type d’énergie de chauffage ne sont pas égales. Par conséquent, nous utilisons le test oneway.test() (ANOVA de Welch) au lieu de l’ANOVA classique (aov())
+
+```{r}
+oneway.test(emission_ges~ type_energie_chauffage, data=data_dpe, var.equal=FALSE)
+```
+Signification de l’ANOVA :
+
+- p-value < 0,0001 → très faible → différence certaine
+
+- F élevé → différences de moyennes très importantes
+
+Conclusion : les émissions dépendent réellement du type d’énergie de chauffage.
+
+## Tests t de Student par paires
+
+On va vérifier si les moyennes des émissions de GES diffèrent selon le type d’énergie de chauffage.
+
+- H0: Les groupes ont des moyennes d’émissions égales.
+
+- H1: Au moins un groupe a une moyenne différente.
+
+```{r}
+pairwise.t.test(data_dpe$emission_ges,data_dpe$type_energie_chauffage,
+                p.adjust.method = "none",pool.sd = FALSE)
+```
+**Comparaison par paires des groupes d’énergie** :
+
+- Gaz vs Électricité → p < 2e-16 → différence extrêmement significative
+
+- Gaz vs Autre → p = 0,0053 → différence significative
+
+- Électricité vs Autre → p = 1,8e-06 → différence extrêmement significative
+
+Conclusion : toutes les paires de groupes d’énergie présentent des différences significatives au niveau
+des émissions.
