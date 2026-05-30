@@ -67,9 +67,9 @@ Les visualisations finales sont créées pour l'analyse DPE et couvrent les aspe
 
 D’après nos résultats, nous pouvons identifier des profils types :
 
-- L'idéal énergétique : Un Appartement chauffé à l'Électricité tend à atteindre les classes de performance B hoặc C.
+- L'idéal énergétique : Un Appartement chauffé à l'Électricité tend à atteindre les classes de performance B ou C.
 
-- Le risque modéré : Une Maison utilisant le Gas se situe souvent dans les classes D hoặc E.
+- Le risque modéré : Une Maison utilisant le Gas se situe souvent dans les classes D ou E.
 
 - La "Passoire Énergétique" critique : Quel que soit le type de bâtiment, l'usage d'énergies fossiles de type "Autre" conduit quasi systématiquement à une classification G (consommation extrêmement élevée).
 
