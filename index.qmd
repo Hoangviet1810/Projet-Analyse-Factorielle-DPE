@@ -41,13 +41,7 @@ Le projet est divisé en plusieurs parties :
 
 -   **Partie 6 :** Conclusion
 
-::: callout-note
-## Consulter le rapport complet
 
-Vous pouvez consulter le rapport détaillé du projet (format PDF) en cliquant sur le lien ci-dessous :
-
-<a href="ProjetPE.pdf" target="_blank" style="font-weight: bold; text-decoration: underline;"> Ouvrir le rapport PDF </a>
-:::
 
 ::: callout-note
 ## Consulter le darshboard
