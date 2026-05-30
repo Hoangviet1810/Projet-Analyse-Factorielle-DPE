@@ -52,6 +52,7 @@ format:
     toc-title: "Sur cette page" 
     code-fold: true
     embed-resources: false
+    include-after-body: footer.html
    
     
     
