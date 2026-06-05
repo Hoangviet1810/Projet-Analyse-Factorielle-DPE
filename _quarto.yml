@@ -20,8 +20,6 @@ website:
         text: "ACM "
       - href: Part5.qmd
         text: "Test "
-      - href: Part6.qmd
-        text: "Conclusion "
         
     right:
       - icon: github
