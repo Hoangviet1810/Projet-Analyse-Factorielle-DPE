@@ -246,6 +246,30 @@ ul.task-list li input[type="checkbox"] {
 </section>
 
 </main> <!-- /main -->
+<div id="preloader">
+    <div class="loader-content">
+        <div class="loader-center-group">
+            <div class="spinner"></div> 
+
+            <div class="loader-letter-container">
+                <span class="loader-letter">V</span>
+            </div>
+        </div>
+        
+        <h2 class="loader-text">MADE BY NGUYEN DUC HOANG VIET</h2>
+        <p class="loader-subtext"> PROJET ANALYSE FACTORIELLE DPE</p>
+    </div>
+</div>
+
+<script>
+    // Giữ nguyên đoạn script
+    window.addEventListener('load', function () {
+        const preloader = document.getElementById('preloader');
+        setTimeout(function() {
+            preloader.classList.add('fade-out');
+        }, 1200); 
+    });
+</script>
 <div style="text-align:center; font-size:0.85em; color:#888; padding:25px;">
   <strong>© 2026 NGUYEN Duc Hoang Viet — Tous droits réservés.</strong><br>
   <strong>Université de Lille — Projet Analyse Factorielle DPE<strong><br>

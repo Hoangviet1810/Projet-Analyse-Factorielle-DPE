@@ -45,12 +45,13 @@ format:
   html:
     theme: flatly
     css: custom.css
+    include-after-body: [loading.html, footer.html]
     toc: true
     toc-location: right
     toc-title: "Sur cette page" 
     code-fold: true
     embed-resources: false
-    include-after-body: footer.html
+    #include-after-body: footer.html
    
     
     
