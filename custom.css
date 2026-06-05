@@ -63,7 +63,7 @@ ul li {
     
     /* Sử dụng conic-gradient để tạo dải màu xoay mượt mà chuẩn xác như ảnh logo */
     background: conic-gradient(
-        #00b894, /* Xanh lục bảo */
+        #ffffff, /* Xanh lục bảo */
         #00d2d3, /* Xanh cyan neon */
         #ffb800, /* Vàng hổ phách */
         #ff2a4b, /* Đỏ Crimson */
