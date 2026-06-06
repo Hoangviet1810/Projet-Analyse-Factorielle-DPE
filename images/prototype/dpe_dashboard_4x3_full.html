@@ -1,0 +1,377 @@
+
+<h2 class="sr-only">Dashboard DPE Haute-Garonne 4 colonnes 3 lignes — classes énergétiques, ACM biplot, PCA cercle, ANOVA, tests T, GES boxplot.</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+.db{background:#0d1117;color:#e6edf3;font-family:var(--font-sans);width:100%;}
+.hdr{background:#161b22;border-bottom:1px solid #21262d;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;}
+.hdr-title{font-size:15px;font-weight:500;color:#e6edf3;}.hdr-title span{color:#38d9a9;}
+.hdr-badge{font-size:10px;color:#38d9a9;border:1px solid #38d9a9;padding:2px 8px;border-radius:3px;letter-spacing:.08em;}
+.kpi-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:10px;}
+.kpi{background:#161b22;border:1px solid #21262d;border-radius:6px;padding:9px 12px;}
+.kpi-l{font-size:10px;color:#8b949e;margin-bottom:3px;}
+.kpi-v{font-size:22px;font-weight:500;}
+.kpi-u{font-size:10px;color:#8b949e;margin-top:1px;}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:0 10px 8px;}
+.card{background:#161b22;border:1px solid #21262d;border-radius:6px;padding:10px 12px;}
+.card-tl{border-top:2px solid #38d9a9;}.card-cy{border-top:2px solid #79c0ff;}
+.card-am{border-top:2px solid #e3b341;}.card-gr{border-top:2px solid #56d364;}
+.card-pk{border-top:2px solid #d2a8ff;}.card-wh{border-top:2px solid #8b949e;}
+.card-re{border-top:2px solid #f85149;}
+.ct{font-size:11px;font-weight:500;color:#8b949e;margin-bottom:7px;}
+.leg{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px;}
+.li{display:flex;align-items:center;gap:4px;font-size:10px;color:#8b949e;}
+.ld{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
+.pill{display:inline-block;font-size:10px;padding:2px 7px;border-radius:3px;font-weight:500;}
+.p-tl{background:rgba(56,217,169,.15);color:#38d9a9;border:1px solid rgba(56,217,169,.3);}
+.p-re{background:rgba(248,81,73,.15);color:#f85149;border:1px solid rgba(248,81,73,.3);}
+.p-am{background:rgba(227,179,65,.15);color:#e3b341;border:1px solid rgba(227,179,65,.3);}
+.p-gr{background:rgba(86,211,100,.15);color:#56d364;border:1px solid rgba(86,211,100,.3);}
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th{font-size:9px;color:#8b949e;text-transform:uppercase;letter-spacing:.05em;padding:3px 5px;border-bottom:1px solid #21262d;text-align:left;}
+.tbl td{font-size:10px;padding:4px 5px;border-bottom:1px solid #21262d;color:#c9d1d9;vertical-align:top;}
+.tbl .hl{color:#38d9a9;font-weight:500;}
+.tbl .sig{color:#56d364;font-weight:500;}
+.tbl .vs{color:#f85149;font-weight:500;}
+.mr{display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;}
+.ml{font-size:10px;color:#8b949e;}
+.mi{font-size:11px;font-weight:500;}
+.bar-bg{background:#0d1117;border-radius:2px;height:7px;width:100%;overflow:hidden;margin:2px 0 5px;}
+.bar{height:7px;border-radius:2px;}
+.foot{font-size:10px;color:#8b949e;text-align:right;padding:5px 10px 10px;}
+</style>
+
+<div class="db">
+<div class="hdr">
+  <div>
+    <div class="hdr-title">Projet <span>DPE</span> — Analyse factorielle · Haute-Garonne</div>
+    <div style="font-size:10px;color:#8b949e;margin-top:2px;">Duc Hoang Viet Nguyen · M1 Mathématiques &amp; Applications · Université de Lille · 2025–2026</div>
+  </div>
+  <div class="hdr-badge">ADEME · 1 000 logements</div>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi"><div class="kpi-l">Logements analysés</div><div class="kpi-v" style="color:#38d9a9;">1 000</div><div class="kpi-u">échantillon ADEME</div></div>
+  <div class="kpi"><div class="kpi-l">Conso. moy. énergie</div><div class="kpi-v" style="color:#e3b341;">184</div><div class="kpi-u">kWhEP/m²/an</div></div>
+  <div class="kpi"><div class="kpi-l">Émission GES moy.</div><div class="kpi-v" style="color:#79c0ff;">21.9</div><div class="kpi-u">kg éq. CO₂/m²</div></div>
+  <div class="kpi"><div class="kpi-l">Ancienneté moy.</div><div class="kpi-v" style="color:#d2a8ff;">34.6</div><div class="kpi-u">ans · CV 75%</div></div>
+</div>
+
+<!-- LIGNE 1 -->
+<div class="grid4">
+
+  <div class="card card-tl">
+    <div class="ct">Classes énergétiques (A→G)</div>
+    <div style="position:relative;height:140px"><canvas id="c1" role="img" aria-label="A:98 B:295 C:274 D:121 E:127 F:70 G:15">A 98, B 295, C 274, D 121, E 127, F 70, G 15</canvas></div>
+    <div class="leg">
+      <span class="li"><span class="ld" style="background:#38d9a9;"></span>A–C 667</span>
+      <span class="li"><span class="ld" style="background:#e3b341;"></span>D–E 248</span>
+      <span class="li"><span class="ld" style="background:#f85149;"></span>F–G 85</span>
+    </div>
+  </div>
+
+  <div class="card card-cy">
+    <div class="ct">Type logement &amp; énergie chauffage</div>
+    <div style="position:relative;height:75px;margin-bottom:6px"><canvas id="c2" role="img" aria-label="Appartement 639 Maison 361">Appartement 639, Maison 361</canvas></div>
+    <div class="leg" style="margin-bottom:5px;">
+      <span class="li"><span class="ld" style="background:#79c0ff;"></span>Appt. 64%</span>
+      <span class="li"><span class="ld" style="background:#d2a8ff;"></span>Maison 36%</span>
+    </div>
+    <div style="position:relative;height:50px"><canvas id="c3" role="img" aria-label="Électricité 542 Gaz 433 Autre 25">Électricité 54%, Gaz 43%</canvas></div>
+    <div class="leg">
+      <span class="li"><span class="ld" style="background:#38d9a9;"></span>Élec. 54%</span>
+      <span class="li"><span class="ld" style="background:#e3b341;"></span>Gaz 43%</span>
+      <span class="li"><span class="ld" style="background:#8b949e;"></span>Autre 3%</span>
+    </div>
+  </div>
+
+  <div class="card card-pk" style="grid-column:span 2;">
+    <div class="ct">ACM — Biplot catégories (Dim1 18.8% · Dim2 14.7%)</div>
+    <div style="position:relative;height:180px"><canvas id="cacm" role="img" aria-label="Biplot ACM: classes A B C côté électricité appartement, F G autre côté gaz maison."></canvas></div>
+    <div class="leg">
+      <span class="li"><span class="ld" style="background:#38d9a9;"></span>Classes A–C / Élec.</span>
+      <span class="li"><span class="ld" style="background:#f85149;"></span>Classes F–G / Gaz</span>
+      <span class="li"><span class="ld" style="background:#79c0ff;"></span>Type logement</span>
+      <span class="li"><span class="ld" style="background:#d2a8ff;"></span>Maison</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- LIGNE 2 -->
+<div class="grid4">
+
+  <div class="card card-am">
+    <div class="ct">Conso. par énergie (kWhEP/m²)</div>
+    <div style="position:relative;height:100px"><canvas id="c4" role="img" aria-label="Gaz 220, Électricité 155, Autre 390">Gaz 220, Électricité 155, Autre 390</canvas></div>
+    <div style="margin-top:6px;" class="ct">GES par énergie (kg CO₂/m²)</div>
+    <div style="position:relative;height:80px"><canvas id="c5" role="img" aria-label="Gaz 33.6, Électricité 11.1, Autre 55.5">Gaz 33.6, Élec 11.1, Autre 55.5</canvas></div>
+  </div>
+
+  <div class="card card-tl">
+    <div class="ct">ACP — Inertie expliquée (%)</div>
+    <div style="position:relative;height:90px"><canvas id="c7" role="img" aria-label="PC1 49%, PC2 25.6%, PC3 13.5%, PC4 11.9%">PC1 49%, PC2 25.6%</canvas></div>
+    <div style="margin-top:8px;">
+      <div class="mr"><span class="ml">PC1 + PC2 (Kaiser)</span><span class="pill p-tl">74.6%</span></div>
+      <div class="mr"><span class="ml">PC3 + PC4</span><span style="font-size:10px;color:#8b949e;">25.4%</span></div>
+      <div style="margin-top:6px;font-size:10px;color:#8b949e;border-top:1px solid #21262d;padding-top:5px;">
+        Dim retenues : <span style="color:#38d9a9;font-weight:500;">PC1 · PC2</span> (règle Kaiser λ&gt;1)
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-cy" style="grid-column:span 2;">
+    <div class="ct">ACP — Cercle de corrélation (PC1 49% · PC2 25.6%)</div>
+    <div style="position:relative;height:190px"><canvas id="cpca" role="img" aria-label="annee_construction opposée à conso_energie emission_ges; surface quasi-indépendante."></canvas></div>
+  </div>
+
+</div>
+
+<!-- LIGNE 3 -->
+<div class="grid4">
+
+  <div class="card card-gr" style="grid-column:span 2;">
+    <div class="ct">Tests statistiques — ANOVA</div>
+    <table class="tbl">
+      <tr><th>Test</th><th>Stat.</th><th>p-value</th><th>Conclusion</th><th>Moyennes</th></tr>
+      <tr>
+        <td style="color:#c9d1d9;">Conso. vs type logement</td>
+        <td class="hl">F = 11.1</td>
+        <td class="sig">0.0009</td>
+        <td><span class="pill p-gr">H0 rejetée</span></td>
+        <td style="font-size:9px;color:#8b949e;">Maison 197.6<br>Appt. 176.5</td>
+      </tr>
+      <tr style="border-bottom:none;">
+        <td style="color:#c9d1d9;">GES vs type énergie (Welch)</td>
+        <td class="hl">F = 219.5</td>
+        <td class="vs">&lt; 2.2e-16</td>
+        <td><span class="pill p-gr">H0 rejetée</span></td>
+        <td style="font-size:9px;color:#8b949e;">Gaz 33.6<br>Élec. 11.1<br>Autre 55.5</td>
+      </tr>
+    </table>
+    <div style="margin-top:10px;" class="ct">Tests T par paires — GES selon énergie</div>
+    <table class="tbl">
+      <tr><th>Comparaison</th><th>p-value</th><th>Conclusion</th></tr>
+      <tr><td>Gaz vs Électricité</td><td class="vs">&lt; 2e-16</td><td><span class="pill p-re">Très significatif</span></td></tr>
+      <tr><td>Gaz vs Autre</td><td class="hl">0.0053</td><td><span class="pill p-am">Significatif</span></td></tr>
+      <tr style="border-bottom:none;"><td>Électricité vs Autre</td><td class="vs">1.8e-06</td><td><span class="pill p-re">Très significatif</span></td></tr>
+    </table>
+  </div>
+
+  <div class="card card-re">
+    <div class="ct">GES simulé par énergie (kg CO₂/m²)</div>
+    <div style="position:relative;height:160px"><canvas id="c_ges" role="img" aria-label="Distribution GES simulée: gaz médiane 33.6, électricité médiane 11.1, autre médiane 55.5">Distribution GES par type énergie.</canvas></div>
+    <div class="leg">
+      <span class="li"><span class="ld" style="background:#e3b341;"></span>Gaz</span>
+      <span class="li"><span class="ld" style="background:#38d9a9;"></span>Électricité</span>
+      <span class="li"><span class="ld" style="background:#8b949e;"></span>Autre</span>
+    </div>
+  </div>
+
+  <div class="card card-wh">
+    <div class="ct">Synthèse des résultats</div>
+    <div style="margin-bottom:6px;">
+      <div class="mr"><span class="ml">Classes A–C</span><span class="pill p-tl">66.7%</span></div>
+      <div class="bar-bg"><div class="bar" style="width:67%;background:#38d9a9;"></div></div>
+      <div class="mr"><span class="ml">Classes D–E</span><span class="pill p-am">24.8%</span></div>
+      <div class="bar-bg"><div class="bar" style="width:25%;background:#e3b341;"></div></div>
+      <div class="mr"><span class="ml">Classes F–G</span><span class="pill p-re">8.5%</span></div>
+      <div class="bar-bg"><div class="bar" style="width:9%;background:#f85149;"></div></div>
+    </div>
+    <div style="border-top:1px solid #21262d;padding-top:6px;margin-top:2px;">
+      <div style="font-size:10px;color:#8b949e;margin-bottom:4px;">ACM — variance expliquée</div>
+      <div class="mr"><span class="ml">Dim 1</span><span class="mi" style="color:#d2a8ff;">18.8%</span></div>
+      <div class="bar-bg"><div class="bar" style="width:75%;background:#d2a8ff;"></div></div>
+      <div class="mr"><span class="ml">Dim 2</span><span class="mi" style="color:#d2a8ff;">14.7%</span></div>
+      <div class="bar-bg"><div class="bar" style="width:59%;background:#d2a8ff;opacity:.7;"></div></div>
+      <div class="mr"><span class="ml">Dim 3</span><span class="mi" style="color:#8b949e;">12.2%</span></div>
+      <div class="bar-bg"><div class="bar" style="width:49%;background:#4d3b6b;"></div></div>
+    </div>
+    <div style="margin-top:8px;padding:5px 7px;background:rgba(56,217,169,.07);border-radius:4px;font-size:9px;color:#38d9a9;">
+      Énergie &amp; type logement → principaux déterminants de la performance DPE
+    </div>
+  </div>
+
+</div>
+
+<div class="foot">Sources : ADEME open data · Analyse : Duc Hoang Viet Nguyen — Université de Lille, M1 Mathématiques &amp; Applications, 2025–2026</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const T='#8b949e', G='rgba(255,255,255,0.05)';
+const base={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}};
+const ax={x:{ticks:{color:T,font:{size:9}},grid:{color:G}},y:{ticks:{color:T,font:{size:9}},grid:{color:G}}};
+
+new Chart(document.getElementById('c1'),{type:'bar',
+  data:{labels:['A','B','C','D','E','F','G'],
+    datasets:[{data:[98,295,274,121,127,70,15],
+      backgroundColor:['#38d9a9','#38d9a9','#38d9a9','#e3b341','#e3b341','#f85149','#f85149'],
+      borderRadius:3}]},
+  options:{...base,scales:ax}});
+
+new Chart(document.getElementById('c2'),{type:'bar',
+  data:{labels:['Appartement','Maison'],
+    datasets:[{data:[639,361],backgroundColor:['#79c0ff','#d2a8ff'],borderRadius:3}]},
+  options:{...base,indexAxis:'y',scales:{x:{ticks:{color:T,font:{size:9}},grid:{color:G}},y:{ticks:{color:T,font:{size:9}},grid:{color:G}}}}});
+
+new Chart(document.getElementById('c3'),{type:'bar',
+  data:{labels:['Élec.','Gaz','Autre'],
+    datasets:[{data:[542,433,25],backgroundColor:['#38d9a9','#e3b341','#8b949e'],borderRadius:3}]},
+  options:{...base,indexAxis:'y',scales:{x:{ticks:{color:T,font:{size:9}},grid:{color:G}},y:{ticks:{color:T,font:{size:9}},grid:{color:G}}}}});
+
+new Chart(document.getElementById('c4'),{type:'bar',
+  data:{labels:['Gaz','Élec.','Autre'],
+    datasets:[{data:[220,155,390],backgroundColor:['#e3b341','#38d9a9','#8b949e'],borderRadius:3}]},
+  options:{...base,indexAxis:'y',scales:{x:{ticks:{color:T,font:{size:9}},grid:{color:G}},y:{ticks:{color:T,font:{size:9}},grid:{color:G}}}}});
+
+new Chart(document.getElementById('c5'),{type:'bar',
+  data:{labels:['Gaz','Élec.','Autre'],
+    datasets:[{data:[33.6,11.1,55.5],backgroundColor:['#e3b341','#38d9a9','#8b949e'],borderRadius:3}]},
+  options:{...base,indexAxis:'y',scales:{x:{ticks:{color:T,font:{size:9}},grid:{color:G}},y:{ticks:{color:T,font:{size:9}},grid:{color:G}}}}});
+
+new Chart(document.getElementById('c7'),{type:'bar',
+  data:{labels:['PC1','PC2','PC3','PC4'],
+    datasets:[{data:[49.0,25.6,13.5,11.9],
+      backgroundColor:['#79c0ff','#79c0ff','#2d333b','#2d333b'],borderRadius:3}]},
+  options:{...base,scales:{
+    x:{ticks:{color:T,font:{size:9}},grid:{color:G}},
+    y:{max:60,ticks:{color:T,font:{size:9},callback:v=>v+'%'},grid:{color:G}}},
+  plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.parsed.y+'%'}}}}});
+
+(function(){
+  const canvas=document.getElementById('cpca');
+  const vars=[
+    {label:'annee_constr.',x:-0.88,y:-0.12,c:'#e3b341'},
+    {label:'surface',x:0.06,y:0.97,c:'#79c0ff'},
+    {label:'conso_énergie',x:0.82,y:-0.16,c:'#38d9a9'},
+    {label:'emission_ges',x:0.79,y:0.15,c:'#38d9a9'}
+  ];
+  const circle=[];
+  for(let a=0;a<=360;a+=3) circle.push({x:Math.cos(a*Math.PI/180),y:Math.sin(a*Math.PI/180)});
+  const chart=new Chart(canvas,{type:'scatter',
+    data:{datasets:[
+      {data:vars.map(v=>({x:v.x,y:v.y})),backgroundColor:vars.map(v=>v.c),pointRadius:6,pointHoverRadius:8},
+      {data:circle,type:'line',borderColor:'rgba(255,255,255,0.12)',borderWidth:1,pointRadius:0,fill:false}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      scales:{
+        x:{min:-1.2,max:1.2,ticks:{color:T,font:{size:9},stepSize:0.5},grid:{color:G},title:{display:true,text:'PC1 (49%)',color:T,font:{size:9}}},
+        y:{min:-1.2,max:1.2,ticks:{color:T,font:{size:9},stepSize:0.5},grid:{color:G},title:{display:true,text:'PC2 (25.6%)',color:T,font:{size:9}}}
+      },
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{
+        if(ctx.datasetIndex!==0) return '';
+        return `${vars[ctx.dataIndex].label} (${ctx.parsed.x.toFixed(2)}, ${ctx.parsed.y.toFixed(2)})`;
+      }}}}}
+  });
+  setTimeout(()=>{
+    const ctx2=canvas.getContext('2d');
+    const meta=chart.getDatasetMeta(0);
+    ctx2.font='bold 10px sans-serif';
+    meta.data.forEach((pt,i)=>{
+      ctx2.fillStyle=vars[i].c;
+      ctx2.textAlign=vars[i].x>0?'left':'right';
+      ctx2.fillText(vars[i].label,pt.x+(vars[i].x>0?8:-8),pt.y+(vars[i].y>0?-6:12));
+      ctx2.strokeStyle=vars[i].c+'99';
+      ctx2.lineWidth=1.5;
+      ctx2.beginPath();
+      const cx=meta.data[i].x, cy=meta.data[i].y;
+      const originX=chart.scales.x.getPixelForValue(0);
+      const originY=chart.scales.y.getPixelForValue(0);
+      ctx2.moveTo(originX,originY);
+      ctx2.lineTo(cx,cy);
+      ctx2.stroke();
+    });
+  },500);
+})();
+
+(function(){
+  const canvas=document.getElementById('cacm');
+  const cats=[
+    {label:'A',x:-0.9,y:0.4,c:'#38d9a9',r:7},
+    {label:'B',x:-0.7,y:0.1,c:'#38d9a9',r:7},
+    {label:'C',x:-0.3,y:-0.05,c:'#38d9a9',r:7},
+    {label:'D',x:0.4,y:-0.1,c:'#e3b341',r:6},
+    {label:'E',x:0.9,y:-0.3,c:'#e3b341',r:6},
+    {label:'F',x:1.5,y:0.5,c:'#f85149',r:7},
+    {label:'G',x:1.7,y:1.1,c:'#f85149',r:7},
+    {label:'autre',x:1.6,y:1.3,c:'#8b949e',r:5},
+    {label:'électricité',x:-0.55,y:0.05,c:'#38d9a9',r:5},
+    {label:'gaz',x:0.7,y:-0.2,c:'#e3b341',r:5},
+    {label:'Appartement',x:-0.35,y:-0.2,c:'#79c0ff',r:6},
+    {label:'Maison',x:0.5,y:0.15,c:'#d2a8ff',r:6}
+  ];
+  const chart=new Chart(canvas,{type:'scatter',
+    data:{datasets:[{
+      data:cats.map(c=>({x:c.x,y:c.y})),
+      backgroundColor:cats.map(c=>c.c+'cc'),
+      pointRadius:cats.map(c=>c.r),
+      pointHoverRadius:cats.map(c=>c.r+2)
+    }]},
+    options:{responsive:true,maintainAspectRatio:false,
+      scales:{
+        x:{min:-1.3,max:2.1,ticks:{color:T,font:{size:9}},grid:{color:G},title:{display:true,text:'Dim1 (18.8%)',color:T,font:{size:9}}},
+        y:{min:-0.6,max:1.7,ticks:{color:T,font:{size:9}},grid:{color:G},title:{display:true,text:'Dim2 (14.7%)',color:T,font:{size:9}}}
+      },
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${cats[ctx.dataIndex].label} (${ctx.parsed.x.toFixed(2)}, ${ctx.parsed.y.toFixed(2)})`}}}
+    }
+  });
+  setTimeout(()=>{
+    const ctx2=canvas.getContext('2d');
+    const meta=chart.getDatasetMeta(0);
+    ctx2.font='bold 9px sans-serif';
+    const offsets={A:[7,-4],B:[7,-4],C:[7,-4],D:[7,-4],E:[7,-4],F:[7,-4],G:[7,-4],
+      autre:[7,-4],électricité:[-5,-8],gaz:[7,-4],Appartement:[0,12],Maison:[7,-4]};
+    meta.data.forEach((pt,i)=>{
+      ctx2.fillStyle=cats[i].c;
+      const off=offsets[cats[i].label]||[7,-4];
+      ctx2.textAlign=off[0]>0?'left':'center';
+      ctx2.fillText(cats[i].label,pt.x+off[0],pt.y+off[1]);
+    });
+    const ox=chart.scales.x.getPixelForValue(0);
+    const oy=chart.scales.y.getPixelForValue(0);
+    [0,1,2,3,4,5,6].forEach(i=>{
+      ctx2.strokeStyle=cats[i].c+'55';
+      ctx2.lineWidth=1;
+      ctx2.setLineDash([3,3]);
+      ctx2.beginPath();
+      ctx2.moveTo(ox,oy);
+      ctx2.lineTo(meta.data[i].x,meta.data[i].y);
+      ctx2.stroke();
+      ctx2.setLineDash([]);
+    });
+  },500);
+})();
+
+(function(){
+  const canvas=document.getElementById('c_ges');
+  const energies=['Gaz','Électricité','Autre'];
+  const medians=[33.6,11.1,55.5];
+  const q1=[15,4,25]; const q3=[52,18,90];
+  const mins=[5,1,10]; const maxs=[130,45,150];
+  const colors=['#e3b341','#38d9a9','#8b949e'];
+  new Chart(canvas,{type:'bar',
+    data:{labels:energies,
+      datasets:[
+        {label:'Q1→Q3',data:q3.map((v,i)=>v-q1[i]),backgroundColor:colors.map(c=>c+'55'),borderColor:colors,borderWidth:1.5,borderRadius:3,base:q1},
+        {label:'Médiane',data:medians,backgroundColor:colors,borderRadius:2,barPercentage:0.25}
+      ]},
+    options:{...base,scales:{
+      x:{ticks:{color:T,font:{size:10}},grid:{color:G}},
+      y:{min:0,max:170,ticks:{color:T,font:{size:9},callback:v=>v},grid:{color:G},
+        title:{display:true,text:'kg CO₂/m²',color:T,font:{size:9}}}
+    },plugins:{legend:{display:false},tooltip:{callbacks:{
+      label:ctx=>ctx.datasetIndex===1?`Médiane: ${ctx.parsed.y}`:null
+    }}}}});
+  setTimeout(()=>{
+    const ctx2=canvas.getContext('2d');
+    const chart2=Chart.getChart(canvas);
+    const meta=chart2.getDatasetMeta(1);
+    ctx2.font='bold 11px sans-serif';
+    meta.data.forEach((pt,i)=>{
+      ctx2.fillStyle=colors[i];
+      ctx2.textAlign='center';
+      ctx2.fillText(medians[i],pt.x,pt.y-6);
+    });
+  },500);
+})();
+</script>

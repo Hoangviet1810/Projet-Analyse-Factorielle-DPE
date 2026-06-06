@@ -1,0 +1,271 @@
+
+<h2 class="sr-only">Tableau de bord DPE – Analyse factorielle des logements en Haute-Garonne (1000 logements). Visualisations : distribution des classes énergétiques, types de logement, énergie de chauffage, consommation, émissions de GES, corrélations ACP, contributions ACM, tests statistiques.</h2>
+
+<style>
+  .dpe-dash { font-family: var(--font-sans); padding: 1rem 0; }
+  .dash-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.5rem; border-bottom: 0.5px solid var(--color-border-tertiary); padding-bottom: 0.75rem; }
+  .dash-title { font-size: 17px; font-weight: 500; color: var(--color-text-primary); }
+  .dash-sub { font-size: 12px; color: var(--color-text-secondary); }
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 1.25rem; }
+  .kpi { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.75rem 1rem; }
+  .kpi-label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px; text-transform: none; }
+  .kpi-val { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
+  .kpi-unit { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+  .grid33 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 12px; }
+  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 0.85rem 1rem; }
+  .card-title { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 0.6rem; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+  .leg-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--color-text-secondary); }
+  .leg-swatch { width: 9px; height: 9px; border-radius: 2px; flex-shrink: 0; }
+  .footer-note { font-size: 11px; color: var(--color-text-secondary); text-align: right; margin-top: 0.5rem; }
+</style>
+
+<div class="dpe-dash">
+  <div class="dash-header">
+    <div class="dash-title">Projet DPE — Analyse factorielle · Haute-Garonne</div>
+    <div class="dash-sub">1 000 logements · diagnostics avant juil. 2021 · Créé par Nguyen Duc Hoang Viet</div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-label">Logements analysés</div><div class="kpi-val">1 000</div><div class="kpi-unit">échantillon</div></div>
+    <div class="kpi"><div class="kpi-label">Conso. moy. énergie</div><div class="kpi-val">184</div><div class="kpi-unit">kWhEP/m²/an</div></div>
+    <div class="kpi"><div class="kpi-label">Émission GES moy.</div><div class="kpi-val">21.9</div><div class="kpi-unit">kg éq. CO₂/m²</div></div>
+    <div class="kpi"><div class="kpi-label">Ancienneté moy.</div><div class="kpi-val">34.6</div><div class="kpi-unit">ans (CV 75%)</div></div>
+  </div>
+
+  <div class="grid33">
+    <div class="card">
+      <div class="card-title">Distribution des classes énergétiques</div>
+      <div style="position:relative;height:160px"><canvas id="c1" role="img" aria-label="Barres des classes A à G. B et C dominent.">A:98 B:295 C:274 D:121 E:127 F:70 G:15</canvas></div>
+      <div class="legend">
+        <span class="leg-item"><span class="leg-swatch" style="background:#22c197"></span>A–C (667)</span>
+        <span class="leg-item"><span class="leg-swatch" style="background:#e08a1e"></span>D–E (248)</span>
+        <span class="leg-item"><span class="leg-swatch" style="background:#c93c3c"></span>F–G (85)</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Type de logement</div>
+      <div style="position:relative;height:160px"><canvas id="c2" role="img" aria-label="Donut: 639 appartements, 361 maisons.">Appartements: 639 (63.9%), Maisons: 361 (36.1%)</canvas></div>
+      <div class="legend">
+        <span class="leg-item"><span class="leg-swatch" style="background:#3266ad"></span>Appartement 64%</span>
+        <span class="leg-item"><span class="leg-swatch" style="background:#d4537e"></span>Maison 36%</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Type d'énergie de chauffage</div>
+      <div style="position:relative;height:160px"><canvas id="c3" role="img" aria-label="Donut: électricité 542, gaz 433, autre 25.">Électricité: 542 (54.2%), Gaz: 433 (43.3%), Autre: 25 (2.5%)</canvas></div>
+      <div class="legend">
+        <span class="leg-item"><span class="leg-swatch" style="background:#1d9e75"></span>Électricité 54%</span>
+        <span class="leg-item"><span class="leg-swatch" style="background:#e08a1e"></span>Gaz 43%</span>
+        <span class="leg-item"><span class="leg-swatch" style="background:#888780"></span>Autre 3%</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid33">
+    <div class="card">
+      <div class="card-title">Conso. énergie par type d'énergie (kWhEP/m²)</div>
+      <div style="position:relative;height:160px"><canvas id="c4" role="img" aria-label="Barres horizontales: gaz ~220, électricité ~155, autre ~390.">Gaz: ~220 kWh/m², Électricité: ~155 kWh/m², Autre: ~390 kWh/m²</canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Émissions GES moyennes par énergie (kg CO₂/m²)</div>
+      <div style="position:relative;height:160px"><canvas id="c5" role="img" aria-label="Gaz ~33.6, Électricité ~11.1, Autre ~55.5. Toutes paires significatives p<0.01.">Gaz: 33.6, Électricité: 11.1, Autre: 55.5</canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Conso. moyenne : maison vs appartement</div>
+      <div style="position:relative;height:160px"><canvas id="c6" role="img" aria-label="Appartement 176.5 vs Maison 197.6 kWhEP/m², différence ANOVA p=0.0009.">Appartement: 176.5, Maison: 197.6 kWhEP/m²</canvas></div>
+    </div>
+  </div>
+
+  <div class="grid33">
+    <div class="card">
+      <div class="card-title">ACP — inertie expliquée par axe (%)</div>
+      <div style="position:relative;height:160px"><canvas id="c7" role="img" aria-label="PC1 49%, PC2 25.6%, PC3 13.5%, PC4 11.9%. Règle Kaiser: garder PC1+PC2.">PC1:49%, PC2:25.6%, PC3:13.5%, PC4:11.9%</canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">ACP — corrélations variables (PC1 vs PC2)</div>
+      <div id="scatter-wrap" style="position:relative;height:160px"><canvas id="c8" role="img" aria-label="Cercle de corrélation: annee_construction opposée à conso_energie et emission_ges; surface_habitable quasi-indépendante."></canvas></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">ACM — variance expliquée par dimension (%)</div>
+      <div style="position:relative;height:160px"><canvas id="c9" role="img" aria-label="ACM: Dim1 18.8%, Dim2 14.7%, Dim3 12.2%, Dim4–6 11.1% chacune.">Dim1:18.8% Dim2:14.7% Dim3:12.2%</canvas></div>
+    </div>
+  </div>
+
+  <p class="footer-note">Sources : ADEME open data · Analyse : Duc Hoang Viet NGUYEN — Université de Lille, M1 Mathématiques & Applications, UE ANAC++, 2025–2026</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const isDark = matchMedia('(prefers-color-scheme: dark)').matches;
+const txt = isDark ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.55)';
+const grid = isDark ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.06)';
+const base = { responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false}, tooltip:{callbacks:{}} } };
+
+const axCfg = {
+  x:{ ticks:{color:txt,font:{size:10}}, grid:{color:grid} },
+  y:{ ticks:{color:txt,font:{size:10}}, grid:{color:grid} }
+};
+
+new Chart(document.getElementById('c1'), {
+  type:'bar',
+  data:{ labels:['A','B','C','D','E','F','G'],
+    datasets:[{ data:[98,295,274,121,127,70,15],
+      backgroundColor:['#22c197','#22c197','#22c197','#e08a1e','#e08a1e','#c93c3c','#c93c3c'],
+      borderRadius:3 }]
+  },
+  options:{...base, scales:axCfg}
+});
+
+new Chart(document.getElementById('c2'), {
+  type:'doughnut',
+  data:{ labels:['Appartement','Maison'],
+    datasets:[{ data:[639,361], backgroundColor:['#3266ad','#d4537e'], borderWidth:0, hoverOffset:4 }]
+  },
+  options:{...base, cutout:'65%'}
+});
+
+new Chart(document.getElementById('c3'), {
+  type:'doughnut',
+  data:{ labels:['Électricité','Gaz','Autre'],
+    datasets:[{ data:[542,433,25], backgroundColor:['#1d9e75','#e08a1e','#888780'], borderWidth:0, hoverOffset:4 }]
+  },
+  options:{...base, cutout:'65%'}
+});
+
+new Chart(document.getElementById('c4'), {
+  type:'bar',
+  data:{ labels:['Gaz','Électricité','Autre'],
+    datasets:[{ data:[220,155,390],
+      backgroundColor:['#e08a1e','#1d9e75','#888780'],
+      borderRadius:3 }]
+  },
+  options:{...base, indexAxis:'y', scales:{
+    x:{ ticks:{color:txt,font:{size:10}}, grid:{color:grid} },
+    y:{ ticks:{color:txt,font:{size:10}}, grid:{color:grid} }
+  }}
+});
+
+new Chart(document.getElementById('c5'), {
+  type:'bar',
+  data:{ labels:['Gaz','Électricité','Autre'],
+    datasets:[{ data:[33.6,11.1,55.5],
+      backgroundColor:['#e08a1e','#1d9e75','#888780'],
+      borderRadius:3 }]
+  },
+  options:{...base, scales:axCfg}
+});
+
+new Chart(document.getElementById('c6'), {
+  type:'bar',
+  data:{ labels:['Appartement','Maison'],
+    datasets:[{ data:[176.5,197.6],
+      backgroundColor:['#3266ad','#d4537e'],
+      borderRadius:3 }]
+  },
+  options:{...base,
+    scales:{
+      x:{ ticks:{color:txt,font:{size:11}}, grid:{color:grid} },
+      y:{ min:160, max:210, ticks:{color:txt,font:{size:10}}, grid:{color:grid},
+        title:{display:true,text:'kWhEP/m²',color:txt,font:{size:10}} }
+    }
+  }
+});
+
+new Chart(document.getElementById('c7'), {
+  type:'bar',
+  data:{ labels:['PC1','PC2','PC3','PC4'],
+    datasets:[{
+      data:[49.0,25.6,13.5,11.9],
+      backgroundColor:['#3266ad','#3266ad','#b5d4f4','#b5d4f4'],
+      borderRadius:3,
+      borderDash:[4,2]
+    }]
+  },
+  options:{...base,
+    scales:{
+      x:{ ticks:{color:txt,font:{size:11}}, grid:{color:grid} },
+      y:{ max:60, ticks:{color:txt,font:{size:10},callback:v=>v+'%'}, grid:{color:grid} }
+    },
+    plugins:{
+      legend:{display:false},
+      annotation:{},
+      tooltip:{callbacks:{label:ctx=>ctx.parsed.y+'%'}}
+    }
+  }
+});
+
+(function() {
+  const canvas = document.getElementById('c8');
+  const wrap = document.getElementById('scatter-wrap');
+  const vars = [
+    { label:'annee_constr.', x:-0.88, y:-0.12 },
+    { label:'surface', x:0.06, y:0.97 },
+    { label:'conso_énergie', x:0.82, y:-0.16 },
+    { label:'emission_ges', x:0.79, y:0.15 }
+  ];
+  const pts = vars.map(v=>({ x:v.x, y:v.y, lbl:v.label }));
+
+  new Chart(canvas, {
+    type:'scatter',
+    data:{ datasets:[
+      { data:pts.map(p=>({x:p.x,y:p.y})),
+        backgroundColor:'#3266ad', pointRadius:6, pointHoverRadius:7 },
+      { data: (function(){
+          const t=[]; for(let a=0;a<=360;a+=4){ t.push({x:Math.cos(a*Math.PI/180),y:Math.sin(a*Math.PI/180)}); } return t;
+        })(),
+        type:'line', borderColor: isDark?'rgba(255,255,255,.2)':'rgba(0,0,0,.15)',
+        borderWidth:1, pointRadius:0, fill:false }
+    ]},
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      scales:{
+        x:{ min:-1.15, max:1.15, ticks:{color:txt,font:{size:9},stepSize:0.5}, grid:{color:grid} },
+        y:{ min:-1.15, max:1.15, ticks:{color:txt,font:{size:9},stepSize:0.5}, grid:{color:grid} }
+      },
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{
+        label: ctx => {
+          const d = ctx.datasetIndex===0 ? vars[ctx.dataIndex].label : '';
+          return d ? `${d} (${ctx.parsed.x.toFixed(2)}, ${ctx.parsed.y.toFixed(2)})` : '';
+        }
+      }}}
+    }
+  });
+
+  setTimeout(()=>{
+    const ctx2 = canvas.getContext('2d');
+    const chart = Chart.getChart(canvas);
+    const meta = chart.getDatasetMeta(0);
+    ctx2.font = `10px ${getComputedStyle(document.body).fontFamily || 'sans-serif'}`;
+    ctx2.fillStyle = isDark ? 'rgba(255,255,255,0.75)' : 'rgba(0,0,0,0.65)';
+    meta.data.forEach((pt, i) => {
+      const xOff = vars[i].x > 0 ? 6 : -6;
+      const align = vars[i].x > 0 ? 'left' : 'right';
+      ctx2.textAlign = align;
+      ctx2.fillText(vars[i].label, pt.x + xOff, pt.y + 4);
+    });
+  }, 600);
+})();
+
+new Chart(document.getElementById('c9'), {
+  type:'bar',
+  data:{ labels:['Dim 1','Dim 2','Dim 3','Dim 4','Dim 5','Dim 6'],
+    datasets:[{ data:[18.8,14.7,12.2,11.1,11.1,11.1],
+      backgroundColor:['#7f77dd','#7f77dd','#afa9ec','#d3d1c7','#d3d1c7','#d3d1c7'],
+      borderRadius:3 }]
+  },
+  options:{...base,
+    scales:{
+      x:{ ticks:{color:txt,font:{size:9}}, grid:{color:grid} },
+      y:{ max:25, ticks:{color:txt,font:{size:10},callback:v=>v+'%'}, grid:{color:grid} }
+    },
+    plugins:{ legend:{display:false}, tooltip:{callbacks:{label:ctx=>ctx.parsed.y+'%'}} }
+  }
+});
+</script>
