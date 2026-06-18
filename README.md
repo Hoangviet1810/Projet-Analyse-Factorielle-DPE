@@ -43,7 +43,7 @@
   
 ## 1. Introduction
 
-L’étude porte sur la performance énergétique de **1000 logements individuels** construits entre **1900 et 2020** dans le département de la **Haute-Garonne**, pour lesquels un **DPE** a été réalisé avant **juillet 2021**. Pour plus de détails, vous pouvez consulter le [fichier PDF](Projet_DPE.pdf).
+L’étude porte sur la performance énergétique de **1000 logements individuels** construits entre **1900 et 2020** dans le département de la **Haute-Garonne**, pour lesquels un **DPE** a été réalisé avant **juillet 2021**. Pour plus de détails, vous pouvez consulter le [fichier PDF](ProjetDPE.pdf).
  
 👉 [Voir le site en ligne](https://hoangviet1810.github.io/DPE/)
 
