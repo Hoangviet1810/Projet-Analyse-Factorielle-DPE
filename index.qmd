@@ -53,16 +53,6 @@ Vous pouvez consulter le rapport détaillé du projet (format PDF) en cliquant s
 ::: callout-note
 ## Consulter le dashboard
 
-<a href="images/Dashboard_DPE.png" target="_blank">
-  <img src="images/Dashboard_DPE.png"
-       alt="Dashboard du projet"
-       style="max-width:100%; height:auto; border-radius:8px;">
-</a>
-:::
-
-::: callout-note
-## Consulter le dashboard
-
 <a href="images/dpe_dashboard.html" target="_blank">
   <img src="images/Dashboard_DPE.png"
        alt="Dashboard du projet"
