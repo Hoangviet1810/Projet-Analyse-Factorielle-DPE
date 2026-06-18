@@ -6,7 +6,7 @@ website:
   title: "Projet Analyse Factorielle DPE"
  
   navbar:
-    background: "#2d1b69"
+    background: "#1e90ff"
     left:
       - href: index.qmd
         text: Accueil

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,6 +10,9 @@
 
 <title>Partie 5 Test – Projet Analyse Factorielle DPE</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -72,10 +75,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-30ee011dadc1df2dfc3b38815031f4e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-11b3f32067488f43687af122420cca82.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -148,10 +151,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link active" href="./Part5.html" aria-current="page"> 
 <span class="menu-text">Test</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./Part6.html"> 
-<span class="menu-text">Conclusion</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
@@ -235,13 +234,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>-H0: La classe de consommation indépendante du type de chauffage.</p>
 <p>-H1: La classe de consommation dépend du type de chauffage.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_dpe <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data_dpe.txt"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_dpe <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data_dpe.txt"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>type_energie_chauffage <span class="ot">&lt;-</span>data_dpe<span class="sc">$</span>type_energie_chauffage</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>classe_conso_energie <span class="ot">&lt;-</span> data_dpe<span class="sc">$</span>classe_conso_energie</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(type_energie_chauffage,classe_conso_energie),<span class="at">beside=</span><span class="cn">TRUE</span>,</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"green"</span>,<span class="st">"red"</span>), <span class="at">main=</span><span class="st">"Classe conso energie par type chauffage"</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        ,<span class="at">xlab=</span> <span class="st">"classe conso energie"</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        ,<span class="at">ylab=</span><span class="st">"Fréquence "</span>,<span class="at">legend.text=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        ,<span class="at">ylab=</span><span class="st">"Fréquence "</span>,<span class="at">legend.text=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -251,9 +250,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>table_conso_energie <span class="ot">&lt;-</span> <span class="fu">table</span> (data_dpe<span class="sc">$</span>type_energie_chauffage,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>table_conso_energie <span class="ot">&lt;-</span> <span class="fu">table</span> (data_dpe<span class="sc">$</span>type_energie_chauffage,</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                                   data_dpe<span class="sc">$</span>classe_conso_energie)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>table_conso_energie</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>table_conso_energie</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   
       A   B   C   D   E   F   G
@@ -261,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   2  92 247 165  24  11   3   0
   3   1   0   3   4   6   6   5</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(table_conso_energie)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(table_conso_energie)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's Chi-squared test
@@ -285,8 +284,8 @@ X-squared = 477.22, df = 12, p-value &lt; 2.2e-16</code></pre>
 <li><p>H1: Il existe une différence réelle de consommation énergétique moyenne entre Maison et Appartement.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>anova_result <span class="ot">&lt;-</span> <span class="fu">aov</span>(conso_energie <span class="sc">~</span> type_logement, <span class="at">data =</span> data_dpe)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>anova_result <span class="ot">&lt;-</span> <span class="fu">aov</span>(conso_energie <span class="sc">~</span> type_logement, <span class="at">data =</span> data_dpe)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(anova_result)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>               Df  Sum Sq Mean Sq F value   Pr(&gt;F)    
 type_logement   1  103182  103182    11.1 0.000894 ***
@@ -297,7 +296,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>Ici, Pr(&gt;F) - 0.000894 &lt; 0.5 donc on rejette H0 et donc il existe une différence réelle de consommation énergétique moyenne entre Maison et Appartement</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(conso_energie <span class="sc">~</span> type_logement, <span class="at">data =</span> data_dpe, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(conso_energie <span class="sc">~</span> type_logement, <span class="at">data =</span> data_dpe, mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  type_logement conso_energie
 1             1      176.4841
@@ -317,14 +316,14 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li><p>H1: Au moins un groupe a une moyenne différente.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>moycond <span class="ot">&lt;-</span> <span class="fu">tapply</span>(data_dpe<span class="sc">$</span>emission_ges, data_dpe<span class="sc">$</span>type_logement, mean, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>moycond <span class="ot">&lt;-</span> <span class="fu">tapply</span>(data_dpe<span class="sc">$</span>emission_ges, data_dpe<span class="sc">$</span>type_logement, mean, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(emission_ges <span class="sc">~</span> type_energie_chauffage,</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="at">data =</span> data_dpe,</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="at">main =</span> <span class="st">"Émissions de GES selon le type de chauffage"</span>,</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="at">xlab =</span> <span class="st">"Type de chauffage"</span>,</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="at">ylab =</span> <span class="st">"Émissions GES (kg éq. CO2/m2)"</span>)</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ajouter le point de moyen</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(moycond), moycond, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">pch=</span><span class="st">"*"</span>, <span class="at">cex=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(moycond), moycond, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">pch=</span><span class="st">"*"</span>, <span class="at">cex=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -342,7 +341,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Observation préliminaire : le type d’énergie de chauffage a un impact significatif sur le niveau des émissions.</p>
 <p>De plus, les variances des groupes selon le type d’énergie de chauffage ne sont pas égales. Par conséquent, nous utilisons le test oneway.test() (ANOVA de Welch) au lieu de l’ANOVA classique (aov())</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oneway.test</span>(emission_ges<span class="sc">~</span> type_energie_chauffage, <span class="at">data=</span>data_dpe, <span class="at">var.equal=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">oneway.test</span>(emission_ges<span class="sc">~</span> type_energie_chauffage, <span class="at">data=</span>data_dpe, <span class="at">var.equal=</span><span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One-way analysis of means (not assuming equal variances)
@@ -367,8 +366,8 @@ F = 219.53, num df = 2.000, denom df = 61.494, p-value &lt; 2.2e-16</code></pre>
 <li><p>H1: Au moins un groupe a une moyenne différente.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise.t.test</span>(data_dpe<span class="sc">$</span>emission_ges,data_dpe<span class="sc">$</span>type_energie_chauffage,</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">p.adjust.method =</span> <span class="st">"none"</span>,<span class="at">pool.sd =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise.t.test</span>(data_dpe<span class="sc">$</span>emission_ges,data_dpe<span class="sc">$</span>type_energie_chauffage,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">p.adjust.method =</span> <span class="st">"none"</span>,<span class="at">pool.sd =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pairwise comparisons using t tests with non-pooled SD 
@@ -395,6 +394,30 @@ P value adjustment method: none </code></pre>
 </section>
 
 </main> <!-- /main -->
+<div id="preloader">
+    <div class="loader-content">
+        <div class="loader-center-group">
+            <div class="spinner"></div> 
+
+            <div class="loader-letter-container">
+                <span class="loader-letter">V</span>
+            </div>
+        </div>
+        
+        <h2 class="loader-text">MADE BY NGUYEN DUC HOANG VIET</h2>
+        <p class="loader-subtext"> PROJET ANALYSE FACTORIELLE DPE</p>
+    </div>
+</div>
+
+<script>
+    // Giữ nguyên đoạn script
+    window.addEventListener('load', function () {
+        const preloader = document.getElementById('preloader');
+        setTimeout(function() {
+            preloader.classList.add('fade-out');
+        }, 1200); 
+    });
+</script>
 <div style="text-align:center; font-size:0.85em; color:#888; padding:25px;">
   <strong>© 2026 NGUYEN Duc Hoang Viet — Tous droits réservés.</strong><br>
   <strong>Université de Lille — Projet Analyse Factorielle DPE<strong><br>
@@ -451,13 +474,14 @@ P value adjustment method: none </code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

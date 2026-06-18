@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,6 +10,9 @@
 
 <title>Partie 4 Analyse des correspondances multiples (ACM) – Projet Analyse Factorielle DPE</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -72,10 +75,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-30ee011dadc1df2dfc3b38815031f4e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-11b3f32067488f43687af122420cca82.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -148,10 +151,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="./Part5.html"> 
 <span class="menu-text">Test</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./Part6.html"> 
-<span class="menu-text">Conclusion</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
@@ -228,11 +227,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="1"><span class="header-section-number">1</span> Objectif de l’ACM</h1>
 <p>On va réaliserer une Analyse des correspondances multiples (ACM) afin d’explorer les relations entre les variables qualitatives et de visualiser les associations entre elles.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_dpe <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data_dpe.txt"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data1 <span class="ot">&lt;-</span> data_dpe[, <span class="fu">c</span>(<span class="st">"type_logement"</span>, <span class="st">"type_energie_chauffage"</span>, <span class="st">"classe_conso_energie"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_dpe <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data_dpe.txt"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data1 <span class="ot">&lt;-</span> data_dpe[, <span class="fu">c</span>(<span class="st">"type_logement"</span>, <span class="st">"type_energie_chauffage"</span>, <span class="st">"classe_conso_energie"</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data1<span class="sc">$</span>type_logement <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data1<span class="sc">$</span>type_logement <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  data1<span class="sc">$</span>type_logement,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), </span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Appartement"</span>, <span class="st">"Maison"</span>)</span>
@@ -250,7 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">ordered =</span> <span class="cn">TRUE</span></span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     type_logement type_energie_chauffage classe_conso_energie
  Appartement:639   gaz        :433        A: 98               
@@ -266,9 +265,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="valeur-propre" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Valeur propre</h1>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FactoMineR)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FactoMineR)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data1.mca <span class="ot">&lt;-</span> <span class="fu">MCA</span>(data1, <span class="at">graph =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>data1.mca<span class="sc">$</span>eig</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>data1.mca<span class="sc">$</span>eig</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      eigenvalue percentage of variance cumulative percentage of variance
 dim 1  0.5654050              18.846832                          18.84683
@@ -288,8 +287,8 @@ dim 9  0.1111250               3.704166                         100.00000</code>
 <section id="carte-des-variables-de-la-mca-1" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="carte-des-variables-de-la-mca-1"><span class="header-section-number">3.1</span> Carte des variables de la MCA 1</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mca_var</span>(data1.mca,<span class="at">repel=</span><span class="cn">TRUE</span>,<span class="at">geom.var=</span><span class="fu">c</span>(<span class="st">'arrow'</span>,<span class="st">'text'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mca_var</span>(data1.mca,<span class="at">repel=</span><span class="cn">TRUE</span>,<span class="at">geom.var=</span><span class="fu">c</span>(<span class="st">'arrow'</span>,<span class="st">'text'</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -310,7 +309,7 @@ dim 9  0.1111250               3.704166                         100.00000</code>
 <section id="carte-des-variables-de-la-mca-2" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="carte-des-variables-de-la-mca-2"><span class="header-section-number">3.2</span> Carte des variables de la MCA 2</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mca_var</span>(data1.mca,<span class="at">choice=</span><span class="st">'var'</span>,<span class="at">repel=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mca_var</span>(data1.mca,<span class="at">choice=</span><span class="st">'var'</span>,<span class="at">repel=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -325,7 +324,7 @@ dim 9  0.1111250               3.704166                         100.00000</code>
 <p>L’ACM met en évidence deux grands profils : les logements performants, souvent chauffés à l’électricité, et les logements moins performants (classes F et G), davantage associés au gaz ou à d’autres sources d’énergie. Ainsi, le type d’énergie apparaît comme le principal levier d’action pour améliorer l’efficacité énergétique.</p>
 <p>Enfin, les analyses précédentes suggèrent que les logements les plus énergivores sont généralement associés à une combinaison de bâtiments anciens et de systèmes de chauffage peu performants.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_contrib</span>(data1.mca,<span class="at">choice=</span><span class="st">'var'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_contrib</span>(data1.mca,<span class="at">choice=</span><span class="st">'var'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -342,7 +341,7 @@ dim 9  0.1111250               3.704166                         100.00000</code>
 <section id="individuals" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="individuals"><span class="header-section-number">3.3</span> Individuals</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mca_ind</span>(data1.mca,<span class="at">col.ind =</span> <span class="st">"cos2"</span>, <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mca_ind</span>(data1.mca,<span class="at">col.ind =</span> <span class="st">"cos2"</span>, <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -357,7 +356,7 @@ dim 9  0.1111250               3.704166                         100.00000</code>
 <p>Les couleurs représentent la qualité de représentation (<em>cos²</em>) : plus la couleur est claire, mieux l’individu est représenté par les deux dimensions.</p>
 <p>Enfin, les maisons et les appartements ne forment pas de groupes distincts, ce qui confirme que la performance énergétique dépend davantage du <strong>type d’énergie de chauffage</strong> que du <strong>type de logement</strong>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mca_ind</span>(data1.mca,<span class="at">habillage=</span><span class="st">"type_logement"</span>, <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mca_ind</span>(data1.mca,<span class="at">habillage=</span><span class="st">"type_logement"</span>, <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -367,7 +366,7 @@ dim 9  0.1111250               3.704166                         100.00000</code>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mca_ind</span>(data1.mca,<span class="at">habillage=</span><span class="st">"type_energie_chauffage"</span>,<span class="at">repel=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mca_ind</span>(data1.mca,<span class="at">habillage=</span><span class="st">"type_energie_chauffage"</span>,<span class="at">repel=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -377,7 +376,7 @@ dim 9  0.1111250               3.704166                         100.00000</code>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mca_ind</span>(data1.mca,<span class="at">habillage=</span><span class="st">"classe_conso_energie"</span>,<span class="at">repel=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_mca_ind</span>(data1.mca,<span class="at">habillage=</span><span class="st">"classe_conso_energie"</span>,<span class="at">repel=</span><span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -392,7 +391,7 @@ dim 9  0.1111250               3.704166                         100.00000</code>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Consulter le code Python
+<span class="screen-reader-only">Note</span>Consulter le code Python
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -406,6 +405,30 @@ Consulter le code Python
 </section>
 
 </main> <!-- /main -->
+<div id="preloader">
+    <div class="loader-content">
+        <div class="loader-center-group">
+            <div class="spinner"></div> 
+
+            <div class="loader-letter-container">
+                <span class="loader-letter">V</span>
+            </div>
+        </div>
+        
+        <h2 class="loader-text">MADE BY NGUYEN DUC HOANG VIET</h2>
+        <p class="loader-subtext"> PROJET ANALYSE FACTORIELLE DPE</p>
+    </div>
+</div>
+
+<script>
+    // Giữ nguyên đoạn script
+    window.addEventListener('load', function () {
+        const preloader = document.getElementById('preloader');
+        setTimeout(function() {
+            preloader.classList.add('fade-out');
+        }, 1200); 
+    });
+</script>
 <div style="text-align:center; font-size:0.85em; color:#888; padding:25px;">
   <strong>© 2026 NGUYEN Duc Hoang Viet — Tous droits réservés.</strong><br>
   <strong>Université de Lille — Projet Analyse Factorielle DPE<strong><br>
@@ -462,13 +485,14 @@ Consulter le code Python
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

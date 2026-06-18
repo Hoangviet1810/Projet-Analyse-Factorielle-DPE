@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.38">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,6 +10,9 @@
 
 <title>Partie 2 Analyse descriptive – Projet Analyse Factorielle DPE</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -72,10 +75,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-30ee011dadc1df2dfc3b38815031f4e0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-11b3f32067488f43687af122420cca82.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -148,10 +151,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="./Part5.html"> 
 <span class="menu-text">Test</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./Part6.html"> 
-<span class="menu-text">Conclusion</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
@@ -239,22 +238,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="ancienneté" class="level3" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="ancienneté"><span class="header-section-number">1.1.1</span> Ancienneté</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_dpe <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data_dpe.txt"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_dpe <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">"data_dpe.txt"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data_dpe<span class="sc">$</span>anciennete <span class="ot">=</span> <span class="dv">2021</span> <span class="sc">-</span> data_dpe<span class="sc">$</span>annee_construction</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_dpe<span class="sc">$</span>anciennete)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_dpe<span class="sc">$</span>anciennete)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
    1.00   15.00   32.00   34.58   51.00  121.00 </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>anciennete <span class="ot">&lt;-</span> data_dpe<span class="sc">$</span>anciennete</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">sd</span>(anciennete))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>anciennete <span class="ot">&lt;-</span> data_dpe<span class="sc">$</span>anciennete</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">sd</span>(anciennete))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 26</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cv<span class="ot">=</span><span class="fu">round</span>((<span class="fu">sd</span>(anciennete)<span class="sc">/</span><span class="fu">mean</span>(anciennete))<span class="sc">*</span><span class="dv">100</span>) <span class="co"># cv = coeff de variation</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>cv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cv<span class="ot">=</span><span class="fu">round</span>((<span class="fu">sd</span>(anciennete)<span class="sc">/</span><span class="fu">mean</span>(anciennete))<span class="sc">*</span><span class="dv">100</span>) <span class="co"># cv = coeff de variation</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>cv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 75</code></pre>
 </div>
@@ -262,7 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>La moyenne de l’ancienneté des logements est de 34,58 ans avec un écart-type d’environ 26 ans, ce qui situe la majorité des logements entre 9 et 61 ans.<br>
 Le coefficient de variation de 75 % indique une forte hétérogénéité des âges, due à la coexistence de logements très anciens et récents.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">cex.main=</span><span class="fl">1.5</span>, <span class="at">cex.lab=</span><span class="fl">1.3</span>, <span class="at">cex.axis=</span><span class="fl">1.2</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">cex.main=</span><span class="fl">1.5</span>, <span class="at">cex.lab=</span><span class="fl">1.3</span>, <span class="at">cex.axis=</span><span class="fl">1.2</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data_dpe<span class="sc">$</span>anciennete,</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span><span class="st">"Distribution de l'ancienneté des logements"</span>,</span>
@@ -282,7 +281,7 @@ Le coefficient de variation de 75 % indique une forte hétérogénéité des âg
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Ajouter une ligne pour la médiane (vert)</span></span>
 <span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> mediane, <span class="at">col =</span><span class="st">"green"</span>, <span class="at">lwd =</span><span class="dv">2</span>)</span>
 <span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(mediane, <span class="fu">par</span>(<span class="st">"usr"</span>)[<span class="dv">4</span>]<span class="sc">*</span><span class="fl">0.8</span>,</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> <span class="fu">paste0</span>(<span class="st">"Median = "</span>, mediane),<span class="at">col=</span><span class="st">"green"</span>, <span class="at">pos=</span><span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">labels =</span> <span class="fu">paste0</span>(<span class="st">"Median = "</span>, mediane),<span class="at">col=</span><span class="st">"green"</span>, <span class="at">pos=</span><span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -298,24 +297,24 @@ Le coefficient de variation de 75 % indique une forte hétérogénéité des âg
 <section id="surface-habitable" class="level3" data-number="1.1.2">
 <h3 data-number="1.1.2" class="anchored" data-anchor-id="surface-habitable"><span class="header-section-number">1.1.2</span> Surface habitable</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_dpe<span class="sc">$</span>surface_habitable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_dpe<span class="sc">$</span>surface_habitable)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   16.00   45.75   66.00   82.51   95.25 1452.00 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(data_dpe<span class="sc">$</span>surface_habitable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(data_dpe<span class="sc">$</span>surface_habitable)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 94.87407</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cv<span class="ot">=</span><span class="fu">round</span>(<span class="fu">sd</span>(data_dpe<span class="sc">$</span>surface_habitable)<span class="sc">/</span><span class="fu">mean</span>(data_dpe<span class="sc">$</span>surface_habitable)<span class="sc">*</span><span class="dv">100</span>) </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>cv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cv<span class="ot">=</span><span class="fu">round</span>(<span class="fu">sd</span>(data_dpe<span class="sc">$</span>surface_habitable)<span class="sc">/</span><span class="fu">mean</span>(data_dpe<span class="sc">$</span>surface_habitable)<span class="sc">*</span><span class="dv">100</span>) </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>cv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 115</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data_dpe<span class="sc">$</span>surface_habitable, <span class="at">main =</span> <span class="st">"Distribution de la surface</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="st">habitable"</span>, <span class="at">xlab =</span> <span class="st">"Surface habitable"</span>,<span class="at">ylab =</span> <span class="st">"Fréquence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data_dpe<span class="sc">$</span>surface_habitable, <span class="at">main =</span> <span class="st">"Distribution de la surface</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="st">habitable"</span>, <span class="at">xlab =</span> <span class="st">"Surface habitable"</span>,<span class="at">ylab =</span> <span class="st">"Fréquence"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -325,8 +324,8 @@ Le coefficient de variation de 75 % indique une forte hétérogénéité des âg
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(data_dpe<span class="sc">$</span>surface_habitable, <span class="at">main =</span> <span class="st">"Distribution de la surface</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="st">habitable"</span>, <span class="at">xlab =</span> <span class="st">"Surface habitable"</span>,<span class="at">ylab =</span> <span class="st">"Fréquence"</span>,<span class="at">col =</span> <span class="st">"cyan"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(data_dpe<span class="sc">$</span>surface_habitable, <span class="at">main =</span> <span class="st">"Distribution de la surface</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="st">habitable"</span>, <span class="at">xlab =</span> <span class="st">"Surface habitable"</span>,<span class="at">ylab =</span> <span class="st">"Fréquence"</span>,<span class="at">col =</span> <span class="st">"cyan"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -341,24 +340,24 @@ Le coefficient de variation de 75 % indique une forte hétérogénéité des âg
 <section id="consommation-dénergie" class="level3" data-number="1.1.3">
 <h3 data-number="1.1.3" class="anchored" data-anchor-id="consommation-dénergie"><span class="header-section-number">1.1.3</span> Consommation d’énergie</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_dpe<span class="sc">$</span>conso_energie)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_dpe<span class="sc">$</span>conso_energie)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   27.92  114.73  181.16  184.12  238.25  591.35 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(data_dpe<span class="sc">$</span>conso_energie)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(data_dpe<span class="sc">$</span>conso_energie)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 96.89191</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>cv<span class="ot">=</span><span class="fu">round</span>(<span class="fu">sd</span>(data_dpe<span class="sc">$</span>conso_energie)<span class="sc">/</span><span class="fu">mean</span>(data_dpe<span class="sc">$</span>conso_energie))<span class="sc">*</span><span class="dv">100</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>cv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>cv<span class="ot">=</span><span class="fu">round</span>(<span class="fu">sd</span>(data_dpe<span class="sc">$</span>conso_energie)<span class="sc">/</span><span class="fu">mean</span>(data_dpe<span class="sc">$</span>conso_energie))<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>cv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 100</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data_dpe<span class="sc">$</span>conso_energie, <span class="at">main =</span> <span class="st">"Distribution de la consommation de</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="st">l'énergie"</span>,<span class="at">xlab =</span> <span class="st">"énergie consommé"</span>, <span class="at">ylab =</span> <span class="st">"Fréquence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data_dpe<span class="sc">$</span>conso_energie, <span class="at">main =</span> <span class="st">"Distribution de la consommation de</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="st">l'énergie"</span>,<span class="at">xlab =</span> <span class="st">"énergie consommé"</span>, <span class="at">ylab =</span> <span class="st">"Fréquence"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -368,8 +367,8 @@ Le coefficient de variation de 75 % indique une forte hétérogénéité des âg
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(data_dpe<span class="sc">$</span>conso_energie, <span class="at">main =</span> <span class="st">"Distribution de la consommation</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="st">de l'énergie"</span>, <span class="at">xlab =</span> <span class="st">"énergie consommé"</span>, <span class="at">ylab =</span> <span class="st">"Fréquence"</span>,<span class="at">col =</span> <span class="st">"lightgreen"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(data_dpe<span class="sc">$</span>conso_energie, <span class="at">main =</span> <span class="st">"Distribution de la consommation</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="st">de l'énergie"</span>, <span class="at">xlab =</span> <span class="st">"énergie consommé"</span>, <span class="at">ylab =</span> <span class="st">"Fréquence"</span>,<span class="at">col =</span> <span class="st">"lightgreen"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -385,25 +384,25 @@ Le coefficient de variation de 75 % indique une forte hétérogénéité des âg
 <section id="émission-de-ges" class="level3" data-number="1.1.4">
 <h3 data-number="1.1.4" class="anchored" data-anchor-id="émission-de-ges"><span class="header-section-number">1.1.4</span> Émission de GES</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_dpe<span class="sc">$</span>emission_ges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_dpe<span class="sc">$</span>emission_ges)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   2.000   8.602  12.695  21.933  30.000 143.360 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(data_dpe<span class="sc">$</span>emission_ges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(data_dpe<span class="sc">$</span>emission_ges)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 20.64916</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>cv<span class="ot">=</span><span class="fu">round</span>(<span class="fu">sd</span>(data_dpe<span class="sc">$</span>emission_ges)<span class="sc">/</span><span class="fu">mean</span>(data_dpe<span class="sc">$</span>emission_ges)<span class="sc">*</span><span class="dv">100</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>cv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>cv<span class="ot">=</span><span class="fu">round</span>(<span class="fu">sd</span>(data_dpe<span class="sc">$</span>emission_ges)<span class="sc">/</span><span class="fu">mean</span>(data_dpe<span class="sc">$</span>emission_ges)<span class="sc">*</span><span class="dv">100</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>cv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 94</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data_dpe<span class="sc">$</span>emission_ges, <span class="at">main =</span> <span class="st">"Distribution de la consommation de</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(data_dpe<span class="sc">$</span>emission_ges, <span class="at">main =</span> <span class="st">"Distribution de la consommation de</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="st">gaz à effet de serre"</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>,<span class="at">xlab =</span> <span class="st">"consommation de gaz à effet de serre"</span>,<span class="at">ylab =</span> <span class="st">"Fréquence"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>,<span class="at">xlab =</span> <span class="st">"consommation de gaz à effet de serre"</span>,<span class="at">ylab =</span> <span class="st">"Fréquence"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -413,10 +412,10 @@ Le coefficient de variation de 75 % indique une forte hétérogénéité des âg
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(data_dpe<span class="sc">$</span>emission_ges, <span class="at">main =</span> <span class="st">"Distribution de la consommation</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(data_dpe<span class="sc">$</span>emission_ges, <span class="at">main =</span> <span class="st">"Distribution de la consommation</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="st">de gaz à effet de serre"</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>,<span class="at">xlab =</span> <span class="st">"consommation de gaz à effet de serre"</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>,<span class="at">ylab =</span> <span class="st">"Fréquence"</span>,<span class="at">col =</span> <span class="st">"lightblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>,<span class="at">ylab =</span> <span class="st">"Fréquence"</span>,<span class="at">col =</span> <span class="st">"lightblue"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -439,18 +438,18 @@ Le coefficient de variation de 75 % indique une forte hétérogénéité des âg
 <section id="le-type-de-logement" class="level3" data-number="1.2.1">
 <h3 data-number="1.2.1" class="anchored" data-anchor-id="le-type-de-logement"><span class="header-section-number">1.2.1</span> Le type de logement</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>data_dpe<span class="sc">$</span>type_logement <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>data_dpe<span class="sc">$</span>type_logement <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  data_dpe<span class="sc">$</span>type_logement,<span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"appartement"</span>, <span class="st">"maison"</span>))</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_dpe<span class="sc">$</span>type_logement)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_dpe<span class="sc">$</span>type_logement)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>appartement      maison 
         639         361 </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(data_dpe<span class="sc">$</span>type_logement), <span class="at">main =</span> <span class="st">"Distribution du type de</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(data_dpe<span class="sc">$</span>type_logement), <span class="at">main =</span> <span class="st">"Distribution du type de</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="st">logement"</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>,<span class="at">xlab =</span> <span class="st">"Type de logement"</span>,<span class="at">ylab=</span> <span class="st">"Frequence"</span>,<span class="at">col =</span> <span class="fu">c</span>(<span class="st">"yellow"</span>,<span class="st">"red"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>,<span class="at">xlab =</span> <span class="st">"Type de logement"</span>,<span class="at">ylab=</span> <span class="st">"Frequence"</span>,<span class="at">col =</span> <span class="fu">c</span>(<span class="st">"yellow"</span>,<span class="st">"red"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -468,20 +467,20 @@ Le coefficient de variation de 75 % indique une forte hétérogénéité des âg
 <section id="le-type-de-lenergie-chauffage" class="level3" data-number="1.2.2">
 <h3 data-number="1.2.2" class="anchored" data-anchor-id="le-type-de-lenergie-chauffage"><span class="header-section-number">1.2.2</span> Le type de l’energie chauffage</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>data_dpe<span class="sc">$</span>type_energie_chauffage <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>data_dpe<span class="sc">$</span>type_energie_chauffage <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  data_dpe<span class="sc">$</span>type_energie_chauffage,</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"gaz"</span>, <span class="st">"électricité"</span>, <span class="st">"autre"</span>))</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_dpe<span class="sc">$</span>type_energie_chauffage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data_dpe<span class="sc">$</span>type_energie_chauffage)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        gaz électricité       autre 
         433         542          25 </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(data_dpe<span class="sc">$</span>type_energie_chauffage), <span class="at">main =</span> <span class="st">"Distribution </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(data_dpe<span class="sc">$</span>type_energie_chauffage), <span class="at">main =</span> <span class="st">"Distribution </span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="st">        du type de l'energie chauffage"</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>        ,<span class="at">xlab =</span> <span class="st">"Type de de l'énergie chauffage"</span></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>        ,<span class="at">ylab=</span> <span class="st">"Frequence"</span>,<span class="at">col=</span> <span class="fu">c</span>(<span class="st">"lightpink"</span>,<span class="st">"slategray1"</span>,<span class="st">"coral4"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>        ,<span class="at">ylab=</span> <span class="st">"Frequence"</span>,<span class="at">col=</span> <span class="fu">c</span>(<span class="st">"lightpink"</span>,<span class="st">"slategray1"</span>,<span class="st">"coral4"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -499,7 +498,7 @@ Le coefficient de variation de 75 % indique une forte hétérogénéité des âg
 <section id="la-classe-de-la-consommation-dénergie" class="level3" data-number="1.2.3">
 <h3 data-number="1.2.3" class="anchored" data-anchor-id="la-classe-de-la-consommation-dénergie"><span class="header-section-number">1.2.3</span> La classe de la consommation d’énergie</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(data_dpe<span class="sc">$</span>classe_conso_energie)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(data_dpe<span class="sc">$</span>classe_conso_energie)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
   A   B   C   D   E   F   G 
@@ -507,12 +506,12 @@ Le coefficient de variation de 75 % indique une forte hétérogénéité des âg
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(data_dpe<span class="sc">$</span>classe_conso_energie), <span class="at">main =</span> <span class="st">"Distribution de</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(data_dpe<span class="sc">$</span>classe_conso_energie), <span class="at">main =</span> <span class="st">"Distribution de</span></span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="st">classe conso energie"</span></span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>, <span class="at">xlab =</span> <span class="st">"Classe consommation d'énergie"</span></span>
 <span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>, <span class="at">ylab=</span> <span class="st">"Frequence"</span></span>
 <span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>,<span class="at">col =</span></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"floralwhite"</span>,<span class="st">"plum3"</span>,<span class="st">"aquamarine"</span>,<span class="st">"firebrick"</span>,<span class="st">"limegreen"</span>,<span class="st">"khaki"</span>,<span class="st">"navy"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"floralwhite"</span>,<span class="st">"plum3"</span>,<span class="st">"aquamarine"</span>,<span class="st">"firebrick"</span>,<span class="st">"limegreen"</span>,<span class="st">"khaki"</span>,<span class="st">"navy"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -533,6 +532,30 @@ Le coefficient de variation de 75 % indique une forte hétérogénéité des âg
 </section>
 
 </main> <!-- /main -->
+<div id="preloader">
+    <div class="loader-content">
+        <div class="loader-center-group">
+            <div class="spinner"></div> 
+
+            <div class="loader-letter-container">
+                <span class="loader-letter">V</span>
+            </div>
+        </div>
+        
+        <h2 class="loader-text">MADE BY NGUYEN DUC HOANG VIET</h2>
+        <p class="loader-subtext"> PROJET ANALYSE FACTORIELLE DPE</p>
+    </div>
+</div>
+
+<script>
+    // Giữ nguyên đoạn script
+    window.addEventListener('load', function () {
+        const preloader = document.getElementById('preloader');
+        setTimeout(function() {
+            preloader.classList.add('fade-out');
+        }, 1200); 
+    });
+</script>
 <div style="text-align:center; font-size:0.85em; color:#888; padding:25px;">
   <strong>© 2026 NGUYEN Duc Hoang Viet — Tous droits réservés.</strong><br>
   <strong>Université de Lille — Projet Analyse Factorielle DPE<strong><br>
@@ -589,13 +612,14 @@ Le coefficient de variation de 75 % indique une forte hétérogénéité des âg
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
