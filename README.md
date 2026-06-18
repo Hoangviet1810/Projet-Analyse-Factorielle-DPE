@@ -1,3 +1,25 @@
+
+<div align="center">
+  <h1>Projet Analyse Factorielle DPE</h1>
+  <p><em>Analyse statistique de la consommation énergétique et des émissions de GES des logements</em></p>
+
+  <a href="#"><img src="https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white&style=flat-square"></a>
+  <a href="#"><img src="https://img.shields.io/badge/R-4.x-276DC3?logo=r&logoColor=white&style=flat-square"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Data-Analysis-orange?style=flat-square"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Statistics-ANOVA%20%7C%20Chi--Square-blue?style=flat-square"></a>
+  <a href="#"><img src="https://img.shields.io/badge/DPE-Energy%20%26%20GES-green?style=flat-square"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Status-Completed-brightgreen?style=flat-square"></a>
+  <a href="https://github.com/Hoangviet1810/Projet-Analyse-Factorielle-DPE">
+    <img src="https://img.shields.io/badge/GitHub-Repository-black?logo=github&style=flat-square">
+  </a>
+  <a href="#"><img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square"></a>
+  <a href="https://hoangviet1810.github.io/DPE/">
+  <img src="https://img.shields.io/badge/Demo-Live%20Website-brightgreen?style=for-the-badge&logo=googlechrome&logoColor=white">
+</a>
+</div>
+<br>
+
+
 # Projet-Analyse-Factorielle-DPE
 
 # Analyse de la consommation énergétique et des émissions de GES des logements
@@ -22,6 +44,8 @@
 ## 1. Introduction
 
 L’étude porte sur la performance énergétique de **1000 logements individuels** construits entre **1900 et 2020** dans le département de la **Haute-Garonne**, pour lesquels un **DPE** a été réalisé avant **juillet 2021**. Pour plus de détails, vous pouvez consulter le [fichier PDF](Projet_DPE.pdf).
+ 
+👉 [Voir le site en ligne](https://hoangviet1810.github.io/DPE/)
 
 Ce projet consiste à analyser un jeu de données contenant des informations sur les logements :  
 - **type de logement** (appartement, maison)  
